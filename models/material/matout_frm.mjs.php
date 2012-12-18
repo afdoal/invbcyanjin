@@ -12,6 +12,7 @@ function setdg(){
 		columns:[[  
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
+			{field:'twhmp',title:'Section',width:100},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
 		]],
@@ -66,6 +67,7 @@ function setComboGrid(){
 		columns:[[  
 			{field:'KdBarang2',title:'Mat. Code',width:60},
 			{field:'NmBarang2',title:'Desc.',width:50},
+			{field:'twhmp',title:'Section',width:50},
 			{field:'Sat2',title:'Unit',width:50},
 			{field:'qty',title:'Qty',width:50}
 		]],
@@ -80,6 +82,7 @@ function insert_ref(row){
 
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
+	$('#twhmp').val(row.twhmp);
 	$('#Sat2').val(row.Sat2);
 	$('#qty').numberbox('setValue',row.qty);
 }

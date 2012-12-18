@@ -13,6 +13,7 @@ function setdg(){
 			{field:'KdBarang2',title:'Part Code',width:80},
 			{field:'NmBarang2',title:'Part No',width:150},
 			{field:'Sat2',title:'Unit',width:60},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right',formatter:function(value){
@@ -122,6 +123,7 @@ function simpan(){
 		//FORM LIST BARANG
 		nolist_val="";	
 		KdBarang2_val="";
+		weight_val="";
 		qty_val="";
 		price_val="";
 		j=1;
@@ -129,6 +131,7 @@ function simpan(){
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
+			weight_val += rows[i].weight.replace(",","") + "`";
 			qty_val += rows[i].qty.replace(",","") + "`";
 			price_val += rows[i].price.replace(",","") + "`";
 		}	 	
@@ -148,7 +151,7 @@ function simpan(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val,price:price_val
+		weight:weight_val,qty:qty_val,price:price_val
 		},
 		function(result){
 			var result = eval('('+result+')');

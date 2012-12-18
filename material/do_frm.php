@@ -157,6 +157,10 @@ require_once "do_frm.cjs.php";
           </select>
       </td>
     </tr>
+	<tr>
+      <td>Weight</td>
+      <td><input name="weight" type="text" id="weight" value="" style="width:100px"></td>
+    </tr>
     <tr>
       <td>Qty</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:100px"></td>

@@ -21,7 +21,7 @@ if ($req=='menu'){
 	$q .= "ORDER BY matin_no, matin_date ASC";
 } else if ($req=='list') {	
 	$matin_id = $_REQUEST["matin_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 		  FROM mat_incdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matin_id='$matin_id' 
@@ -34,7 +34,7 @@ if ($req=='menu'){
 		  WHERE po_id='$po_id' 
 		  ORDER BY child_no ASC";
 } else if ($req=='dgDetFirst') {
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,HsNo AS HsNo2,Sat AS Sat2
 		  FROM mst_barang  
 		  WHERE TpBarang='1' 
 		  ORDER BY KdBarang ASC";		  

@@ -18,6 +18,7 @@ $notes=$_REQUEST['notes'];
 //FORM LIST DATA MATERIAL
 $nolist=explode("`", $_REQUEST['nolist']);
 $KdBarang2=explode("`", $_REQUEST['KdBarang2']);
+$weight=explode("`", $_REQUEST['weight']);
 $qty=explode("`", $_REQUEST['qty']);
 $price=explode("`", $_REQUEST['price']);
 $tot_qty=0;
@@ -52,9 +53,9 @@ try {
 		//TAMBAH DETAIL		
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mkt_dodet (
-				  do_id,child_no,fg_id,qty,price
+				  do_id,child_no,fg_id,weight,qty,price
 				  ) VALUES (
-				  '$do_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$price[$i]'
+				  '$do_id','$nolist[$i]','$KdBarang2[$i]','$weight[$i]','$qty[$i]','$price[$i]'
 				  )";	
 		}//AKHIR TAMBAH DETAIL
 		
@@ -79,9 +80,9 @@ try {
 		//UBAH DETAIL	
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mkt_dodet (
-				  do_id,child_no,fg_id,qty,price
+				  do_id,child_no,fg_id,weight,qty,price
 				  ) VALUES (
-				  '$do_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$price[$i]'
+				  '$do_id','$nolist[$i]','$KdBarang2[$i]','$weight[$i]','$qty[$i]','$price[$i]'
 				  )";	
 		}//AKHIR UBAH DETAIL
 		

@@ -21,7 +21,7 @@ if ($req=='menu'){
 	$q .= "ORDER BY do_no, do_date ASC";
 } else if ($req=='list') {	
 	$do_id = $_REQUEST["do_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2,NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(a.qty, 2) AS qty,FORMAT(a.price, 2) AS price,FORMAT(a.qty*a.price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2,NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,weight,FORMAT(a.qty, 2) AS qty,FORMAT(a.price, 2) AS price,FORMAT(a.qty*a.price, 2) AS amount
 		  FROM mkt_dodet a 
 		  LEFT JOIN mkt_dohdr b ON b.do_id=a.do_id
 		  LEFT JOIN mst_barang c ON KdBarang = a.fg_id 		 
