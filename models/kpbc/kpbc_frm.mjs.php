@@ -3,10 +3,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:500,	
 		toolbar:"#toolbar",
 		fitColumns:"true",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		columns:[[  
 			{field:'KdKpbc0',title:'KdKpbc0',width:80,hidden:true},
 			{field:'KdKpbc',title:'Kode KPBC',width:80},

@@ -3,7 +3,7 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,	
 		toolbar:"#toolbar",
 		fitColumns:"true",
 		rownumbers:"true",
@@ -13,10 +13,7 @@ function setdg(){
 			{field:'matgroup_name',title:'Mat. Group Name',width:80},
 			{field:'HsNo',title:'HS No.',width:300}
 		]],
-		url: '<?php echo $basedir; ?>models/matgroup_grid.php',  
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: ''		
+		url: '<?php echo $basedir; ?>models/matgroup_grid.php'
 	});
 }
 

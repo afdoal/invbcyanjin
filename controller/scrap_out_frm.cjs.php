@@ -35,22 +35,9 @@ $('#qty').numberbox({
 	decimalSeparator:'.',
 });
 
-$('#ref_no').combogrid({  
-	panelWidth:500,  	
-	url: '<?php echo $basedir; ?>models/material/scrap_out_grid.php?req=ref',  
-	idField:'matout_no',  
-	textField:'matout_no',  
-	mode:'remote',  
-	fitColumns:true,  
-	columns:[[  
-		{field:'matout_no',title:'Outgoing No.',width:60},
-		{field:'matout_date',title:'Outgoing Date',width:50},
-		{field:'wo_no',title:'WO No.',width:50}
-	]],
-	onClickRow:function(index,row){insert_ref(row)}  
-}); 
 	
 setdg();
+setComboGrid();
 dsInput();
 $('#matout_date').combo('disable');
 $('#expplan_date').combo('disable');
@@ -97,7 +84,6 @@ $('#tl1Tbh').click(function(){
 	
 	enInput();
 	$('#matout_date').datebox('enable');
-	$('#ref_no').combogrid('enable');
 	$('#expplan_date').datebox('enable');
 	$('#Sat2').attr('disabled',true);
 });
@@ -126,8 +112,6 @@ $('#tl1Sim').click(function(){
 		throw "matout_no-Outgoing No.";
 	} else if ($('#matout_date').datebox('getValue') == ''){ 
 		throw "matout_date-Outgoing Date";
-	} else if ($('#ref_id').val() == ''){	
-		throw "ref_no-PO Cust. No.";
 	} else if (rows.length == 0){
 		throw "matout_no-Finished Goods List";	
 	} else {
@@ -150,8 +134,10 @@ $('#tl1Sim').click(function(){
 		matout_id: $('#matout_id').val(),
 		matout_no: $('#matout_no').val(),
 		matout_date: $('#matout_date').datebox('getValue'),
-		ref_id: $('#ref_id').val(),
-		ref_no: $('#ref_no').combogrid('getValue'),
+		cust: $('#cust').val(),
+		vehicle_no: $('#vehicle_no').val(),
+		driver: $('#driver').val(),
+		KdJnsDok: $('#KdJnsDok').val(),
 		notes: $('#notes').val(),
 		
 		//FORM LIST DATA BARANG	

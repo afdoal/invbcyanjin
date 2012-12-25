@@ -9,10 +9,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,
 		toolbar:"#toolCari",
 		fitColumns:"true",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		columns:[[  
 			{field:'wh_name',title:'Warehouse',width:80},
 			{field:'date',title:'Date',width:80},

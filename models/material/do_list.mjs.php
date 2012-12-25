@@ -3,10 +3,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,	
 		toolbar:"#toolCari",
 		fitColumns:"true",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		columns:[[  
 			{field:'do_no',title:'DO No.',width:80},
 			{field:'do_date',title:'DO Date',width:80},

@@ -44,7 +44,7 @@ require_once "bc23.cjs.php";
 <body oncontextmenu="return false;">
 <div id="w" style="padding:5px;">
 <form id="frm" name="frm" action="" method="post">
-    <div class="easyui-tabs" tools="#tab-tools" style="width:720px;height:650px;">               
+    <div class="easyui-tabs" tools="#tab-tools" style="width:720px;height:655px;">               
         <div title="Data Umum" style="padding:10px;">
         <div class="demo-info" style="margin-bottom:10px">
             <div class="demo-tip icon-tip">&nbsp;</div>

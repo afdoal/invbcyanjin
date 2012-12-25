@@ -10,7 +10,7 @@ function setdg(){
 		fitColumns:"true",
 		rownumbers:"true",
 		columns:[[  
-			{field:'KdBarang2',title:'Mat. Code',width:80},
+			{field:'KdBarang2',title:'Scrap Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
@@ -19,11 +19,9 @@ function setdg(){
 	});
 }
 
-function setdgUrl(){
-	var matout_id = $('#ref_id').val();
-	
+function setdgUrl(){	
 	$('#dg').datagrid({  	
-		url: '<?php echo $basedir; ?>models/material/scrap_out_grid.php?req=list&matout_id='+matout_id
+		url: '<?php echo $basedir; ?>models/material/scrap_out_grid.php?req=list'
 	});
 }
 
@@ -35,9 +33,8 @@ function setdgCari(){
 		rownumbers:"true", 
 		toolbar:"#toolCari",
 		columns:[[  
-			{field:'matout_no',title:'MOB No.',width:60},
-			{field:'matout_date',title:'MOB Date',width:50},
-			{field:'ref_no',title:'Ref. No.',width:50}
+			{field:'matout_no',title:'Scrap No.',width:60},
+			{field:'matout_date',title:'Scrap Date',width:50}
 		]],
 		url: '<?php echo $basedir ?>models/material/scrap_out_grid.php?req=menu&pilcari='+$("#pilcari").val()+'&txtcari='+$("#txtcari").val(),
 		onClickRow:function(index,row){insert_menu(row)}
@@ -48,8 +45,10 @@ function insert_menu(row){
 	$('#matout_id').val(row.matout_id);
 	$('#matout_no').val(row.matout_no);
 	$('#matout_date').datebox('setValue',row.matout_date);
-	$('#ref_id').val(row.ref_id);
-	$('#ref_no').combogrid('setValue',row.ref_no);	
+	$('#cust').val(row.cust);	
+	$('#vehicle_no').val(row.vehicle_no);	
+	$('#driver').val(row.driver);	
+	$('#KdJnsDok').val(row.KdJnsDok);	
 	$('#notes').val(row.notes);	
 	setdg();
 	$('#toolbar2').hide();
@@ -61,30 +60,25 @@ function insert_menu(row){
 }
 
 function setComboGrid(){	
-	var ref_id = $('#ref_id').val();
 	$('#KdBarang2').combogrid({  
 		panelWidth:500,  	
-		url: '<?php echo $basedir; ?>models/material/scrap_out_grid.php?req=dgDet&ref_id='+ref_id,  
+		url: '<?php echo $basedir; ?>models/material/scrap_out_grid.php?req=dgDet',  
 		idField:'KdBarang2',  
 		textField:'KdBarang2',  
 		mode:'remote',  
-		fitColumns:true,  
+		rownumbers:true,
+		fitColumns:true,
+		pagination:true,
+		pageList:[25,50,75,100],  
 		columns:[[  
-			{field:'KdBarang2',title:'Mat. Code',width:60},
+			{field:'KdBarang2',title:'Scrap Code',width:60},
 			{field:'NmBarang2',title:'Desc.',width:50},
-			{field:'Sat2',title:'Unit',width:50},
-			{field:'qty',title:'Qty',width:50}
+			{field:'Sat2',title:'Unit',width:50}
 		]],
 		onClickRow:function(index,row){insert_det(row)}  
 	}); 
 }
 
-
-function insert_ref(row){
-	$('#ref_id').val(row.matout_id);		
-	setdgUrl();
-	setComboGrid();	
-}
 
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);

@@ -45,10 +45,13 @@ function setBarang(){
 	idField:'KdBarang2',  
 	textField:'KdBarang2',  
 	mode:'remote',  
-	fitColumns:true,  
+	rownumbers:true,
+	fitColumns:true,
+	pagination:true,
+	pageList:[25,50,75,100],    
 	columns:[[  
 		{field:'KdBarang2',title:'Mat. Code',width:60},
-		{field:'NmBarang2',title:'Mat. Name',width:50},
+		{field:'NmBarang2',title:'Desc.',width:50},
 		{field:'Sat2',title:'Unit',width:50}
 	]],
 	onSelect:function(index,row){insert_det(row)}  

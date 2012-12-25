@@ -3,7 +3,7 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,	
 		toolbar:"#toolbar",
 		fitColumns:"true",
 		rownumbers:"true",

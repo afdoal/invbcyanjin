@@ -3,10 +3,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,	
 		toolbar:"#toolCari",
 		fitColumns:"true",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		columns:[[  		
 			{field:'wh_name',title:'Warehouse.',width:100},
 			{field:'opname_date',title:'Date',width:100},
@@ -27,7 +29,9 @@ function setdg(){
 				url:'<?php echo $basedir; ?>models/material/stock_adjust_grid.php?req=listrpt&opname_id='+row.opname_id,  
 				fitColumns:true,  
 				singleSelect:true,  
-				rownumbers:true,  
+				rownumbers:true,
+				pagination:true,
+				pageList:[25,50,75,100],  
 				loadMsg:'',  
 				height:'auto',  
 				columns:[[  

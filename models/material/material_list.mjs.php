@@ -3,9 +3,11 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,
 		toolbar:"#toolCari",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		frozenColumns:[[  
 			{field:'KdBarang0',title:'Kode Barang0',width:80,hidden:true},
 			{field:'matgroup_name',title:'Mat. Group',width:80},

@@ -3,10 +3,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,
 		toolbar:"#toolbar",
 		fitColumns:false,
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		frozenColumns:[[  
 			{field:'NmPrshn0',title:'NmPrshn0',width:80,hidden:true},
 			{field:'NmPrshn',title:'Nama',width:170},

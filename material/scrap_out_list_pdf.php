@@ -143,8 +143,8 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		<thead>
 		<tr>
 		  <th align="center" width="25"><b>No.</b></th>
-		  <th width="80"><b>MOB No.</b></th>
-		  <th width="80"><b>MOB Date</b></th>
+		  <th width="80"><b>Scrap Out No.</b></th>
+		  <th width="80"><b>Scrap Out Date</b></th>
 		  <th width="80"><b>Ref. No.</b></th>
 		  <th><b>Notes</b></th>
 		</tr>

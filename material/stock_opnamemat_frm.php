@@ -131,6 +131,10 @@ require_once "stock_opnamemat_frm.cjs.php";
       <td>Desc.</td>
       <td><input name="NmBarang2" type="text" id="NmBarang2" style="width:150px" readonly></td>
     </tr>
+	<tr>
+      <td>Section</td>
+      <td><input name="twhmp" type="text" id="twhmp" style="width:150px" readonly></td>
+    </tr>
     <tr>
       <td>Unit</td>
       <td>

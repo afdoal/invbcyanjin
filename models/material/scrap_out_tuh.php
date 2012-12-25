@@ -9,8 +9,10 @@ require_once "function.php";
 $matout_id=$_REQUEST['matout_id'];
 $matout_no=$_REQUEST['matout_no'];
 $matout_date=dmys2ymd($_REQUEST['matout_date']);
-$ref_id=$_REQUEST['ref_id'];
-$ref_no=$_REQUEST['ref_no'];
+$cust=$_REQUEST['cust'];
+$vehicle_no=$_REQUEST['vehicle_no'];
+$driver=$_REQUEST['driver'];
+$KdJnsDok=$_REQUEST['KdJnsDok'];
 $notes=$_REQUEST['notes'];
 
 //FORM LIST DATA MATERIAL
@@ -37,10 +39,10 @@ try {
 		//TAMBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
 				  matout_id,matout_type,matout_no,matout_date,
-				  ref_id,ref_no,tot_qty,notes
+				  ref_id,ref_no,tot_qty,notes,cust,vehicle_no,driver,KdJnsDok
 				  ) VALUES (
 				  '$matout_id','3','$matout_no','$matout_date',
-				  '$ref_id','$ref_no','$tot_qty','$notes'
+				  '','','$tot_qty','$notes','$cust','$vehicle_no','$driver','$KdJnsDok'
 				  )";	
 		//AKHIR TAMBAH HEADER
 		
@@ -65,11 +67,11 @@ try {
 		//UBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
 				  matout_id,matout_type,matout_no,matout_date,
-				  ref_id,ref_no,tot_qty,notes
+				  ref_id,ref_no,tot_qty,notes,cust,vehicle_no,driver,KdJnsDok
 				  ) VALUES (
 				  '$matout_id','3','$matout_no','$matout_date',
-				  '$ref_id','$ref_no','$tot_qty','$notes'
-				  )";	
+				  '','','$tot_qty','$notes','$cust','$vehicle_no','$driver','$KdJnsDok'
+				  )";
 		//AKHIR UBAH HEADER		
 		//UBAH DETAIL	
 		for ($i=0; $i<$jmlnodet; $i++){			

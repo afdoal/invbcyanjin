@@ -38,7 +38,10 @@ $('#KdBarang2').combogrid({
 	idField:'KdBarang2',  
 	textField:'KdBarang2',  
 	mode:'remote',  
-	fitColumns:true,  
+	rownumbers:true,
+	fitColumns:true,
+	pagination:true,
+	pageList:[25,50,75,100],  
 	columns:[[  
 		{field:'KdBarang2',title:'Part Code',width:60},
 		{field:'NmBarang2',title:'Part No',width:50},

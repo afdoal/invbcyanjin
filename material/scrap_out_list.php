@@ -36,8 +36,8 @@ require_once "mst_list.cjs.php";
 <div id="toolCari">  
     Search
      <select id="pilcari" name="pilcari">
-    	<option value="matout_no">MOB No.</option>
-        <option value="matout_date">MOB Date</option>
+    	<option value="matout_no">Scrap Out No.</option>
+        <option value="matout_date">Scrap Out Date</option>
         <option value="ref_no">Ref. No.</option>
      </select> 
     <input type="text" id="txtcari" name="txtcari" style="width:100px">

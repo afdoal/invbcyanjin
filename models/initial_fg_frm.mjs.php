@@ -16,7 +16,7 @@ function setdg(){
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
 		]],
-		url: '<?php echo $basedir; ?>models/initial_fg_grid.php?req=list&wh_id='+wh_id+'&date='+date,  
+		url: '<?php echo $basedir; ?>models/initial_fg_grid.php?req=list2&wh_id='+wh_id+'&date='+date,  
 		onAdd:function(index,row){rowIndex=index;},
 		onDblClickRow:function(index,row){rowIndex=index;}
 		

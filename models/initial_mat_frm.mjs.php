@@ -13,13 +13,11 @@ function setdg(){
 		columns:[[  
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
+			{field:'twhmp',title:'Section',width:150},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
 		]],
-		url: '<?php echo $basedir; ?>models/initial_mat_grid.php?req=list&wh_id='+wh_id+'&date='+date,  
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: '',
+		url: '<?php echo $basedir; ?>models/initial_mat_grid.php?req=list2&wh_id='+wh_id+'&date='+date,  
 		onAdd:function(index,row){rowIndex=index;},
 		onDblClickRow:function(index,row){rowIndex=index;}
 		
@@ -39,9 +37,6 @@ function setdgCari(){
 			{field:'date',title:'Date',width:50}
 		]],
 		url: '<?php echo $basedir ?>models/initial_mat_grid.php?req=menu&pilcari='+$("#pilcari").val(), 
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: '',
 		onClickRow:function(index,row){insert_menu(row)}
 		
 	});
@@ -63,6 +58,7 @@ function insert_menu(row){
 
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
+	$('#twhmp').val(row.twhmp);
 	$('#Sat2').val(row.Sat2);
 }
 

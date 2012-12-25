@@ -6,6 +6,11 @@ $TpBarang=$_REQUEST["TpBarang"];
 $pilcari = $_REQUEST["pilcari"];
 $txtcari = $_REQUEST["txtcari"];
 
+$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+$offset = ($page-1)*$rows;
+$result = array();
+
 $q = "SELECT *,KdBarang AS KdBarang0 FROM mst_barang a 
 	  LEFT JOIN mat_group b ON b.matgroup_code=a.MatGroup
 	  WHERE TpBarang='$TpBarang' ";
@@ -16,7 +21,15 @@ if ($txtcari != ""){
 
 $q .= "ORDER BY MatGroup, KdBarang ASC";	  
 
-$run=$pdo->query($q);	
+$runtot=$pdo->query($q);
+$rstot=$runtot->fetchAll(PDO::FETCH_ASSOC);
+
+$q .= " LIMIT $offset,$rows";
+$run=$pdo->query($q);
 $rs=$run->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($rs);
+
+$result["total"] = count($rstot);
+$result["rows"] = $rs;
+
+echo json_encode($result);
 ?>

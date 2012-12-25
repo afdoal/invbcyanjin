@@ -31,7 +31,7 @@ if ($rs){
 }
 .kolom2 {
 	float:left;
-	width:130px;	
+	width:160px;	
 }
 .kolom3 {
 	float:left;
@@ -68,18 +68,45 @@ require_once "scrap_out_frm.cjs.php";
 <form id="fm" method="post" onSubmit="return false">
 	<input type="hidden" id="aksi" name="aksi">
     <div class="hdr">
-      <span class="kolom1">MOB No. </span><span class="kolom2">
+      <span class="kolom1">Scrap No. </span>
+	  <span class="kolom2">
       <input type="hidden" id="matout_id" name="matout_id">
       <input type="text" id="matout_no" name="matout_no" style="width:100px">    
       </span>
-      <span class="kolom3">MOB Date </span>
+      <span class="kolom3">Scrap Date </span>
       <span class="kolom4">
         <input type="text" id="matout_date" name="matout_date" class="easyui-datebox" required maxlength="10" tabindex="10" style="width:100px">
       </span>
-      <span class="kolom5">Ref. No. </span>
+	  <span class="kolom5">Customer</span>
       <span class="kolom6">
-      <input type="hidden" id="ref_id" name="ref_id" style="width:100px">
-      <select name="ref_no" id="ref_no" style="width:150px"></select></span>
+      <select name="cust" id="cust" style="width:150px">
+        <option value=""></option>
+        <?php
+            $run = $pdo->query("SELECT NmPrshn FROM mst_perusahaan WHERE TpPrshn='c' ORDER BY NmPrshn");
+            $rs = $run->fetchAll(PDO::FETCH_ASSOC);
+            foreach($rs as $r)
+                echo "<option value=\"".$r['NmPrshn']."\">".$r['NmPrshn']."</option>";
+        ?>
+      </select>
+	  </span>
+	</div>  
+	<div class="hdr">
+	  <span class="kolom1">Vehicle No.</span>
+      <span class="kolom2"><input type="text" name="vehicle_no" id="vehicle_no" style="width:100px"></span>
+      <span class="kolom3">Driver</span>
+      <span class="kolom4"><input type="text" name="driver" id="driver" style="width:100px"></span>	  
+	  <span class="kolom5">Jenis BC</span>
+      <span class="kolom6">
+      <select name="KdJnsDok" id="KdJnsDok" style="width:80px">
+        <option value=""></option>
+        <?php
+            $run = $pdo->query("SELECT * FROM jenis_dok WHERE KdJnsDok IN ('3','9') ORDER BY KdJnsDok");
+            $rs = $run->fetchAll(PDO::FETCH_ASSOC);
+            foreach($rs as $r)
+                echo "<option value=\"".$r['KdJnsDok']."\">".$r['UrJnsDok']."</option>";
+        ?>
+      </select>
+      </span>       
     </div>        
     <!--
     <div class="hdr">
@@ -119,7 +146,7 @@ require_once "scrap_out_frm.cjs.php";
 	<form name="fm2" id="fm2" method="post" onSubmit="return false">
  	<table>
     <tr>
-      <td width="115">Mat. Code</td>
+      <td width="115">Scrap Code</td>
       <td width="319"><input name="KdBarang3" type="hidden" id="KdBarang3" class="easyui-validatebox" value=""><input id="KdBarang2" name="KdBarang2" type="text" style="width:100px"></td>
     </tr>
     <tr>
@@ -158,8 +185,8 @@ require_once "scrap_out_frm.cjs.php";
 <div id="toolCari">  
     Search
     <select id="pilcari" name="pilcari">
-    	<option value="matout_no">MOB No.</option>
-        <option value="matout_date">MOB Date</option>
+    	<option value="matout_no">Scrap Out No.</option>
+        <option value="matout_date">Scrap Out Date</option>
         <option value="ref_no">Ref. No.</option>
     </select> 
     <input type="text" id="txtcari" name="txtcari" style="width:100px">

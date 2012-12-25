@@ -3,10 +3,12 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,	
 		toolbar:"#toolCari",
 		fitColumns:false,
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		frozenColumns:[[  
 			{field:'KdBarang',title:'Mat. Code',width:80,rowspan:2},  
 			{field:'NmBarang',title:'Desc.',width:100,rowspan:2},   

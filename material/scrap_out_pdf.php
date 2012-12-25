@@ -144,10 +144,10 @@ $rs=$run->fetchAll(PDO::FETCH_ASSOC);
 $html = '<h2 align="center">'.$NmMenu.'</h2>'.		
 		'<table>
 		<tr>
-		  <td width="80"><b>MOB No.</b></td>
+		  <td width="80"><b>Scrap Out No.</b></td>
 		  <td width="10"><b>:</b></td>
 		  <td width="80"><b>'.$rsh[0]['matout_no'].'</b></td>
-		  <td width="80"><b>MOB Date</b></td>
+		  <td width="80"><b>Scrap Out Date</b></td>
 		  <td width="10"><b>:</b></td>
 		  <td width="150"><b>'.$rsh[0]['matout_date'].'</b></td>
 		  <td width="80"><b>Ref No</b></td>

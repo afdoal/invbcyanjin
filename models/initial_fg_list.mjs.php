@@ -3,7 +3,7 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:500,	
 		toolbar:"#toolCari",
 		fitColumns:"true",
 		rownumbers:"true",
@@ -28,6 +28,8 @@ function setdg(){
 				fitColumns:true,  
 				singleSelect:true,  
 				rownumbers:true,  
+				pagination:true,
+				pageList:[25,50,75,100],
 				loadMsg:'',  
 				height:'auto',  
 				columns:[[  

@@ -3,19 +3,18 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,
 		toolbar:"#toolbar",
 		fitColumns:"true",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		columns:[[  
 			{field:'KdSat0',title:'KdSat0',width:80,hidden:true},
 			{field:'KdSat',title:'Kode Satuan',width:80},
 			{field:'UrSat',title:'Nama Satuan',width:300}
 		]],
-		url: '<?php echo $basedir; ?>models/satuan/satuan_grid.php',  
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: ''		
+		url: '<?php echo $basedir; ?>models/satuan/satuan_grid.php'
 	});
 }
 

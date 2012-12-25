@@ -3,9 +3,11 @@ function setdg(){
 	$('#dg').datagrid({  	
 		title:"",
 		width:736,
-		height:415,	
+		height:515,
 		toolbar:"#toolCari",
 		rownumbers:"true",
+		pagination:true,
+		pageList:[25,50,75,100],
 		frozenColumns:[[  
 			{field:'matin_no',title:'Incoming No.',width:80},
 			{field:'matin_date',title:'Incoming Date',width:80},

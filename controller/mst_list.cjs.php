@@ -5,7 +5,7 @@ setdg();
 $('#w').window({ 
 	title:"<?php echo strtoupper($NmMenu) ?>", 
     width:750,
-	height:450,
+	height:550,
 	left:0,  
 	top:0, 
 	collapsible:false,
