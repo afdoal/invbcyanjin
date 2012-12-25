@@ -33,9 +33,9 @@ try {
 		
 		//TAMBAH HEADER
 		$sql[] = "INSERT INTO mat_inchdr (
-				  matin_id,matin_type,matin_date,notes				  
+				  matin_id,mat_type,matin_date,notes				  
 				  ) VALUES (
-				  '$matin_id','3','$matin_date','$notes'
+				  '$matin_id','12','$matin_date','$notes'
 				  )";	
 		//AKHIR TAMBAH HEADER
 		
@@ -59,9 +59,9 @@ try {
 		//$sql[]="DELETE FROM mat_incdet WHERE matin_id='$matin_id'";
 		//UBAH HEADER
 		$sql[] = "INSERT INTO mat_inchdr (
-				  matin_id,matin_type,matin_date,notes				  
+				  matin_id,mat_type,matin_date,notes				  
 				  ) VALUES (
-				  '$matin_id','3','$matin_date','$notes'
+				  '$matin_id','12','$matin_date','$notes'
 				  )";
 		//AKHIR UBAH HEADER		
 		//UBAH DETAIL	

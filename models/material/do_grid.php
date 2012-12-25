@@ -14,17 +14,17 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 
-	$q = "SELECT *,DATE_FORMAT(do_date,'%d/%m/%Y') AS do_date, a.notes AS notes
-		  FROM mkt_dohdr a 
-		   ";
+	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes
+		  FROM mat_outhdr a 
+		  WHERE mat_type='0' ";
 	if ($txtcari != ""){		  
-		if ($pilcari == "do_date"){		  
-			$q .= "WHERE $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
+		if ($pilcari == "matout_date"){		  
+			$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
 		} else {
-			$q .= "WHERE $pilcari LIKE '%$txtcari%' ";	  
+			$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
 		}
 	}  
-	$q .= "ORDER BY do_no, do_date ASC";
+	$q .= "ORDER BY matout_no, matout_date ASC";
 	
 	$runtot=$pdo->query($q);
 	$rstot=$runtot->fetchAll(PDO::FETCH_ASSOC);
@@ -40,10 +40,10 @@ if ($req=='menu'){
 } else if ($req=='list') {	
 	$do_id = $_REQUEST["do_id"];
 	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2,NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,weight,FORMAT(a.qty, 2) AS qty,FORMAT(a.price, 2) AS price,FORMAT(a.qty*a.price, 2) AS amount
-		  FROM mkt_dodet a 
-		  LEFT JOIN mkt_dohdr b ON b.do_id=a.do_id
-		  LEFT JOIN mst_barang c ON KdBarang = a.fg_id 		 
-		  WHERE a.do_id='$do_id' 
+		  FROM mat_outdet a 
+		  LEFT JOIN mat_outhdr b ON b.matout_id=a.matout_id
+		  LEFT JOIN mst_barang c ON KdBarang = a.mat_id 		 
+		  WHERE a.matout_id='$do_id' 
 		  ORDER BY a.child_no ASC";
 	
 	$run=$pdo->query($q);	

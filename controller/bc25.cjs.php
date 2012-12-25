@@ -218,7 +218,10 @@ $('#KdJnsDok').change(function(){
 });
 
 $('#NmTuj').change(function(){
-	$('#ref_id').combogrid({disabled:false});
+	$('#ref_id').combogrid({
+		url: '<?php echo $basedir ?>models/bc25/bc25_grid.php?req=outhdr&NmTuj='+$('#NmTuj').val(),  	
+		disabled:false
+	});
 
 });
 $('#KdBarang2').change(function(){
@@ -227,15 +230,19 @@ $('#KdBarang2').change(function(){
 
 	$('#ref_id').combogrid({  
 		panelWidth:500,  	
+		width:150,
 		idField:'matout_id',  
 		textField:'matout_no',  
 		url: '<?php echo $basedir ?>models/bc25/bc25_grid.php?req=outhdr',  
-		fitColumns:true,  
+		mode:'remote',  
+		rownumbers:true,
+		fitColumns:true,
+		pagination:true,
+		pageList:[25,50,75,100],   
 		columns:[[  
 			{field:'matout_no',title:'Outgoing No.',width:60},
-			{field:'matout_date',title:'Outgoing Date',width:50},
-			{field:'matout_name',title:'Outgoing Type',width:50},
-			{field:'wo_no',title:'WO No.',width:50}
+			{field:'matout_date',title:'Outgoing Date',width:50},			
+			{field:'cust',title:'Customer',width:50}
 		]],
 		onClickRow:function(index,row){setdg2Url(row)}  
 	});

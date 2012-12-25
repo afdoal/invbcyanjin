@@ -377,7 +377,8 @@ function setdg2(){
 }
 
 function setdg2Url(row){
-	//$('#NmTuj').val(row.supplier);
+	$('#HrgSerah').numberbox('setValue',row.tot_amount);
+	$('#NETTO').numberbox('setValue',row.tot_qty);
 	$('#dg2').datagrid({  
 		url: '<?php echo $basedir ?>models/bc25/bc25_grid.php?req=outdet&matout_id='+row.matout_id
 	});

@@ -104,7 +104,14 @@ $('#btnCri').click(function(){
 });
 
 $('#NmTuj').change(function(){
-	$('#ref_id').combogrid({disabled:false});	
+	$('#ref_id').combogrid({
+		<?php if ($ket=='in'){ ?>
+			url: '<?php echo $basedir ?>models/bc27/bc27_grid.php?req=inhdr&NmTuj='+$('#NmTuj').val(),  
+		<?php } else { ?>
+			url: '<?php echo $basedir ?>models/bc27/bc27_grid.php?req=outhdr&NmTuj='+$('#NmTuj').val(),  
+		<?php } ?>
+		disabled:false
+	});	
 });
 
 $('#KdBarang').change(function(){
@@ -130,11 +137,14 @@ $('#dtsampai').datebox({disabled:false});
 		idField:'matin_id',  
 		textField:'matin_no',  
 		url: '<?php echo $basedir ?>models/bc27/bc27_grid.php?req=inhdr',  
-		fitColumns:true,  
+		mode:'remote',  
+		rownumbers:true,
+		fitColumns:true,
+		pagination:true,
+		pageList:[25,50,75,100],    
 		columns:[[  
 			{field:'matin_no',title:'Incoming No.',width:60},
 			{field:'matin_date',title:'Incoming Date',width:50},
-			{field:'matin_name',title:'Incoming Type',width:50},
 			{field:'supplier',title:'Supplier',width:50}
 		]],
 		onClickRow:function(index,row){setdg2Url(row)}  
@@ -142,16 +152,20 @@ $('#dtsampai').datebox({disabled:false});
 
 <?php } else { ?>
 	$('#ref_id').combogrid({  
-		panelWidth:500,  	
+		panelWidth:500, 
+		width:150, 	
 		idField:'matout_id',  
 		textField:'matout_no',  
 		url: '<?php echo $basedir ?>models/bc27/bc27_grid.php?req=outhdr',  
-		fitColumns:true,  
+		mode:'remote',  
+		rownumbers:true,
+		fitColumns:true,
+		pagination:true,
+		pageList:[25,50,75,100],     
 		columns:[[  
 			{field:'matout_no',title:'Outgoing No.',width:60},
 			{field:'matout_date',title:'Outgoing Date',width:50},
-			{field:'matout_name',title:'Outgoing Type',width:50},
-			{field:'wo_no',title:'WO No.',width:50}
+			{field:'cust',title:'Customer',width:50}
 		]],
 		onClickRow:function(index,row){setdg2Url(row)}  
 	});

@@ -13,11 +13,13 @@ $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
 $offset = ($page-1)*$rows;
 $result = array();
 
-$q = "SELECT KdBarang,NmBarang,HsNo,Sat,
+$q = "SELECT KdBarang, NmBarang,HsNo,Sat,
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_stockcard s WHERE date < '".$date1."' AND s.mat_id = a.KdBarang AND type IN ('B','I'))	  
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_stockcard s WHERE date < '".$date1."' AND s.mat_id = a.KdBarang AND type = 'B')
+	  +
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE matin_date < '".$date1."' AND ia.mat_id = a.KdBarang)
 	  -
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mkt_dodet da LEFT JOIN mkt_dohdr db ON db.do_id=da.do_id WHERE do_date < '".$date1."' AND da.fg_id = a.KdBarang)
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE matout_date < '".$date1."' AND oa.mat_id = a.KdBarang)
 	  +
 	  (SELECT IF(SUM(qty_in)>0,SUM(qty_in),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE opname_date < '".$date1."' AND oa.mat_id = a.KdBarang)
 	  -
@@ -25,11 +27,11 @@ $q = "SELECT KdBarang,NmBarang,HsNo,Sat,
 	  ) AS qty_beg, 
 	  
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_stockcard s WHERE s.mat_id = a.KdBarang AND type = 'I' AND date  BETWEEN '".$date1."' AND '".$date2."')
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE  ia.mat_id = a.KdBarang AND matin_date BETWEEN '".$date1."' AND '".$date2."')
 	  ) AS qty_in,
 	  
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_outdet da INNER JOIN mat_outhdr db ON db.matout_id=da.matout_id AND db.mat_type='0' WHERE da.mat_id = a.KdBarang AND matout_date BETWEEN '".$date1."' AND '".$date2."')
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE oa.mat_id = a.KdBarang AND matout_date BETWEEN '".$date1."' AND '".$date2."')
 	  ) AS qty_out,
 	  
 	  (
@@ -45,7 +47,7 @@ $q = "SELECT KdBarang,NmBarang,HsNo,Sat,
 $q .= "FROM mst_barang a 
 	  WHERE a.TpBarang='$mat_type' 
 	  ORDER BY KdBarang ASC";
-
+	  
 $runtot=$pdo->query($q);
 $rstot=$runtot->fetchAll(PDO::FETCH_ASSOC);
 

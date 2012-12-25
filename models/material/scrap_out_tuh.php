@@ -38,10 +38,10 @@ try {
 		
 		//TAMBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,
+				  matout_id,mat_type,matout_no,matout_date,
 				  ref_id,ref_no,tot_qty,notes,cust,vehicle_no,driver,KdJnsDok
 				  ) VALUES (
-				  '$matout_id','3','$matout_no','$matout_date',
+				  '$matout_id','12','$matout_no','$matout_date',
 				  '','','$tot_qty','$notes','$cust','$vehicle_no','$driver','$KdJnsDok'
 				  )";	
 		//AKHIR TAMBAH HEADER
@@ -66,10 +66,10 @@ try {
 		//$sql[]="DELETE FROM mat_outdet WHERE matout_id='$matout_id'";
 		//UBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,
+				  matout_id,mat_type,matout_no,matout_date,
 				  ref_id,ref_no,tot_qty,notes,cust,vehicle_no,driver,KdJnsDok
 				  ) VALUES (
-				  '$matout_id','3','$matout_no','$matout_date',
+				  '$matout_id','12','$matout_no','$matout_date',
 				  '','','$tot_qty','$notes','$cust','$vehicle_no','$driver','$KdJnsDok'
 				  )";
 		//AKHIR UBAH HEADER		

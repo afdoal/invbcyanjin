@@ -263,9 +263,6 @@ require_once "bc41.cjs.php";
                     </select>
               <input type="text" id="HrgSerah" name="HrgSerah" class="easyui-numberbox" precision="2" groupSeparator="," maxlength="10" size="12" tabindex="30"></td>
               <td colspan="2">
-                <div id="ref">
-                  Ref No. <select id="ref_id" name="ref_id"></select>
-                </div>
               </td>
             </tr>
             </table>

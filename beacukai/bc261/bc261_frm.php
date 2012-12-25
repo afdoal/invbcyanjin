@@ -203,7 +203,7 @@ require_once "bc261.cjs.php";
               <select id="NmTuj" name="NmTuj" style="width:200px;">
               <option value=""></option>
               <?php 
-					$q="SELECT * FROM mst_perusahaan WHERE TpPrshn IN ('s','c') ORDER BY NmPrshn";
+					$q="SELECT * FROM mst_perusahaan WHERE TpPrshn IN ('c') ORDER BY NmPrshn";
 					$run = $pdo->query($q);
 		  		    $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 					foreach ($rs as $r){

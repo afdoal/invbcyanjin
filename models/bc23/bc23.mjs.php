@@ -334,7 +334,7 @@ function setdg2(){
 }
 
 function setdg2Url(row){
-	//$('#NmTuj').val(row.supplier);
+	$('#HrgSerah').numberbox('setValue',row.tot_amount);
 	$('#dg2').datagrid({  
 		url: '<?php echo $basedir ?>models/bc23/bc23_grid.php?req=indet&matin_id='+row.matin_id
 	});

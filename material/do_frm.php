@@ -6,11 +6,11 @@ require_once "pdocon.php";
 $NmMenu=$_REQUEST["NmMenu"];
 $TpBarang=$_REQUEST["TpBarang"];
 
-$q="SELECT do_id FROM mkt_dohdr ORDER BY do_id DESC";
+$q="SELECT matout_id FROM mat_outhdr ORDER BY matout_id DESC";
 $run = $pdo->query($q);
 $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 if ($rs){
-	$newId=$rs[0]['do_id']+1;
+	$newId=$rs[0]['matout_id']+1;
 } else {
 	$newId="1";				
 }
@@ -98,6 +98,22 @@ require_once "do_frm.cjs.php";
       <input type="hidden" id="so_id" name="so_id" style="width:100px">
       <input name="so_no" id="so_no" style="width:150px"></span>  
     </div>
+	<div class="hdr">
+      <span class="kolom1">
+        Jenis BC
+      </span>
+      <span class="kolom2">
+      <select name="KdJnsDok" id="KdJnsDok" style="width:80px">
+        <option value=""></option>
+        <?php
+            $run = $pdo->query("SELECT * FROM jenis_dok WHERE KdJnsDok IN ('3','4','6','7','9') ORDER BY KdJnsDok");
+            $rs = $run->fetchAll(PDO::FETCH_ASSOC);
+            foreach($rs as $r)
+                echo "<option value=\"".$r['KdJnsDok']."\">".$r['UrJnsDok']."</option>";
+        ?>
+      </select>
+      </span>
+	</div>  
     <!--
     <div class="hdr">
       <span class="kolom1">
@@ -128,7 +144,7 @@ require_once "do_frm.cjs.php";
     <a href="javascript:void(0)" id="tl2Hps" class="easyui-linkbutton" iconCls="icon-remove" plain="true" title="Hapus">Delete</a>  
 </div>        
 <div class="hdr" style="padding-top:10px">Notes: 
-  <textarea id="notes" name="notes" style="width:700px; height:70px;"></textarea></div>    
+  <textarea id="notes" name="notes" style="width:700px; height:40px;"></textarea></div>    
 <input type="submit" id="btnSubmit1" name="btnSubmit1" style="display:none">
 </form>     
 
@@ -187,9 +203,9 @@ require_once "do_frm.cjs.php";
 <div id="toolCari">  
     Search
     <select id="pilcari" name="pilcari">
-    	<option value="do_no">DO No.</option>
-        <option value="do_date">DO Date</option>
-        <option value="so_no">PO Cust. No.</option>
+    	<option value="matout_no">DO No.</option>
+        <option value="matout_date">DO Date</option>
+        <option value="ref_no">PO Cust. No.</option>
     </select> 
     <input type="text" id="txtcari" name="txtcari" style="width:100px">
     <a href="#" id="dtlCri" class="easyui-linkbutton" iconCls="icon-search"></a>

@@ -42,9 +42,9 @@ function setdgCari(){
 		rownumbers:"true", 
 		toolbar:"#toolCari",
 		columns:[[  
-			{field:'do_no',title:'DO No.',width:60},
-			{field:'do_date',title:'DO Date',width:50},
-			{field:'so_no',title:'PO Cust. No.',width:50},
+			{field:'matout_no',title:'DO No.',width:60},
+			{field:'matout_date',title:'DO Date',width:50},
+			{field:'ref_no',title:'PO Cust. No.',width:50},
 			{field:'cust',title:'Customer',width:50}
 		]],
 		url: '<?php echo $basedir ?>models/material/do_grid.php?req=menu&pilcari='+$("#pilcari").val()+'&txtcari='+$("#txtcari").val(),
@@ -53,14 +53,15 @@ function setdgCari(){
 }
 
 function insert_menu(row){
-	$('#do_id').val(row.do_id);
-	$('#do_no').val(row.do_no);
-	$('#do_date').datebox('setValue',row.do_date);
+	$('#do_id').val(row.matout_id);
+	$('#do_no').val(row.matout_no);
+	$('#do_date').datebox('setValue',row.matout_date);
 	$('#cust').val(row.cust);	
-	$('#so_id').val(row.so_id);
-	$('#so_no').val(row.so_no);	
+	$('#so_id').val(row.ref_id);
+	$('#so_no').val(row.ref_no);	
 	$('#vehicle_no').val(row.vehicle_no);
 	$('#driver').val(row.driver);
+	$('#KdJnsDok').val(row.KdJnsDok);
 	$('#notes').val(row.notes);	
 	setdg();
 	$('#toolbar2').hide();
@@ -147,6 +148,7 @@ function simpan(){
 		so_no: $('#so_no').val(),
 		vehicle_no: $('#vehicle_no').val(),
 		driver: $('#driver').val(),
+		KdJnsDok: $('#KdJnsDok').val(),
 		notes: $('#notes').val(),
 		
 		//FORM LIST DATA BARANG	

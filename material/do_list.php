@@ -36,10 +36,9 @@ require_once "mst_list.cjs.php";
 <div id="toolCari">  
     Search
      <select id="pilcari" name="pilcari">
-    	<option value="do_no">DO No.</option>
-        <option value="do_date">DO Date</option>
+    	<option value="matout_no">DO No.</option>
+        <option value="matout_date">DO Date</option>
         <option value="cust">Customer</option>
-        <option value="due_date">Due Date</option>
     </select> 
     <input type="text" id="txtcari" name="txtcari" style="width:100px">
     <a href="#" id="dtlCri" class="easyui-linkbutton" iconCls="icon-search"></a>

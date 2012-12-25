@@ -323,9 +323,9 @@ function setdg2(){
 }
 
 function setdg2Url(row){
-	$('#NmTuj').val(row.cust);
+	$('#NETTO').numberbox('setValue',row.tot_qty);
 	$('#dg2').datagrid({  
-		url: '<?php echo $basedir ?>models/bc30/bc30_grid.php?req=dodet&do_id='+row.do_id
+		url: '<?php echo $basedir ?>models/bc30/bc30_grid.php?req=outdet&matout_id='+row.matout_id
 	});
 }
 

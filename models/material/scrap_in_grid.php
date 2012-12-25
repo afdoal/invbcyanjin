@@ -17,7 +17,7 @@ if ($req=='menu'){
 	$q = "SELECT *,DATE_FORMAT(matin_date,'%d/%m/%Y') AS matin_date
 		  FROM mat_inchdr a 
 		  LEFT JOIN mst_in_type c ON c.matin_type=a.matin_type
-		  WHERE a.matin_type='3' ";
+		  WHERE a.mat_type='12' ";
 	if ($txtcari != ""){		  
 		if ($pilcari == "matin_date"){		  
 			$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  

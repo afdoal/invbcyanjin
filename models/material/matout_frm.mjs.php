@@ -31,7 +31,7 @@ function setdgCari(){
 			{field:'matout_no',title:'Outgoing No.',width:60},
 			{field:'matout_date',title:'Outgoing Date',width:50},
 			{field:'matout_name',title:'Outgoing Type',width:50},
-			{field:'wo_no',title:'WO No.',width:50}
+			{field:'ref_no',title:'WO No.',width:50}
 		]],
 		url: '<?php echo $basedir ?>models/material/matout_grid.php?req=menu&pilcari='+$("#pilcari").val()+'&txtcari='+$("#txtcari").val(),
 		onClickRow:function(index,row){insert_menu(row)}
@@ -43,8 +43,8 @@ function insert_menu(row){
 	$('#matout_type').val(row.matout_type);
 	$('#matout_no').val(row.matout_no);
 	$('#matout_date').datebox('setValue',row.matout_date);
-	$('#wo_id').val(row.wo_id);
-	$('#wo_no').val(row.wo_no);	
+	$('#wo_id').val(row.ref_id);
+	$('#wo_no').val(row.ref_no);	
 	$('#KdJnsDok').val(row.KdJnsDok);	
 	$('#notes').val(row.notes);	
 	setdg();
@@ -80,7 +80,7 @@ function setComboGrid(){
 
 
 function insert_ref(row){
-	$('#wo_id').val(row.wo_id);		
+	$('#wo_id').val(row.ref_id);		
 }
 
 function insert_det(row){

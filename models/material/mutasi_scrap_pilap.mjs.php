@@ -37,7 +37,7 @@ function setdg(){
 			{field:'qty_diff',title:'Selisih',width:90,align:'right'},
 			{field:'ket',title:'Keterangan',width:80}
 		]],
-		url: '<?php echo $basedir; ?>models/material/mutasi_mat_grid.php?mat_type=12&date1='+$("#date1").datebox('getValue')+'&date2='+$("#date2").datebox('getValue'),
+		url: '<?php echo $basedir; ?>models/material/mutasi_scrap_grid.php?mat_type=12&date1='+$("#date1").datebox('getValue')+'&date2='+$("#date2").datebox('getValue'),
 	});
 }
 

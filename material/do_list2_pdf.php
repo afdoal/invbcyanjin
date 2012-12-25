@@ -124,16 +124,17 @@ $pdf->AddPage();
 //Data loading
 $pilcari = $_REQUEST["pilcari"];
 $txtcari = $_REQUEST["txtcari"];
-$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes
-	  FROM mat_outhdr a WHERE mat_type='12' ";
+$q = "SELECT *,DATE_FORMAT(do_date,'%d/%m/%Y') AS do_date, a.notes AS notes
+	  FROM mkt_dohdr a 
+	  LEFT JOIN mkt_sorderhdr b ON b.so_id=a.so_id ";
 if ($txtcari != ""){		  
-	if ($pilcari == "matout_date"){		  
-		$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
+	if ($pilcari == "do_date"){		  
+		$q .= "WHERE $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
 	} else {
-		$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
+		$q .= "WHERE $pilcari LIKE '%$txtcari%' ";	  
 	}
 }  
-$q .= "ORDER BY matout_no, matout_date ASC";
+$q .= "ORDER BY do_no, do_date ASC";
 $run=$pdo->query($q);	
 $rs=$run->fetchAll(PDO::FETCH_ASSOC);
 
@@ -143,11 +144,12 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		<thead>
 		<tr>
 		  <th align="center" width="25"><b>No.</b></th>
-		  <th width="80"><b>Scrap Out No.</b></th>
-		  <th width="80"><b>Scrap Out Date</b></th>
-		  <th width="180"><b>Customer</b></th>
-		  <th width="80"><b>Vehicle No.</b></th>
-		  <th width="80"><b>Driver</b></th>
+		  <th width="80"><b>DO No.</b></th>
+		  <th width="80"><b>DO Date</b></th>
+		  <th width="80"><b>PO Cust. No.</b></th>
+		  <th width="150"><b>Customer</b></th>
+		  <th width="60"><b>Vehicle No.</b></th>
+		  <th><b>Driver</b></th>
 		  <th><b>Notes</b></th>
 		</tr>
 		</thead>
@@ -156,11 +158,12 @@ $no=1;
 foreach ($rs as $r){
 $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
-		 '<td width="80">'.$r['matout_no'].'</td>'.
-		 '<td width="80">'.$r['matout_date'].'</td>'.
-		 '<td width="180">'.$r['cust'].'</td>'.
-		 '<td width="80">'.$r['vehicle_no'].'</td>'.
-		 '<td width="80">'.$r['driver'].'</td>'.
+		 '<td width="80">'.$r['do_no'].'</td>'.
+		 '<td width="80">'.$r['do_date'].'</td>'.
+		 '<td width="80">'.$r['so_no'].'</td>'.
+		 '<td width="150">'.$r['cust'].'</td>'.
+		 '<td width="60">'.$r['vehicle_no'].'</td>'.
+		 '<td>'.$r['driver'].'</td>'.
 		 '<td>'.$r['notes'].'</td>'.
 		 '</tr>';
 $no+=1;	

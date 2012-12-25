@@ -19,7 +19,7 @@ function setdg(){
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right'}*/
 		]],
-		url: '<?php echo $basedir; ?>models/material/stock_adjustmat_grid.php?req=list&bln='+bln+'&thn='+thn+'&wh_id='+wh_id
+		url: '<?php echo $basedir; ?>models/material/stock_adjustmat_grid.php?req=list2&bln='+bln+'&thn='+thn+'&wh_id='+wh_id
 	});
 }
 

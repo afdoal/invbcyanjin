@@ -15,7 +15,7 @@ if ($req=='menu'){
 	$result = array();
 	
 	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes
-		  FROM mat_outhdr a WHERE matout_type='3' ";
+		  FROM mat_outhdr a WHERE mat_type='12' ";
 	if ($txtcari != ""){		  
 		if ($pilcari == "matout_date"){		  
 			$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  

@@ -124,17 +124,18 @@ $pdf->AddPage();
 //Data loading
 $pilcari = $_REQUEST["pilcari"];
 $txtcari = $_REQUEST["txtcari"];
-$q = "SELECT *,DATE_FORMAT(do_date,'%d/%m/%Y') AS do_date, a.notes AS notes
-	  FROM mkt_dohdr a 
-	  LEFT JOIN mkt_sorderhdr b ON b.so_id=a.so_id ";
+$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.cust, a.notes AS notes
+	  FROM mat_outhdr a 
+	  LEFT JOIN mkt_sorderhdr b ON b.so_id=a.ref_id 
+	  WHERE mat_type='0' ";
 if ($txtcari != ""){		  
-	if ($pilcari == "do_date"){		  
-		$q .= "WHERE $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
+	if ($pilcari == "matout_date"){		  
+		$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
 	} else {
-		$q .= "WHERE $pilcari LIKE '%$txtcari%' ";	  
+		$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
 	}
 }  
-$q .= "ORDER BY do_no, do_date ASC";
+$q .= "ORDER BY matout_no, matout_date ASC";
 $run=$pdo->query($q);	
 $rs=$run->fetchAll(PDO::FETCH_ASSOC);
 
@@ -158,9 +159,9 @@ $no=1;
 foreach ($rs as $r){
 $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
-		 '<td width="80">'.$r['do_no'].'</td>'.
-		 '<td width="80">'.$r['do_date'].'</td>'.
-		 '<td width="80">'.$r['so_no'].'</td>'.
+		 '<td width="80">'.$r['matout_no'].'</td>'.
+		 '<td width="80">'.$r['matout_date'].'</td>'.
+		 '<td width="80">'.$r['ref_no'].'</td>'.
 		 '<td width="150">'.$r['cust'].'</td>'.
 		 '<td width="60">'.$r['vehicle_no'].'</td>'.
 		 '<td>'.$r['driver'].'</td>'.

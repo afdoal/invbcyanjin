@@ -27,15 +27,15 @@ if ($rs){
 }
 .kolom1 {
 	float:left;
-	width:70px;	
+	width:90px;	
 }
 .kolom2 {
 	float:left;
-	width:160px;	
+	width:130px;	
 }
 .kolom3 {
 	float:left;
-	width:80px;	
+	width:90px;	
 }
 .kolom4 {
 	float:left;
@@ -68,12 +68,12 @@ require_once "scrap_out_frm.cjs.php";
 <form id="fm" method="post" onSubmit="return false">
 	<input type="hidden" id="aksi" name="aksi">
     <div class="hdr">
-      <span class="kolom1">Scrap No. </span>
+      <span class="kolom1">Scrap Out No. </span>
 	  <span class="kolom2">
       <input type="hidden" id="matout_id" name="matout_id">
       <input type="text" id="matout_no" name="matout_no" style="width:100px">    
       </span>
-      <span class="kolom3">Scrap Date </span>
+      <span class="kolom3">Scrap Out Date </span>
       <span class="kolom4">
         <input type="text" id="matout_date" name="matout_date" class="easyui-datebox" required maxlength="10" tabindex="10" style="width:100px">
       </span>

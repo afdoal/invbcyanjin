@@ -14,7 +14,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes, a.wo_no
+	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes, a.ref_no
 		  FROM mat_outhdr a 
 		  LEFT JOIN ppic_wohdr b ON b.wo_id=a.wo_id
 		  INNER JOIN mst_out_type c ON c.matout_type=a.matout_type ";

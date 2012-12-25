@@ -39,7 +39,7 @@ try {
 		
 		//TAMBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,wo_id,wo_no,
+				  matout_id,matout_type,matout_no,matout_date,ref_id,ref_no,
 				  tot_qty,notes,KdJnsDok
 				  ) VALUES (
 				  '$matout_id','$matout_type','$matout_no','$matout_date','$wo_id','$wo_no',
@@ -67,7 +67,7 @@ try {
 		//$sql[]="DELETE FROM mat_outdet WHERE matout_id='$matout_id'";
 		//UBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,wo_id,wo_no,
+				  matout_id,matout_type,matout_no,matout_date,ref_id,ref_no,
 				  tot_qty,notes,KdJnsDok
 				  ) VALUES (
 				  '$matout_id','$matout_type','$matout_no','$matout_date','$wo_id','$wo_no',
