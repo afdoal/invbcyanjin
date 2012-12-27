@@ -39,7 +39,7 @@ if ($req=='menu'){
 	echo json_encode($result);
 } else if ($req=='list') {	
 	$do_id = $_REQUEST["do_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2,NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,weight,FORMAT(a.qty, 2) AS qty,FORMAT(a.price, 2) AS price,FORMAT(a.qty*a.price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2,NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,weight,FORMAT(a.qty, 2) AS qty,FORMAT(a.price, 4) AS price,FORMAT(a.qty*a.price, 4) AS amount
 		  FROM mat_outdet a 
 		  LEFT JOIN mat_outhdr b ON b.matout_id=a.matout_id
 		  LEFT JOIN mst_barang c ON KdBarang = a.mat_id 		 

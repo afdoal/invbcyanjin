@@ -132,7 +132,7 @@ $q = "SELECT KdBarang,NmBarang,HsNo,Sat,
 	  ) AS qty_in,
 	  
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mkt_dodet da LEFT JOIN mkt_dohdr db ON db.do_id=da.do_id WHERE da.fg_id = a.KdBarang AND do_date BETWEEN '".$date1."' AND '".$date2."')
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_stockcard s WHERE s.mat_id = a.KdBarang AND type IN ('O') AND date  BETWEEN '".$date1."' AND '".$date2."' )
 	  ) AS qty_out,
 	  
 	  (

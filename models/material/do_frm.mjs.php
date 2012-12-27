@@ -18,7 +18,7 @@ function setdg(){
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right',formatter:function(value){
 				amount=parseFloat(value);
-				amount=amount.toFixed(2);
+				amount=amount.toFixed(4);
 				return amount;
 			}}
 		]],
