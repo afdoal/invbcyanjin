@@ -10,7 +10,7 @@ if ($req=='menu'){
 	$txtcari = $_REQUEST["txtcari"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 
@@ -64,7 +64,7 @@ if ($req=='menu'){
 	$key = $_REQUEST["q"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
@@ -73,7 +73,7 @@ if ($req=='menu'){
 		  WHERE TpBarang='1' ";		  
 	
 	if ($key != ''){
-		$q .= " AND (KdBarang LIKE '%$key%' OR NmBarang LIKE '%$key%') ";
+		$q .= " AND (KdBarang LIKE '%$key%' OR NmBarang LIKE '%$key%' OR twhmp LIKE '%$key%') ";
 	}	 
 	 
 	$q .= "ORDER BY KdBarang ASC";

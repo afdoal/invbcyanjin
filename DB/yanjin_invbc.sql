@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2012-12-26 00:15:53
+Date: 2013-01-03 08:45:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1719,7 +1719,7 @@ CREATE TABLE `log` (
   `nama_user` varchar(20) DEFAULT NULL,
   `ket` text,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB AUTO_INCREMENT=966 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=980 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of log
@@ -2169,6 +2169,20 @@ INSERT INTO `log` VALUES ('962', '2012-12-25 23:16:43', 'admin', 'Edit delivery 
 INSERT INTO `log` VALUES ('963', '2012-12-25 23:44:13', 'admin', 'Edit matin 2');
 INSERT INTO `log` VALUES ('964', '2012-12-25 23:46:09', 'admin', 'Add initial balance machine & office equipment 5 2012-11-29 12');
 INSERT INTO `log` VALUES ('965', '2012-12-25 23:47:04', 'admin', 'Add scrap in 4');
+INSERT INTO `log` VALUES ('966', '2012-12-26 11:23:58', 'admin', 'login');
+INSERT INTO `log` VALUES ('967', '2012-12-26 12:51:27', 'admin', 'login');
+INSERT INTO `log` VALUES ('968', '2012-12-26 12:52:41', 'admin', 'Edit wip 2 2012-12-12');
+INSERT INTO `log` VALUES ('969', '2012-12-26 13:36:10', 'admin', 'login');
+INSERT INTO `log` VALUES ('970', '2012-12-26 13:49:52', 'admin', 'Edit delivery order 8');
+INSERT INTO `log` VALUES ('971', '2012-12-26 15:08:21', 'admin', 'login');
+INSERT INTO `log` VALUES ('972', '2012-12-27 11:13:33', 'admin', 'login');
+INSERT INTO `log` VALUES ('973', '2012-12-29 08:22:15', 'admin', 'login');
+INSERT INTO `log` VALUES ('974', '2012-12-29 02:22:42', 'admin', 'logout');
+INSERT INTO `log` VALUES ('975', '2012-12-29 08:41:28', 'admin', 'login');
+INSERT INTO `log` VALUES ('976', '2012-12-29 08:56:27', 'admin', 'Add delivery order 9');
+INSERT INTO `log` VALUES ('977', '2012-12-29 02:56:41', 'admin', 'logout');
+INSERT INTO `log` VALUES ('978', '2013-01-03 08:35:04', 'admin', 'login');
+INSERT INTO `log` VALUES ('979', '2013-01-03 02:35:46', 'admin', 'logout');
 
 -- ----------------------------
 -- Table structure for `mat_group`
@@ -2203,7 +2217,7 @@ CREATE TABLE `mat_incdet` (
   `mat_id` varchar(20) NOT NULL DEFAULT '0' COMMENT 'ID Material Yang Masuk',
   `weight` decimal(12,4) DEFAULT NULL,
   `qty` decimal(9,2) NOT NULL DEFAULT '0.00' COMMENT 'Jumlah Quantity Saat Masuk',
-  `price` decimal(12,2) DEFAULT NULL,
+  `price` decimal(12,4) DEFAULT NULL,
   PRIMARY KEY (`matin_id`,`child_no`),
   CONSTRAINT `mat_incdet_ibfk_1` FOREIGN KEY (`matin_id`) REFERENCES `mat_inchdr` (`matin_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Detail Transaksi Incoming Material';
@@ -2211,10 +2225,10 @@ CREATE TABLE `mat_incdet` (
 -- ----------------------------
 -- Records of mat_incdet
 -- ----------------------------
-INSERT INTO `mat_incdet` VALUES ('1', '1', 'RAC-0001', null, '10.00', '10.00');
-INSERT INTO `mat_incdet` VALUES ('2', '1', 'RAC-0002', null, '200.00', '1000.00');
-INSERT INTO `mat_incdet` VALUES ('2', '2', 'RAC-0003', null, '200.00', '100.00');
-INSERT INTO `mat_incdet` VALUES ('2', '3', 'RAC-0004', null, '100.00', '200.00');
+INSERT INTO `mat_incdet` VALUES ('1', '1', 'RAC-0001', null, '10.00', '10.0000');
+INSERT INTO `mat_incdet` VALUES ('2', '1', 'RAC-0002', null, '200.00', '1000.0000');
+INSERT INTO `mat_incdet` VALUES ('2', '2', 'RAC-0003', null, '200.00', '100.0000');
+INSERT INTO `mat_incdet` VALUES ('2', '3', 'RAC-0004', null, '100.00', '200.0000');
 INSERT INTO `mat_incdet` VALUES ('3', '1', 'ST', null, '500.00', null);
 INSERT INTO `mat_incdet` VALUES ('4', '1', 'ST', null, '20.00', null);
 
@@ -2238,7 +2252,7 @@ CREATE TABLE `mat_inchdr` (
   `KdJnsDok` tinyint(1) DEFAULT NULL,
   `CAR` varchar(6) DEFAULT NULL,
   `tot_qty` decimal(9,0) NOT NULL DEFAULT '0' COMMENT 'Jumlah Dalam Bentuang Rupiah',
-  `tot_amount` decimal(12,2) DEFAULT NULL,
+  `tot_amount` decimal(15,4) DEFAULT NULL,
   `notes` varchar(80) NOT NULL DEFAULT '' COMMENT 'Catatan dari Kedatangan Barang',
   PRIMARY KEY (`matin_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Header Incoming Material';
@@ -2264,6 +2278,7 @@ CREATE TABLE `mat_opnamedet` (
   `qty_diff` decimal(12,2) DEFAULT NULL,
   `qty_in` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT 'adjustment (tambah)',
   `qty_out` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT 'adjustment (kurang)',
+  `remark` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`opname_id`,`child_no`),
   CONSTRAINT `mat_opnamedet_ibfk_1` FOREIGN KEY (`opname_id`) REFERENCES `mat_opnamehdr` (`opname_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2271,8 +2286,8 @@ CREATE TABLE `mat_opnamedet` (
 -- ----------------------------
 -- Records of mat_opnamedet
 -- ----------------------------
-INSERT INTO `mat_opnamedet` VALUES ('2', '1', 'RAC-0001', '90.00', '660.00', '570.00', '0.00', '570.00');
-INSERT INTO `mat_opnamedet` VALUES ('5', '1', 'FAB-0001', '500.00', '198.00', '302.00', '302.00', '0.00');
+INSERT INTO `mat_opnamedet` VALUES ('2', '1', 'RAC-0001', '90.00', '660.00', '570.00', '0.00', '570.00', null);
+INSERT INTO `mat_opnamedet` VALUES ('5', '1', 'FAB-0001', '500.00', '198.00', '302.00', '302.00', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `mat_opnamehdr`
@@ -2317,7 +2332,8 @@ CREATE TABLE `mat_outdet` (
 INSERT INTO `mat_outdet` VALUES ('5', '1', 'RAC-0002', null, '200.00', null);
 INSERT INTO `mat_outdet` VALUES ('6', '1', 'RAC-0001', null, '200.00', null);
 INSERT INTO `mat_outdet` VALUES ('7', '1', 'ST', null, '222.00', null);
-INSERT INTO `mat_outdet` VALUES ('8', '1', 'FAB-0001', '1.00', '2.00', '3.0000');
+INSERT INTO `mat_outdet` VALUES ('8', '1', 'FAB-0001', '1.00', '2.00', '3.9876');
+INSERT INTO `mat_outdet` VALUES ('9', '1', 'FAB-0001', '1.00', '2.00', '3.0000');
 
 -- ----------------------------
 -- Table structure for `mat_outhdr`
@@ -2335,12 +2351,12 @@ CREATE TABLE `mat_outhdr` (
   `vehicle_no` varchar(15) NOT NULL DEFAULT '' COMMENT 'Nomor Polisi Kendaraan',
   `driver` varchar(30) NOT NULL DEFAULT '' COMMENT 'Nama Sopir Pengirim',
   `tot_qty` decimal(12,2) DEFAULT NULL,
-  `tot_amount` decimal(15,2) DEFAULT NULL,
+  `tot_amount` decimal(15,4) DEFAULT NULL,
   `notes` varchar(80) NOT NULL DEFAULT '' COMMENT 'Catatan Pengeluaran',
   `KdJnsDok` tinyint(1) DEFAULT NULL,
   `CAR` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`matout_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Header Transaksi Outgoing Material';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COMMENT='Header Transaksi Outgoing Material';
 
 -- ----------------------------
 -- Records of mat_outhdr
@@ -2348,7 +2364,8 @@ CREATE TABLE `mat_outhdr` (
 INSERT INTO `mat_outhdr` VALUES ('5', '001', '2012-12-12', '1', null, null, null, null, '', '', '200.00', null, '', '4', null);
 INSERT INTO `mat_outhdr` VALUES ('6', 'OUT001', '2012-12-12', '1', null, null, null, null, '', '', '200.00', null, '', '9', null);
 INSERT INTO `mat_outhdr` VALUES ('7', 'SSS', '2012-12-22', '3', '12', '0', '', 'PT. Hartono Istana Teknologi', '1', '2', '222.00', null, '222', '3', null);
-INSERT INTO `mat_outhdr` VALUES ('8', 'DO-0001', '2012-12-25', null, '0', '0', 'SO001', 'CV. Jaya Mulya Mandiri', 'D 5962', 'Kikin', '2.00', '6.00', 'tes', '3', null);
+INSERT INTO `mat_outhdr` VALUES ('8', 'DO-0001', '2012-12-25', null, '0', '0', 'SO001', 'CV. Jaya Mulya Mandiri', 'D 5962', 'Kikin', '2.00', '7.9752', 'tes', '3', null);
+INSERT INTO `mat_outhdr` VALUES ('9', 'DO002', '2012-12-29', null, '0', '0', '1233', 'PT. JVC Electronics Indonesia', 'D1010', 'KIkin', '2.00', '6.0000', '', '7', null);
 
 -- ----------------------------
 -- Table structure for `mat_stockcard`
@@ -3472,8 +3489,622 @@ INSERT INTO `mat_stockcard` VALUES ('01', '3', '0', 'FGE-0003', '2012-11-29', 'B
 INSERT INTO `mat_stockcard` VALUES ('01', '3', '0', 'FGE-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
 INSERT INTO `mat_stockcard` VALUES ('01', '3', '0', 'FGE-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
 INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0002', '2012-12-12', 'I', '200.00', '750.00', '0.000', '750', '0.000', 'OK');
-INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAB-0001', '2012-12-12', 'O', '350.00', '700.00', '0.000', '700', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0002', '2012-12-12', 'O', null, '700.00', '0.000', '700', '0.000', 'OK');
 INSERT INTO `mat_stockcard` VALUES ('01', '3', '0', 'FGE-0001', '2012-12-12', 'I', '122.00', '800.00', '0.000', '800', '0.000', 'NG');
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0010', '2012-11-29', 'B', null, '1611.00', '0.000', '1611', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0015', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0017', '2012-11-29', 'B', null, '6220.00', '0.000', '6220', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0018', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0020', '2012-11-29', 'B', null, '63723.00', '0.000', '63723', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0021', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0022', '2012-11-29', 'B', null, '282.00', '0.000', '282', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0024', '2012-11-29', 'B', null, '128.00', '0.000', '128', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0025', '2012-11-29', 'B', null, '1584.00', '0.000', '1584', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0026', '2012-11-29', 'B', null, '295.00', '0.000', '295', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0027', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0029', '2012-11-29', 'B', null, '11366.00', '0.000', '11366', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0031', '2012-11-29', 'B', null, '57264.00', '0.000', '57264', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0032', '2012-11-29', 'B', null, '60592.00', '0.000', '60592', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0033', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0034', '2012-11-29', 'B', null, '72.00', '0.000', '72', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0035', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0036', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0037', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0038', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0039', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0040', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0041', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0042', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0043', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0044', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0045', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0046', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0047', '2012-11-29', 'B', null, '16493.00', '0.000', '16493', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0048', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0049', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0050', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0051', '2012-11-29', 'B', null, '3328.00', '0.000', '3328', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0052', '2012-11-29', 'B', null, '1893.00', '0.000', '1893', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0053', '2012-11-29', 'B', null, '1712.00', '0.000', '1712', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0054', '2012-11-29', 'B', null, '496.00', '0.000', '496', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0055', '2012-11-29', 'B', null, '4474.00', '0.000', '4474', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0056', '2012-11-29', 'B', null, '7588.00', '0.000', '7588', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0057', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0058', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0059', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WJI-0060', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0001', '2012-11-29', 'B', null, '2844.00', '0.000', '2844', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0010', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0015', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0017', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0018', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0020', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0021', '2012-11-29', 'B', null, '60.00', '0.000', '60', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0022', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0024', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0025', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0027', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0029', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0031', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0032', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0033', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0034', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0035', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0036', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0037', '2012-11-29', 'B', null, '18071.00', '0.000', '18071', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPH-0038', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPM-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0001', '2012-11-29', 'B', null, '1191.00', '0.000', '1191', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0002', '2012-11-29', 'B', null, '252.00', '0.000', '252', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0003', '2012-11-29', 'B', null, '246.00', '0.000', '246', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0004', '2012-11-29', 'B', null, '1402.00', '0.000', '1402', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0005', '2012-11-29', 'B', null, '602.00', '0.000', '602', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0006', '2012-11-29', 'B', null, '598.00', '0.000', '598', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0007', '2012-11-29', 'B', null, '690.00', '0.000', '690', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0008', '2012-11-29', 'B', null, '560.00', '0.000', '560', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0009', '2012-11-29', 'B', null, '127.00', '0.000', '127', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0010', '2012-11-29', 'B', null, '658.00', '0.000', '658', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WTG-0014', '2012-11-29', 'B', null, '488.00', '0.000', '488', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0004', '2012-11-29', 'B', null, '356.00', '0.000', '356', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0005', '2012-11-29', 'B', null, '4.00', '0.000', '4', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0006', '2012-11-29', 'B', null, '193.00', '0.000', '193', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0007', '2012-11-29', 'B', null, '2881.00', '0.000', '2881', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0010', '2012-11-29', 'B', null, '1082.00', '0.000', '1082', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WGE-0011', '2012-11-29', 'B', null, '710.00', '0.000', '710', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPG-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPG-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPG-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPG-0004', '2012-11-29', 'B', null, '980.00', '0.000', '980', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPG-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0005', '2012-11-29', 'B', null, '1650.00', '0.000', '1650', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0006', '2012-11-29', 'B', null, '1043.00', '0.000', '1043', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0008', '2012-11-29', 'B', null, '217.00', '0.000', '217', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0010', '2012-11-29', 'B', null, '191.00', '0.000', '191', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0012', '2012-11-29', 'B', null, '2551.00', '0.000', '2551', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0014', '2012-11-29', 'B', null, '56.00', '0.000', '56', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0015', '2012-11-29', 'B', null, '504.00', '0.000', '504', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0017', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0018', '2012-11-29', 'B', null, '459.00', '0.000', '459', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0020', '2012-11-29', 'B', null, '4.00', '0.000', '4', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0021', '2012-11-29', 'B', null, '1.00', '0.000', '1', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0022', '2012-11-29', 'B', null, '10.00', '0.000', '10', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0024', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0025', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0027', '2012-11-29', 'B', null, '53.00', '0.000', '53', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0029', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0031', '2012-11-29', 'B', null, '7221.00', '0.000', '7221', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0032', '2012-11-29', 'B', null, '25850.00', '0.000', '25850', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0033', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0034', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0035', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0036', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0037', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0038', '2012-11-29', 'B', null, '21213.00', '0.000', '21213', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0039', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0040', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0041', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0042', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0043', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0044', '2012-11-29', 'B', null, '6.00', '0.000', '6', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0045', '2012-11-29', 'B', null, '14.00', '0.000', '14', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0046', '2012-11-29', 'B', null, '76.00', '0.000', '76', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0047', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0048', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0049', '2012-11-29', 'B', null, '58250.00', '0.000', '58250', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0050', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0051', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0052', '2012-11-29', 'B', null, '604.00', '0.000', '604', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0053', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0054', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0055', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0056', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0057', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0058', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0059', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0060', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0061', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0062', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0063', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0064', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0065', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0066', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0067', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0068', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0069', '2012-11-29', 'B', null, '1896.00', '0.000', '1896', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0070', '2012-11-29', 'B', null, '2364.00', '0.000', '2364', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0071', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0072', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0073', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0074', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0075', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0076', '2012-11-29', 'B', null, '210.00', '0.000', '210', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0077', '2012-11-29', 'B', null, '449.00', '0.000', '449', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0078', '2012-11-29', 'B', null, '18216.00', '0.000', '18216', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0079', '2012-11-29', 'B', null, '76742.00', '0.000', '76742', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0080', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0081', '2012-11-29', 'B', null, '4229.00', '0.000', '4229', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0082', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0083', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0084', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0085', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0086', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0087', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0088', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0089', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0090', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0091', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0092', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0093', '2012-11-29', 'B', null, '680.00', '0.000', '680', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0094', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0095', '2012-11-29', 'B', null, '2838.00', '0.000', '2838', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0096', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0097', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0098', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0099', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0100', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0101', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0102', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0103', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0104', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0105', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0106', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0107', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0108', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0109', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0110', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0111', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0112', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0113', '2012-11-29', 'B', null, '1897.00', '0.000', '1897', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0114', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0115', '2012-11-29', 'B', null, '24.00', '0.000', '24', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0116', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0117', '2012-11-29', 'B', null, '4.00', '0.000', '4', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0118', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0119', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0120', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0121', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0122', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0123', '2012-11-29', 'B', null, '20.00', '0.000', '20', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0124', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0125', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0126', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0127', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0128', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0129', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0130', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0131', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0132', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0133', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0134', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0135', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0136', '2012-11-29', 'B', null, '224.00', '0.000', '224', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0137', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0138', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0139', '2012-11-29', 'B', null, '110.00', '0.000', '110', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0140', '2012-11-29', 'B', null, '1742.00', '0.000', '1742', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0141', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0142', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0143', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0144', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0145', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0146', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0147', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0148', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0149', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0150', '2012-11-29', 'B', null, '24.00', '0.000', '24', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0151', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0152', '2012-11-29', 'B', null, '80.00', '0.000', '80', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0153', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0154', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0155', '2012-11-29', 'B', null, '13056.00', '0.000', '13056', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0156', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0157', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0158', '2012-11-29', 'B', null, '8542.00', '0.000', '8542', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0159', '2012-11-29', 'B', null, '412.00', '0.000', '412', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0160', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0161', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0162', '2012-11-29', 'B', null, '9.00', '0.000', '9', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0163', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0164', '2012-11-29', 'B', null, '41851.00', '0.000', '41851', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0165', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0166', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0167', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0168', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0169', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0170', '2012-11-29', 'B', null, '48.00', '0.000', '48', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0171', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0172', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0173', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0174', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0175', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0176', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0177', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0178', '2012-11-29', 'B', null, '36.00', '0.000', '36', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0179', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0180', '2012-11-29', 'B', null, '1966.00', '0.000', '1966', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0181', '2012-11-29', 'B', null, '13054.00', '0.000', '13054', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0182', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0183', '2012-11-29', 'B', null, '41238.00', '0.000', '41238', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0184', '2012-11-29', 'B', null, '30.00', '0.000', '30', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0185', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0186', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0187', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0188', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0189', '2012-11-29', 'B', null, '56.00', '0.000', '56', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0190', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0191', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0192', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0193', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0194', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0195', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0196', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0197', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0198', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0199', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0200', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0201', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0202', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0203', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0204', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0205', '2012-11-29', 'B', null, '15583.00', '0.000', '15583', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0206', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0207', '2012-11-29', 'B', null, '19.00', '0.000', '19', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0208', '2012-11-29', 'B', null, '7028.00', '0.000', '7028', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0209', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0210', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0211', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0212', '2012-11-29', 'B', null, '2194.00', '0.000', '2194', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0213', '2012-11-29', 'B', null, '689.00', '0.000', '689', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0214', '2012-11-29', 'B', null, '59.00', '0.000', '59', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0215', '2012-11-29', 'B', null, '100.00', '0.000', '100', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0216', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0217', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0218', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0219', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0220', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0221', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0222', '2012-11-29', 'B', null, '9.00', '0.000', '9', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0223', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0224', '2012-11-29', 'B', null, '706.00', '0.000', '706', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0225', '2012-11-29', 'B', null, '84.00', '0.000', '84', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0226', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0227', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0240', '2012-11-29', 'B', null, '15900.00', '0.000', '15900', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0229', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0230', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0231', '2012-11-29', 'B', null, '1588.00', '0.000', '1588', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0232', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0233', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0234', '2012-11-29', 'B', null, '1753.00', '0.000', '1753', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0242', '2012-11-29', 'B', null, '6.00', '0.000', '6', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0243', '2012-11-29', 'B', null, '1380.00', '0.000', '1380', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0244', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WSI-0245', '2012-11-29', 'B', null, '299.00', '0.000', '299', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0002', '2012-11-29', 'B', null, '48.00', '0.000', '48', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0004', '2012-11-29', 'B', null, '50.00', '0.000', '50', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0007', '2012-11-29', 'B', null, '560.00', '0.000', '560', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0008', '2012-11-29', 'B', null, '203.00', '0.000', '203', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0010', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0013', '2012-11-29', 'B', null, '28545.00', '0.000', '28545', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0014', '2012-11-29', 'B', null, '767.00', '0.000', '767', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0015', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0017', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0018', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0020', '2012-11-29', 'B', null, '726.00', '0.000', '726', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0021', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0022', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0024', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0025', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0027', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0029', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0031', '2012-11-29', 'B', null, '11.00', '0.000', '11', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0032', '2012-11-29', 'B', null, '75.00', '0.000', '75', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0033', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0034', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0035', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0036', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0037', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0038', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0039', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0040', '2012-11-29', 'B', null, '503.00', '0.000', '503', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0041', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0042', '2012-11-29', 'B', null, '19.00', '0.000', '19', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0043', '2012-11-29', 'B', null, '237.00', '0.000', '237', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0044', '2012-11-29', 'B', null, '189.00', '0.000', '189', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0045', '2012-11-29', 'B', null, '110.00', '0.000', '110', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0046', '2012-11-29', 'B', null, '108.00', '0.000', '108', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0047', '2012-11-29', 'B', null, '1110.00', '0.000', '1110', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0048', '2012-11-29', 'B', null, '8.00', '0.000', '8', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0049', '2012-11-29', 'B', null, '9.00', '0.000', '9', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0050', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0051', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0052', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0053', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0054', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0055', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0056', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0057', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0058', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0059', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0060', '2012-11-29', 'B', null, '19.00', '0.000', '19', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0061', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0062', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0063', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0064', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0065', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0066', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0067', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0068', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0069', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0070', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0071', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0072', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0073', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0074', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0075', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0076', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0077', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0078', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0031', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0032', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0081', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0082', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0083', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0084', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYA-0085', '2012-11-29', 'B', null, '5582.00', '0.000', '5582', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0090', '2012-11-29', 'B', null, '104.00', '0.000', '104', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0091', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0092', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0093', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0094', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0095', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WAY-0084', '2012-11-29', 'B', null, '2870.00', '0.000', '2870', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0005', '2012-11-29', 'B', null, '15.00', '0.000', '15', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0007', '2012-11-29', 'B', null, '283.00', '0.000', '283', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0008', '2012-11-29', 'B', null, '94.00', '0.000', '94', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0009', '2012-11-29', 'B', null, '204.00', '0.000', '204', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0010', '2012-11-29', 'B', null, '5228.00', '0.000', '5228', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0013', '2012-11-29', 'B', null, '3.00', '0.000', '3', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0015', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0017', '2012-11-29', 'B', null, '309.00', '0.000', '309', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0018', '2012-11-29', 'B', null, '30.00', '0.000', '30', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0019', '2012-11-29', 'B', null, '1053.00', '0.000', '1053', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0020', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0021', '2012-11-29', 'B', null, '3.00', '0.000', '3', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0022', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0023', '2012-11-29', 'B', null, '2060.00', '0.000', '2060', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0024', '2012-11-29', 'B', null, '325.00', '0.000', '325', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0025', '2012-11-29', 'B', null, '24.00', '0.000', '24', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0027', '2012-11-29', 'B', null, '30.00', '0.000', '30', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0029', '2012-11-29', 'B', null, '17.00', '0.000', '17', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WYI-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPT-0001', '2012-11-29', 'B', null, '4700.00', '0.000', '4700', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPT-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPT-0003', '2012-11-29', 'B', null, '25439.00', '0.000', '25439', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPT-0004', '2012-11-29', 'B', null, '111890.00', '0.000', '111890', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPT-0005', '2012-11-29', 'B', null, '28458.00', '0.000', '28458', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0005', '2012-11-29', 'B', null, '88.00', '0.000', '88', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0006', '2012-11-29', 'B', null, '80.00', '0.000', '80', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0008', '2012-11-29', 'B', null, '56.00', '0.000', '56', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0010', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0015', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0017', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0018', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0020', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0021', '2012-11-29', 'B', null, '395.00', '0.000', '395', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0022', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0024', '2012-11-29', 'B', null, '38.00', '0.000', '38', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0025', '2012-11-29', 'B', null, '28.00', '0.000', '28', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0027', '2012-11-29', 'B', null, '128.00', '0.000', '128', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0028', '2012-11-29', 'B', null, '25.00', '0.000', '25', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKI-0029', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0004', '2012-11-29', 'B', null, '10705.00', '0.000', '10705', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0010', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0012', '2012-11-29', 'B', null, '613.00', '0.000', '613', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0015', '2012-11-29', 'B', null, '159.00', '0.000', '159', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0016', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0017', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0018', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0019', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0020', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0021', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0022', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0023', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0024', '2012-11-29', 'B', null, '720.00', '0.000', '720', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0025', '2012-11-29', 'B', null, '768.00', '0.000', '768', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0026', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0027', '2012-11-29', 'B', null, '34.00', '0.000', '34', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0028', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0029', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0030', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0031', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0032', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0033', '2012-11-29', 'B', null, '694.00', '0.000', '694', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0034', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0035', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0036', '2012-11-29', 'B', null, '242.00', '0.000', '242', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0037', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0038', '2012-11-29', 'B', null, '20.00', '0.000', '20', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0039', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0040', '2012-11-29', 'B', null, '778.00', '0.000', '778', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0041', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0042', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0043', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0044', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0045', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0046', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0047', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0048', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0049', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0050', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0051', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0052', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0053', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0054', '2012-11-29', 'B', null, '22.00', '0.000', '22', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0055', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0056', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0057', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0058', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0059', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0060', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WPB-0061', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKS-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKS-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKS-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKS-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WKS-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0002', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0004', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0005', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0006', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0007', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0008', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0009', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0010', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0011', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0012', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0013', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WLT-0014', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WIM-0001', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WIM-0002', '2012-11-29', 'B', null, '261.00', '0.000', '261', '0.000', null);
+INSERT INTO `mat_stockcard` VALUES ('01', '2', '11', 'WIM-0003', '2012-11-29', 'B', null, '0.00', '0.000', '0', '0.000', null);
 
 -- ----------------------------
 -- Table structure for `mat_warehouse`
@@ -3583,7 +4214,7 @@ CREATE TABLE `mkt_dohdr` (
   `tot_amount` decimal(15,2) DEFAULT NULL,
   `notes` char(80) NOT NULL DEFAULT '' COMMENT 'Catatan Transaksi Pesanan',
   PRIMARY KEY (`do_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='Table Header Pemesanan dari Customer';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table Header Pemesanan dari Customer';
 
 -- ----------------------------
 -- Records of mkt_dohdr

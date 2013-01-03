@@ -31,7 +31,7 @@ function setdg(){
 				singleSelect:true,  
 				rownumbers:true,
 				pagination:true,
-				pageList:[25,50,75,100],  
+				pageList:[200,300,400],  
 				loadMsg:'',  
 				height:'auto',  
 				columns:[[  

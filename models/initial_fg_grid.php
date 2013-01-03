@@ -27,7 +27,7 @@ if ($req=='menu'){
 	$key = $_REQUEST["q"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 
@@ -58,7 +58,7 @@ if ($req=='menu'){
 	$date = dmys2ymd($_REQUEST["date"]);
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 	

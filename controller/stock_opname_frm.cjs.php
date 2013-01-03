@@ -82,7 +82,7 @@ $('#KdBarang2').combogrid({
 	rownumbers:true,
 	fitColumns:true,
 	pagination:true,
-	pageList:[25,50,75,100], 
+	pageList:[200,300,400], 
 	columns:[[  
 		{field:'KdBarang2',title:'Part Code',width:60},
 		{field:'NmBarang2',title:'Part No.',width:50},
@@ -159,13 +159,13 @@ $('#tl1Sim').click(function(){
 		nolist_val="";	
 		KdBarang2_val="";
 		qty_val="";
-		price_val="";
+		remark_val="";
 		j=1;
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
 			qty_val += rows[i].qty.replace(",","") + "`";
-			/*price_val += rows[i].price.replace(",","") + "`";*/
+			remark_val += rows[i].remark + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				
@@ -178,7 +178,7 @@ $('#tl1Sim').click(function(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val//,price:price_val
+		qty:qty_val,remark:remark_val
 		},
 		function(result){
 			var result = eval('('+result+')');
@@ -278,9 +278,8 @@ $('#tl2Ubh2').click(function(){
 				PartNo: $('#PartNo').val(),
 				NmBarang2: $('#NmBarang2').val(),	
 				Sat2: $('#Sat2').val(),
-				qty: nformat2($('#qty').numberbox('getValue'),2)/*,
-				price: nformat2($('#price').numberbox('getValue'),2),
-				amount: nformat2($('#amount').numberbox('getValue'),2)*/
+				qty: nformat2($('#qty').numberbox('getValue'),
+				remark: $('#remark').val()
 				}
 		});
 	}
@@ -293,9 +292,8 @@ $('#tl2Sim').click(function(){
 		PartNo: $('#PartNo').val(),
 		NmBarang2: $('#NmBarang2').val(),	
 		Sat2: $('#Sat2').val(),
-		qty: nformat2($('#qty').numberbox('getValue'),2)/*,
-		price: nformat2($('#price').numberbox('getValue'),2),
-		amount: nformat2($('#amount').numberbox('getValue'),2)*/
+		qty: nformat2($('#qty').numberbox('getValue'),2),
+		remark: $('#remark').val()
 	});
 });
 

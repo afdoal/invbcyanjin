@@ -129,7 +129,7 @@ $('#ref_id').combogrid({
 	rownumbers:true,
 	fitColumns:true,
 	pagination:true,
-	pageList:[25,50,75,100],   
+	pageList:[200,300,400],   
 	columns:[[  
 		{field:'matin_no',title:'Incoming No.',width:60},
 		{field:'matin_date',title:'Incoming Date',width:50},

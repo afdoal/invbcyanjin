@@ -131,7 +131,7 @@ $('#dtsampai').datebox({disabled:false});
 		rownumbers:true,
 		fitColumns:true,
 		pagination:true,
-		pageList:[25,50,75,100],   
+		pageList:[200,300,400],   
 		columns:[[  
 			{field:'matout_no',title:'Outgoing No.',width:60},
 			{field:'matout_date',title:'Outgoing Date',width:50},

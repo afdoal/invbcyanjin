@@ -48,7 +48,7 @@ function setBarang(){
 	rownumbers:true,
 	fitColumns:true,
 	pagination:true,
-	pageList:[25,50,75,100],    
+	pageList:[200,300,400],    
 	columns:[[  
 		{field:'KdBarang2',title:'Mat. Code',width:60},
 		{field:'NmBarang2',title:'Desc.',width:50},

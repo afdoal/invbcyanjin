@@ -10,7 +10,7 @@ if ($req=='menu'){
 	$txtcari = $_REQUEST["txtcari"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
@@ -43,11 +43,11 @@ if ($req=='menu'){
 	$opname_id = $_REQUEST["opname_id"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty,remark
 		  FROM mat_opnamedet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE opname_id='$opname_id' 
@@ -69,7 +69,7 @@ if ($req=='menu'){
 	$key = $_REQUEST["q"];
 	
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 	$offset = ($page-1)*$rows;
 	$result = array();
 	

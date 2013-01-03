@@ -9,7 +9,7 @@ $date1 = dmys2ymd($_REQUEST["date1"]);
 $date2 = dmys2ymd($_REQUEST["date2"]);
 
 $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 25;
+$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
 $offset = ($page-1)*$rows;
 $result = array();
 
