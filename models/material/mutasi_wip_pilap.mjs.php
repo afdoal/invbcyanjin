@@ -8,7 +8,7 @@ function setdg(){
 		fitColumns:true,
 		rownumbers:true,
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		columns:[[  
 			{field:'KdBarang',title:'Kode Barang',width:80},  
 			{field:'NmBarang',title:'Nama Barang',width:120},   

@@ -13,6 +13,7 @@ function setdg(){
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'twhmp',title:'Section',width:150},
+			{field:'Lbar',title:'L/Bar',width:150},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
 			{field:'price',title:'Price',width:100,align:'right'},
@@ -73,6 +74,7 @@ function setComboGrid(){
 			{field:'KdBarang2',title:'Mat. Code',width:60},
 			{field:'NmBarang2',title:'Desc.',width:50},
 			{field:'twhmp',title:'Section',width:50},
+			{field:'LBar',title:'L/Bar',width:50},
 			{field:'Sat2',title:'Unit',width:50}
 		]],
 		onClickRow:function(index,row){insert_det(row)}  

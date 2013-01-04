@@ -83,7 +83,7 @@ function setComboGrid(){
 		rownumbers:true,
 		fitColumns:true,
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		columns:[[  
 			{field:'KdBarang2',title:'Part Code',width:60},
 			{field:'NmBarang2',title:'Part No',width:50},

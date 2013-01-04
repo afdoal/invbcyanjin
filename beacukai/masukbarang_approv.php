@@ -53,7 +53,7 @@ $(function(){
 		idField:'CAR',
 		url:'<?php echo $basedir ?>models/masukbarang_applist.php',
 		pagination:'true',
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		rownumbers:"true", 
 		fitColumns:"true",
 		columns:[[  

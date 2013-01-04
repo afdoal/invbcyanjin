@@ -6,11 +6,11 @@ require_once "pdocon.php";
 $NmMenu=$_REQUEST["NmMenu"];
 $TpBarang=$_REQUEST["TpBarang"];
 
-$q="SELECT matout_id FROM mat_outhdr ORDER BY matout_id DESC";
+$q="SELECT opname_id FROM mat_opnamehdr ORDER BY opname_id DESC";
 $run = $pdo->query($q);
 $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 if ($rs){
-	$newId=$rs[0]['matout_id']+1;
+	$newId=$rs[0]['opname_id']+1;
 } else {
 	$newId="1";				
 }
@@ -27,23 +27,23 @@ if ($rs){
 }
 .kolom1 {
 	float:left;
-	width:85px;	
+	width:90px;	
 }
 .kolom2 {
 	float:left;
-	width:130px;	
+	width:140px;	
 }
 .kolom3 {
 	float:left;
-	width:90px;	
+	width:70px;	
 }
 .kolom4 {
 	float:left;
-	width:140px;	
+	width:160px;	
 }
 .kolom5 {
 	float:left;
-	width:100px;	
+	width:70px;	
 }
 .kolom6 {
 	float:left;
@@ -59,8 +59,8 @@ if ($rs){
 <script type="text/javascript" src="<?php echo $basedir; ?>models/js/global.format.js">disableSelection(document.body); 
 </script>
 <?php 
-require_once "matout_frm.mjs.php";
-require_once "matout_frm.cjs.php";
+require_once "stock_opnamewip_frm.mjs.php";
+require_once "stock_opnamewip_frm.cjs.php";
 ?>
 </head>
 <body oncontextmenu="return false;" leftmargin="20" rightmargin="20" topmargin="15" bottommargin="20"> 
@@ -68,60 +68,24 @@ require_once "matout_frm.cjs.php";
 <form id="fm" method="post" onSubmit="return false">
 	<input type="hidden" id="aksi" name="aksi">
     <div class="hdr">
-      <span class="kolom1">Outgoing No. </span><span class="kolom2">
-      <input type="hidden" id="matout_id" name="matout_id">
-      <input type="text" id="matout_no" name="matout_no" style="width:100px">    
-      </span>
-      <span class="kolom3">Outgoing Type</span>
-      <span class="kolom4">
-       <select name="matout_type" id="matout_type" style="width:100px">
-         <option value=""></option>
-         <?php
-            $run = $pdo->query("SELECT * FROM mst_out_type ORDER BY matout_type");
-            $rs = $run->fetchAll(PDO::FETCH_ASSOC);
-            foreach($rs as $r)
-                echo "<option value=\"".$r['matout_type']."\">".$r['matout_name']."</option>";
-        ?>
-       </select>
-      </span>
-      <span class="kolom5">Outgoing Date</span>
-      <span class="kolom6">
-      <input type="text" id="matout_date" name="matout_date" class="easyui-datebox" required maxlength="10" tabindex="10" style="width:100px">
-      </span>
-    </div> 
-    <div class="hdr">      
-      <span class="kolom1">WO No. </span>
+      <span class="kolom1">Opname Date </span>
       <span class="kolom2">
-      <input type="hidden" id="wo_id" name="wo_id" style="width:100px">
-      <input name="wo_no" id="wo_no" style="width:100px"> 
+      <input type="hidden" id="opname_id" name="opname_id">
+      <input type="text" id="opname_date" name="opname_date" class="easyui-datebox" required maxlength="10" tabindex="10" style="width:100px">
       </span>
-	  <span class="kolom3">Customer</span>
+      <span class="kolom3">Warehouse</span>
       <span class="kolom4">
-      <select name="cust" id="cust" style="width:120px">
+      <select name="wh_id" id="wh_id" style="width:150px">
         <option value=""></option>
         <?php
-            $run = $pdo->query("SELECT NmPrshn FROM mst_perusahaan WHERE TpPrshn IN ('c') ORDER BY NmPrshn");
+            $run = $pdo->query("SELECT * FROM mat_warehouse WHERE wh_id='2' ORDER BY wh_name");
             $rs = $run->fetchAll(PDO::FETCH_ASSOC);
             foreach($rs as $r)
-                echo "<option value=\"".$r['NmPrshn']."\">".$r['NmPrshn']."</option>";
+                echo "<option value=\"".$r['wh_id']."\">".$r['wh_name']."</option>";
         ?>
-      </select></span>
-      <span class="kolom5">Jenis BC</span>
-      <span class="kolom6">
-      <select name="KdJnsDok" id="KdJnsDok" style="width:80px">
-        <option value=""></option>
-        <?php
-            $run = $pdo->query("SELECT * FROM jenis_dok WHERE KdJnsDok IN ('3','4','6','9') ORDER BY KdJnsDok");
-            $rs = $run->fetchAll(PDO::FETCH_ASSOC);
-            foreach($rs as $r)
-                echo "<option value=\"".$r['KdJnsDok']."\">".$r['UrJnsDok']."</option>";
-        ?>
-      </select>
-      </span>      
-      <span class="kolom5"></span>
-      <span class="kolom6">
+      </select>    
       </span>
-    </div>            
+    </div>       
     <!--
     <div class="hdr">
       <span class="kolom1">
@@ -160,22 +124,14 @@ require_once "matout_frm.cjs.php";
 	<form name="fm2" id="fm2" method="post" onSubmit="return false">
  	<table>
     <tr>
-      <td width="115">Mat. Code</td>
+      <td width="115">Part Code</td>
       <td width="319"><input name="KdBarang3" type="hidden" id="KdBarang3" class="easyui-validatebox" value=""><input id="KdBarang2" name="KdBarang2" type="text" style="width:100px"></td>
     </tr>
     <tr>
-      <td>Desc.</td>
+      <td>Part No</td>
       <td><input name="NmBarang2" type="text" id="NmBarang2" style="width:150px" readonly></td>
     </tr>
-	<tr>
-      <td>Section</td>
-      <td><input name="twhmp" type="text" id="twhmp" style="width:150px" readonly></td>
-    </tr>
     <tr>
-      <td>L/Bar</td>
-      <td><input name="LBar" type="text" id="LBar" style="width:150px" readonly></td>
-    </tr>
-	<tr>
       <td>Unit</td>
       <td>
         <select name="Sat2" id="Sat2" style="width:50px">
@@ -192,7 +148,16 @@ require_once "matout_frm.cjs.php";
     <tr>
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:100px"></td>
-    </tr>
+    </tr>  
+	<tr>
+      <td>Remark</td>
+      <td>
+	  <select name="remark" id="remark" style="width:50px">
+	    <option value=""></option>
+		<option value="OK">OK</option>
+		<option value="NG">NG</option>
+	  </select></td>
+    </tr>  
     </table>
     <input type="submit" id="btnSubmit2" name="btnSubmit2" style="display:none">
     </form>
@@ -206,11 +171,9 @@ require_once "matout_frm.cjs.php";
 <div id="wCari"><table id="dgCari" singleSelect="true"></table></div>
 <div id="toolCari">  
     Search
-    <select id="pilcari" name="pilcari">
-    	<option value="matout_no">Outgoing No.</option>
-        <option value="matout_date">Outgoing Date</option>
-        <option value="matout_name">Outgoing Type</option>
-        <option value="wo_no">WO No.</option>
+     <select id="pilcari" name="pilcari">
+        <option value="opname_date">Opname Date</option>
+        <option value="wh_id">Warehouse</option>
     </select> 
     <input type="text" id="txtcari" name="txtcari" style="width:100px">
     <a href="#" id="dtlCri" class="easyui-linkbutton" iconCls="icon-search"></a>

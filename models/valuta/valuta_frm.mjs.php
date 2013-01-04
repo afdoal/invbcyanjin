@@ -8,7 +8,7 @@ function setdg(){
 		fitColumns:"true",
 		rownumbers:"true",
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		columns:[[  
 			{field:'KdVal0',title:'KdVal0',width:80,hidden:true},
 			{field:'KdVal',title:'Kode Valuta',width:80},

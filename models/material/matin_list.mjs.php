@@ -7,7 +7,7 @@ function setdg(){
 		toolbar:"#toolCari",
 		rownumbers:"true",
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		frozenColumns:[[  
 			{field:'matin_no',title:'Incoming No.',width:80},
 			{field:'matin_date',title:'Incoming Date',width:80},

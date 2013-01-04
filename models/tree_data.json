@@ -89,6 +89,8 @@
 						"text":"<a href=\"material/stock_opnamemat_frm.php?NmMenu=Stock Opname Material\" target=\"content\">Stock Opname Mat.</a>"
 					},{ 
 						"text":"<a href=\"material/stock_opname_frm.php?NmMenu=Stock Opname Finished Goods\" target=\"content\">Stock Opname FG</a>"
+					},{ 
+						"text":"<a href=\"material/stock_opnamewip_frm.php?NmMenu=Stock Opname Work In Process\" target=\"content\">Stock Opname WIP</a>"
 					}
 				]
 			},{ 
@@ -98,6 +100,8 @@
 						"text":"<a href=\"material/stock_adjustmat_frm.php?NmMenu=Stock Adjustment\" target=\"content\">Stock Adjustment Mat.</a>"		
 					},{ 
 						"text":"<a href=\"material/stock_adjust_frm.php?NmMenu=Stock Adjustment\" target=\"content\">Stock Adjustment FG</a>"			
+					},{ 
+						"text":"<a href=\"material/stock_adjustwip_frm.php?NmMenu=Stock Adjustment WIP\" target=\"content\">Stock Adjustment WIP</a>"			
 					}
 				]
 			}]

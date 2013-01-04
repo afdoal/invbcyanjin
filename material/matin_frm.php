@@ -211,6 +211,10 @@ require_once "matin_frm.cjs.php";
       <td>Section</td>
       <td><input name="twhmp" type="text" id="twhmp" style="width:150px" readonly></td>
     </tr>
+	<tr>
+      <td>L/Bar</td>
+      <td><input name="Lbar" type="text" id="Lbar" style="width:150px" readonly></td>
+    </tr>
     <tr>
       <td>Unit</td>
       <td>

@@ -8,7 +8,7 @@ function setdg(){
 		fitColumns:"true",
 		rownumbers:"true",
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		columns:[[  		
 			{field:'matout_no',title:'Scrap Out No.',width:100},
 			{field:'matout_date',title:'Scrap Out Date',width:100},

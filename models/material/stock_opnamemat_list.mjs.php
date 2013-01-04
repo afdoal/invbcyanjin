@@ -8,7 +8,7 @@ function setdg(){
 		fitColumns:"true",
 		rownumbers:"true",
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		columns:[[  		
 			{field:'wh_name',title:'Warehouse.',width:100},
 			{field:'opname_date',title:'Date',width:100},
@@ -31,7 +31,7 @@ function setdg(){
 				singleSelect:true,  
 				rownumbers:true,  
 				pagination:true,
-				pageList:[25,50,75,100],
+				pageList:[200,300,400,500],
 				loadMsg:'',  
 				height:'auto',  
 				columns:[[  

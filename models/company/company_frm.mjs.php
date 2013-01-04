@@ -8,7 +8,7 @@ function setdg(){
 		fitColumns:false,
 		rownumbers:"true",
 		pagination:true,
-		pageList:[25,50,75,100],
+		pageList:[200,300,400,500],
 		frozenColumns:[[  
 			{field:'NmPrshn0',title:'NmPrshn0',width:80,hidden:true},
 			{field:'NmPrshn',title:'Nama',width:170},

@@ -75,7 +75,7 @@ $('#btnPrint').hide();
 
 $('#KdBarang2').combogrid({  
 	panelWidth:500,  	
-	url: '<?php echo $basedir; ?>models/material/stock_opname_grid.php?req=dgDet',  
+	url: '<?php echo $basedir; ?>models/material/stock_opnamewip_grid.php?req=dgDet',  
 	idField:'KdBarang2',  
 	textField:'KdBarang2',  
 	mode:'remote',  
@@ -169,7 +169,7 @@ $('#tl1Sim').click(function(){
 		}	 	
 		//AKHIR FORM LIST BARANG
 				
-		$.post("<?php echo $basedir ?>models/material/stock_opname_tuh.php", { 
+		$.post("<?php echo $basedir ?>models/material/stock_opnamewip_tuh.php", { 
 		aksi: $('#aksi').val(), 
 		opname_id: $('#opname_id').val(),
 		opname_date: $('#opname_date').datebox('getValue'),
@@ -209,7 +209,7 @@ $('#tl1Hps').click(function(){
 	$('#aksi').val('h');
 	$.messager.confirm('Confirm','Are you sure you want to delete this data?',function(r){  
 		if (r){
-			$.post("<?php echo $basedir ?>models/material/stock_opname_tuh.php", { 
+			$.post("<?php echo $basedir ?>models/material/stock_opnamewip_tuh.php", { 
 			aksi: $('#aksi').val(), 
 			opname_id: $('#opname_id').val()
 			},
