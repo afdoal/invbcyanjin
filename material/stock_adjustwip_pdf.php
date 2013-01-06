@@ -127,7 +127,7 @@ $opname_id = $_REQUEST["opname_id"];
 $q = "SELECT *,DATE_FORMAT(opname_date,'%d/%m/%Y') AS opname_date
 	  FROM mat_opnamehdr a
 	  LEFT JOIN mat_warehouse b ON b.wh_id=a.wh_id 
-	  WHERE mat_type='0' ";
+	  WHERE mat_type='11' ";
 $q .= "AND opname_id LIKE '$opname_id' ";	  
 $q .= "ORDER BY opname_date ASC";
 $runh=$pdo->query($q);	

@@ -13,7 +13,7 @@ function setdg(){
 			{field:'matout_no',title:'Outgoing No.',width:100},
 			{field:'matout_date',title:'Outgoing Date',width:100},	
 			{field:'matout_name',title:'Outgoing Type',width:100},
-			{field:'wo_no',title:'WO No.',width:100},
+			{field:'ref_no',title:'WO No.',width:100},
 			{field:'notes',title:'Notes',width:100},
 			{field:'action',title:'Action',width:60,
 				formatter:function(value,row,index){
@@ -37,11 +37,11 @@ function setdg(){
 				height:'auto',  
 				columns:[[  
 					{field:'KdBarang2',title:'Mat. Code',width:80},  
-					//{field:'PartNo',title:'Part No.',width:80}, 
 					{field:'NmBarang2',title:'Desc',width:100},   
+					{field:'twhmp',title:'Section',width:100},   
+					{field:'LBar',title:'L/Bar',width:100},   
 					{field:'Sat2',title:'Unit',width:80}, 
 					{field:'qty',title:'Quantity',width:100,align:'right'}
-					//{field:'price',title:'Price',width:100}  
 				]],  
 				onResize:function(){  
 					$('#dg').datagrid('fixDetailRowHeight',index);  

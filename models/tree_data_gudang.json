@@ -145,6 +145,8 @@
 								"text":"<a href=\"material/stock_opnamemat_list.php?NmMenu=Stock Opname Material\" target=\"content\">Stock Opname Mat.</a>"
 							},{ 
 								"text":"<a href=\"material/stock_opname_list.php?NmMenu=Stock Opname Finished Goods\" target=\"content\">Stock Opname FG</a>"
+							},{ 
+								"text":"<a href=\"material/stock_opnamewip_list.php?NmMenu=Stock Opname Work In Process\" target=\"content\">Stock Opname WIP</a>"
 							}
 						]
 					},{ 
@@ -154,6 +156,8 @@
 								"text":"<a href=\"material/stock_adjustmat_list.php?NmMenu=Stock Adjustment Raw Material\" target=\"content\">Stock Adjustment Mat.</a>"		
 							},{ 
 								"text":"<a href=\"material/stock_adjust_list.php?NmMenu=Stock Adjustment Finished Goods\" target=\"content\">Stock Adjustment FG</a>"				
+							},{ 
+								"text":"<a href=\"material/stock_adjustwip_list.php?NmMenu=Stock Adjustment Work In Process\" target=\"content\">Stock Adjustment WIP</a>"				
 							}
 						]
 					}
