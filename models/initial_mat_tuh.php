@@ -13,6 +13,7 @@ $date=dmys2ymd($_REQUEST['date']);
 //FORM LIST DATA MATERIAL
 $nolist=explode("`", $_REQUEST['nolist']);
 $KdBarang2=explode("`", $_REQUEST['KdBarang2']);
+$weight=explode("`", $_REQUEST['weight']);
 $qty=explode("`", $_REQUEST['qty']);
 
 $aksi=$_REQUEST['aksi'];
@@ -31,10 +32,10 @@ try {
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mat_stockcard (
 				  kd_fac,wh_id,date,mat_type,mat_id,
-				  type,qty,qty_bal
+				  type,weight,qty,qty_bal
 				  ) VALUES (
 				  '01','$wh_id','$date','1','$KdBarang2[$i]',
-				  'B','$qty[$i]','$qty[$i]'
+				  'B','$weight[$i]','$qty[$i]','$qty[$i]'
 				  )";	
 		}//AKHIR MANIPULASI DATA BARANG		
 		
@@ -52,10 +53,10 @@ try {
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mat_stockcard (
 				  kd_fac,wh_id,date,mat_type,mat_id,
-				  type,qty,qty_bal
+				  type,weight,qty,qty_bal
 				  ) VALUES (
 				  '01','$wh_id','$date','1','$KdBarang2[$i]',
-				  'B','$qty[$i]','$qty[$i]'
+				  'B','$weight[$i]','$qty[$i]','$qty[$i]'
 				  )";
 		}//AKHIR MANIPULASI DATA BARANG
 		

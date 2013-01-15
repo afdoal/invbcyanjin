@@ -50,6 +50,13 @@ $('#ppn').numberbox({
 	decimalSeparator:'.',
 });
 
+$('#weight').numberbox({  
+    min:0, 
+	precision:2, 
+	groupSeparator:',',
+	decimalSeparator:'.',
+});
+
 $('#qty').numberbox({  
     min:0, 
 	precision:2, 
@@ -227,6 +234,7 @@ $('#tl2Ubh2').click(function(){
 				twhmp: $('#twhmp').val(),
 				Lbar: $('#Lbar').val(),
 				Sat2: $('#Sat2').val(),
+				weight: nformat2($('#weight').numberbox('getValue'),2),
 				qty: nformat2($('#qty').numberbox('getValue'),2),
 				price: nformat2($('#price').numberbox('getValue'),2),
 				amount: nformat2($('#amount').numberbox('getValue'),2)
@@ -243,6 +251,7 @@ $('#tl2Sim').click(function(){
 		twhmp: $('#twhmp').val(),
 		Lbar: $('#Lbar').val(),
 		Sat2: $('#Sat2').val(),
+		weight: nformat2($('#weight').numberbox('getValue'),2),
 		qty: nformat2($('#qty').numberbox('getValue'),2),
 		price: nformat2($('#price').numberbox('getValue'),2),
 		amount: nformat2($('#amount').numberbox('getValue'),2)

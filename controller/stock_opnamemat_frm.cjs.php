@@ -29,17 +29,19 @@ $('#tot_amount').numberbox({
 	decimalSeparator:'.',
 });*/
 
+$('#weight').numberbox({  
+    min:0, 
+	precision:2, 
+	groupSeparator:',',
+	decimalSeparator:'.'
+});
+
 $('#qty').numberbox({  
     min:0, 
 	precision:2, 
 	groupSeparator:',',
-	decimalSeparator:'.'/*,
-	onChange:function(newValue,oldValue){
-		price=$('#price').numberbox('getValue');
-		amount = newValue*price;
-		$('#amount').numberbox('setValue',amount);
-	}*/
-});
+	decimalSeparator:'.'
+});	
 /*
 $('#price').numberbox({  
     min:0, 
@@ -87,6 +89,7 @@ $('#KdBarang2').combogrid({
 		{field:'KdBarang2',title:'Mat. Code',width:60},
 		{field:'NmBarang2',title:'Desc.',width:50},
 		{field:'twhmp',title:'Section',width:50},
+		{field:'LBar',title:'L/Bar',width:50},
 		{field:'Sat2',title:'Unit',width:50}
 	]],
 	onSelect:function(index,row){insert_det(row)}  
@@ -160,13 +163,13 @@ $('#tl1Sim').click(function(){
 		nolist_val="";	
 		KdBarang2_val="";
 		qty_val="";
-		price_val="";
+		weight_val="";
 		j=1;
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
 			qty_val += rows[i].qty.replace(",","") + "`";
-			/*price_val += rows[i].price.replace(",","") + "`";*/
+			weight_val += rows[i].weight.replace(",","") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				
@@ -179,7 +182,7 @@ $('#tl1Sim').click(function(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val//,price:price_val
+		qty:qty_val,weight:weight_val
 		},
 		function(result){
 			var result = eval('('+result+')');
@@ -278,7 +281,9 @@ $('#tl2Ubh2').click(function(){
 				KdBarang2: $('#KdBarang2').combogrid('getValue'),
 				NmBarang2: $('#NmBarang2').val(),	
 				twhmp: $('#twhmp').val(),
+				LBar: $('#LBar').val(),
 				Sat2: $('#Sat2').val(),
+				weight: nformat2($('#weight').numberbox('getValue'),2),
 				qty: nformat2($('#qty').numberbox('getValue'),2)
 				}
 		});
@@ -291,7 +296,9 @@ $('#tl2Sim').click(function(){
 		KdBarang2: $('#KdBarang2').combogrid('getValue'),		
 		NmBarang2: $('#NmBarang2').val(),	
 		twhmp: $('#twhmp').val(),
+		LBar: $('#LBar').val(),
 		Sat2: $('#Sat2').val(),
+		weight: nformat2($('#weight').numberbox('getValue'),2),
 		qty: nformat2($('#qty').numberbox('getValue'),2)
 	});
 });

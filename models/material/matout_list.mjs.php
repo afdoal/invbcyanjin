@@ -41,6 +41,7 @@ function setdg(){
 					{field:'twhmp',title:'Section',width:100},   
 					{field:'LBar',title:'L/Bar',width:100},   
 					{field:'Sat2',title:'Unit',width:80}, 
+					{field:'weight',title:'Weight',width:100,align:'right'},
 					{field:'qty',title:'Quantity',width:100,align:'right'}
 				]],  
 				onResize:function(){  

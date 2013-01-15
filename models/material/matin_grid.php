@@ -16,8 +16,9 @@ if ($req=='menu'){
 
 	$q = "SELECT *,DATE_FORMAT(matin_date,'%d/%m/%Y') AS matin_date
 		  FROM mat_inchdr a 
-		  LEFT JOIN mst_in_type c ON c.matin_type=a.matin_type 
+		  LEFT JOIN mst_in_type c ON c.matin_type=a.matin_type
 		  WHERE a.matin_type NOT IN('3') ";
+	
 	if ($txtcari != ""){		  
 		if ($pilcari == "matin_date"){		  
 			$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
@@ -25,6 +26,8 @@ if ($req=='menu'){
 			$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
 		}
 	} 	  
+	
+	
 	$q .= "ORDER BY matin_no, matin_date ASC";
 	
 	$runtot=$pdo->query($q);
@@ -40,7 +43,8 @@ if ($req=='menu'){
 	echo json_encode($result);
 } else if ($req=='list') {	
 	$matin_id = $_REQUEST["matin_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+	
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 		  FROM mat_incdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matin_id='$matin_id' 
@@ -48,10 +52,11 @@ if ($req=='menu'){
 		  
 	$run=$pdo->query($q);	
 	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
-	echo json_encode($rs);		  
+	echo json_encode($rs);
+	
 } else if ($req=='dgDet') {
 	$po_id = $_REQUEST["po_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,LBar,Sat AS Sat2,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 		  FROM pur_podet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE po_id='$po_id' 

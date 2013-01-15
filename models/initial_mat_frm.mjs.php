@@ -14,7 +14,9 @@ function setdg(){
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'twhmp',title:'Section',width:150},
+			{field:'LBar',title:'L/Bar',width:150},
 			{field:'Sat2',title:'Unit',width:80},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
 		]],
 		url: '<?php echo $basedir; ?>models/initial_mat_grid.php?req=list2&wh_id='+wh_id+'&date='+date,  

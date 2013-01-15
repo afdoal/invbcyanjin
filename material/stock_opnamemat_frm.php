@@ -135,6 +135,10 @@ require_once "stock_opnamemat_frm.cjs.php";
       <td>Section</td>
       <td><input name="twhmp" type="text" id="twhmp" style="width:150px" readonly></td>
     </tr>
+	<tr>
+      <td>L/Bar</td>
+      <td><input name="LBar" type="text" id="LBar" style="width:150px" readonly></td>
+    </tr>
     <tr>
       <td>Unit</td>
       <td>
@@ -150,6 +154,10 @@ require_once "stock_opnamemat_frm.cjs.php";
       </td>
     </tr>
     <tr>
+      <td>Weight</td>
+      <td><input name="weight" type="text" id="weight" value="" style="width:100px"></td>
+    </tr>    
+	<tr>
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:100px"></td>
     </tr>    

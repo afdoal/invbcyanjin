@@ -132,7 +132,7 @@ $q .= "ORDER BY matin_no, matin_date ASC";
 $runh=$pdo->query($q);	
 $rsh=$runh->fetchAll(PDO::FETCH_ASSOC);
 
-$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 	  FROM mat_incdet a 
 	  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 	  WHERE matin_id='$matin_id' 
@@ -149,7 +149,7 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		  <td width="80"><b>'.$rsh[0]['matin_no'].'</b></td>
 		  <td width="80"><b>Incoming Type</b></td>
 		  <td width="10"><b>:</b></td>
-		  <td width="150"><b>'.$rsh[0]['matin_type'].'</b></td>
+		  <td width="150"><b>'.$rsh[0]['matin_name'].'</b></td>
 		  <td width="80"><b>Incoming Date</b></td>
 		  <td width="10"><b>:</b></td>
 		  <td width="100"><b>'.$rsh[0]['matin_date'].'</b></td>
@@ -182,14 +182,15 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		<thead>
 		<tr>
 		  <th align="center" width="25"><b>No.</b></th>
-		  <th width="80"><b>Mat. Code</b></th>		  
+		  <th width="60"><b>Mat. Code</b></th>		  
 		  <th width="100"><b>Desc.</b></th>
 		  <th width="100"><b>Section</b></th>
-		  <th width="80"><b>L/Bar</b></th>
+		  <th width="50"><b>L/Bar</b></th>
 		  <th width="30"><b>Unit</b></th>
+		  <th align="right"><b>Weight</b></th>
 		  <th align="right"><b>Qty.</b></th>
 		  <th align="right"><b>Price</b></th>
-		  <th align="right"><b>Amount</b></th>
+		  <th align="right" width="80"><b>Amount</b></th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -197,14 +198,15 @@ $no=1;
 foreach ($rs as $r){
 $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
-		 '<td width="80">'.$r['KdBarang2'].'</td>'.
+		 '<td width="60">'.$r['KdBarang2'].'</td>'.
 		 '<td width="100">'.$r['NmBarang2'].'</td>'.
 		 '<td width="100">'.$r['twhmp'].'</td>'.
-		 '<td width="80">'.$r['LBar'].'</td>'.
+		 '<td width="50">'.$r['LBar'].'</td>'.
 		 '<td width="30">'.$r['Sat2'].'</td>'.
+		 '<td align="right">'.$r['weight'].'</td>'.
 		 '<td align="right">'.$r['qty'].'</td>'.
 		 '<td align="right">'.$r['price'].'</td>'.
-		 '<td align="right">'.$r['amount'].'</td>'.
+		 '<td align="right" width="80">'.$r['amount'].'</td>'.
 		 '</tr>';
 $no+=1;	
 }

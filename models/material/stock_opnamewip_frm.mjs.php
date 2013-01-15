@@ -12,6 +12,8 @@ function setdg(){
 		columns:[[  
 			{field:'KdBarang2',title:'Part Code',width:80},
 			{field:'NmBarang2',title:'Part No',width:150},
+			{field:'twhmp',title:'Section',width:150},
+			{field:'LBar',title:'L/Bar',width:150},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
 			{field:'remark',title:'Remark',width:80},

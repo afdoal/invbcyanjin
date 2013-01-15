@@ -91,7 +91,7 @@ $('#tl1Tbh').click(function(){
 	enInput();
 	$('#date').datebox('enable');
 	$('#KdBarang2').combogrid('enable');
-	$('#Sat2').attr('disabled',true);
+	$('#Sat2').attr('disabled',true);	
 });
 
 $('#tl1Ubh').click(function(){
@@ -222,6 +222,7 @@ $('#tl2Tbh').click(function(){
 	
 	$('#dlg').dialog('open').dialog('setTitle','Tambah <?php echo $NmMenu ?>');
 	$('#fm2').form('clear');
+	$('#remark').val('OK');
 });
 
 $('#tl2Ubh').click(function(){
@@ -233,6 +234,7 @@ $('#tl2Ubh').click(function(){
 		$('#dlg').dialog('open').dialog('setTitle','Ubah <?php echo $NmMenu ?>');
 		$('#fm2').form('load',row);
 	}
+	$('#remark').val('OK');
 });
 
 $('#tl2Ubh2').click(function(){

@@ -23,7 +23,8 @@ if ($req=='menu'){
 		} else {
 			$q .= "WHERE $pilcari LIKE '%$txtcari%' ";	  
 		}
-	}  
+	}
+	  
 	$q .= "ORDER BY matout_no, matout_date ASC";
 	
 	$runtot=$pdo->query($q);
@@ -40,7 +41,7 @@ if ($req=='menu'){
 	
 } else if ($req=='list') {	
 	$matout_id = $_REQUEST["matout_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty
 		  FROM mat_outdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matout_id='$matout_id' 

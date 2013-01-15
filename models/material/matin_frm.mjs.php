@@ -7,7 +7,6 @@ function setdg(){
 		width:700,
 		height:200,	
 		toolbar:"#toolbar2",
-		fitColumns:"true",
 		rownumbers:"true",
 		columns:[[  
 			{field:'KdBarang2',title:'Mat. Code',width:80},
@@ -15,6 +14,7 @@ function setdg(){
 			{field:'twhmp',title:'Section',width:150},
 			{field:'Lbar',title:'L/Bar',width:150},
 			{field:'Sat2',title:'Unit',width:80},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right'}
@@ -35,9 +35,11 @@ function setdgCari(){
 	$('#dgCari').datagrid({  
 		width:586,
 		height:315,	
-		fitColumns:"true",
-		rownumbers:"true", 
 		toolbar:"#toolCari",
+		rownumbers:"true",		
+		fitColumns:true,
+		pagination:true,
+		pageList:[25,50,75,100],   
 		columns:[[  
 			{field:'matin_no',title:'Incoming No.',width:50},
 			{field:'matin_date',title:'Incoming Date',width:50},
@@ -64,8 +66,7 @@ function setComboGrid(){
 		panelWidth:500,  	
 		url: '<?php echo $basedir; ?>models/material/matin_grid.php?req=dgDetFirst',  
 		idField:'KdBarang2',  
-		textField:'KdBarang2',  
-		mode:'remote',  
+		textField:'KdBarang2',   
 		rownumbers:true,
 		fitColumns:true,
 		pagination:true,
@@ -122,6 +123,7 @@ function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#twhmp').val(row.twhmp);
 	$('#Sat2').val(row.Sat2);
+	$('#weight').numberbox('setValue',row.weight);
 	$('#qty').numberbox('setValue',row.qty);
 	$('#price').numberbox('setValue',row.price);
 	$('#amount').numberbox('setValue',row.amount);
@@ -147,12 +149,14 @@ function simpan(){
 		//FORM LIST BARANG
 		nolist_val="";	
 		KdBarang2_val="";
+		weight_val="";
 		qty_val="";
 		price_val="";
 		j=1;
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
+			weight_val += rows[i].weight.replace(",","") + "`";
 			qty_val += rows[i].qty.replace(",","") + "`";
 			price_val += rows[i].price.replace(",","") + "`";
 		}	 	
@@ -176,7 +180,7 @@ function simpan(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val,price:price_val
+		weight:weight_val,qty:qty_val,price:price_val
 		},
 		function(result){
 			var result = eval('('+result+')');
