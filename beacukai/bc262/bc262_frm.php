@@ -139,7 +139,7 @@ require_once "bc262.cjs.php";
                 <td><select id="KdTp" name="KdTp" tabindex="6">
                   <option value=""></option>
                   <?php 
-					$q="SELECT * FROM tujuan_pengiriman ORDER BY KdTp";
+					$q="SELECT * FROM tujuan_pengiriman WHERE KdTp IN ('6','7','8') ORDER BY KdTp";
 					$run = $pdo->query($q);
 		  		    $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 					foreach ($rs as $r){
@@ -147,7 +147,7 @@ require_once "bc262.cjs.php";
 						if ($r['KdTp']=="6"){
 							$str .= "selected";
 						}
-						$str .= ">".$r['KdTp']." - ".$r['UrTp']."</option>";
+						$str .= ">".$r['UrTp']."</option>";
 						echo $str;
 					}
 					?>

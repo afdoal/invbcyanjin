@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2013-01-12 22:04:33
+Date: 2013-01-30 20:38:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,6 +84,7 @@ INSERT INTO `barang` VALUES ('8', '000002', '1', null, 'M001', 'Mesin A', null, 
 INSERT INTO `barang` VALUES ('8', '000002', '2', null, 'P001', 'PC', null, null, null, null, '200', null, null, null, '0.0000', '120.00', null, null, '100.00', null);
 INSERT INTO `barang` VALUES ('8', '000003', '1', null, 'M001', 'Mesin A', null, null, null, null, '100', null, null, null, '0.0000', '0.00', null, null, '200.00', null);
 INSERT INTO `barang` VALUES ('8', '000003', '2', null, 'P001', 'PC', null, null, null, null, '200', null, null, null, '0.0000', '0.00', null, null, '100.00', null);
+INSERT INTO `barang` VALUES ('8', '000004', '1', null, 'RAC-0001', 'Aluminium Coil', null, null, null, null, '200', null, null, null, '0.0000', '0.00', null, null, '180.00', null);
 INSERT INTO `barang` VALUES ('9', '000001', '1', null, 'FG-01', 'tes', null, null, null, null, '2', null, null, null, '1.0000', '1.00', null, null, '1.00', null);
 INSERT INTO `barang` VALUES ('9', '000002', '1', null, 'M001', 'Mesin A', null, null, null, null, '5', null, null, null, '0.0000', '0.00', null, null, '0.00', null);
 
@@ -198,6 +199,7 @@ INSERT INTO `dokumen` VALUES ('7', '000002', '1', '1', '883', '2012-10-31', null
 INSERT INTO `dokumen` VALUES ('8', '000001', '1', '2', '1', '2012-08-01', null);
 INSERT INTO `dokumen` VALUES ('8', '000002', '1', '4', '003', '2012-10-29', null);
 INSERT INTO `dokumen` VALUES ('8', '000003', '1', '4', 'SJ001', '2012-11-26', null);
+INSERT INTO `dokumen` VALUES ('8', '000004', '1', '2', '0022', '2013-01-30', null);
 INSERT INTO `dokumen` VALUES ('9', '000001', '1', '3', '2', '2012-08-02', null);
 INSERT INTO `dokumen` VALUES ('9', '000001', '2', '14', '1', '2012-08-02', null);
 INSERT INTO `dokumen` VALUES ('9', '000001', '3', '14', '2', '2012-08-03', null);
@@ -402,6 +404,7 @@ INSERT INTO `hdrpengangkutan` VALUES ('7', '000002', '0', null, '', '', '', '000
 INSERT INTO `hdrpengangkutan` VALUES ('8', '000001', null, '2', null, '1', null, null);
 INSERT INTO `hdrpengangkutan` VALUES ('8', '000002', null, 'Truk', null, 'B201', null, null);
 INSERT INTO `hdrpengangkutan` VALUES ('8', '000003', null, '', null, '', null, null);
+INSERT INTO `hdrpengangkutan` VALUES ('8', '000004', null, '', null, '', null, null);
 INSERT INTO `hdrpengangkutan` VALUES ('9', '000001', null, '2', null, '1', null, null);
 INSERT INTO `hdrpengangkutan` VALUES ('9', '000002', null, '', null, '', null, null);
 
@@ -487,6 +490,7 @@ INSERT INTO `hdrtransaksi` VALUES ('7', '000002', 'USD', '0.00', '0.00', '0.00',
 INSERT INTO `hdrtransaksi` VALUES ('8', '000001', 'Rp', '1.00', null, null, null, null, '0.00', '2.00');
 INSERT INTO `hdrtransaksi` VALUES ('8', '000002', 'Rp', '1.00', null, null, null, null, '0.00', '300.00');
 INSERT INTO `hdrtransaksi` VALUES ('8', '000003', 'Rp', '1.00', null, null, null, null, '0.00', '0.00');
+INSERT INTO `hdrtransaksi` VALUES ('8', '000004', 'Rp', '1.00', null, null, null, null, '0.00', '2000.00');
 INSERT INTO `hdrtransaksi` VALUES ('9', '000001', 'Rp', '1.00', null, null, null, null, '0.00', '2.00');
 INSERT INTO `hdrtransaksi` VALUES ('9', '000002', 'Rp', '1.00', null, null, null, null, '0.00', '0.00');
 
@@ -558,6 +562,7 @@ INSERT INTO `header` VALUES ('7', '000002', '000002', '2012-10-31', null, '04030
 INSERT INTO `header` VALUES ('8', '000001', '000001', '2012-08-01', '2', '050800', null, null, '', null, null, null, null, null, '1', '0', '', '', null, 'PT. LUCAS ABADI', null, null, null, null, '', '', '', '1', 'AP', '2', '2.0000', '1.00', '2.00', '0.00', '0.00', null, 'LEE JONG HYUK', '_', '1', '2', null);
 INSERT INTO `header` VALUES ('8', '000002', '000002', '2012-10-29', '1', '050800', null, null, null, null, null, null, null, null, '1', null, null, null, null, 'PT. DIHEN BERSAMA', null, null, null, null, null, null, null, 'Tes', 'AM', '4', '0.0000', '310.00', '300.00', null, null, null, 'Mr. Y. Tobusawa', '_', 'Dani', '111', '2');
 INSERT INTO `header` VALUES ('8', '000003', '000003', '2012-11-26', '0', '050800', null, null, null, null, null, null, null, null, '0', null, null, null, null, 'PT. DIHEN BERSAMA', null, null, null, null, null, null, null, '', '', '0', '0.0000', '0.00', '0.00', null, null, null, 'Mr. Y. Tobusawa', '_', '', '', '2');
+INSERT INTO `header` VALUES ('8', '000004', '000005', '2013-01-30', '3', '050800', null, null, null, null, null, null, null, null, '1', null, null, null, null, 'BUANA BARU JAYA', null, null, null, null, null, null, null, '', 'AP', '0', '0.0000', '0.00', '0.00', null, null, null, 'Mr. Y. Tobusawa', '_', '', '', '156');
 INSERT INTO `header` VALUES ('9', '000001', '000001', '2012-08-02', '1', '050800', null, null, null, null, null, null, null, null, '2', null, null, null, null, 'PT. KAILO SUMBER KAS', null, null, null, null, null, null, null, '1', 'BB', '2', '1.0000', '2.00', '1.00', null, null, null, 'LEE JONG HYUK', '_', '1', '2', null);
 INSERT INTO `header` VALUES ('9', '000002', '000002', '2012-10-30', '5', '050800', null, null, null, null, null, null, null, null, '1', null, null, null, null, 'HITACHI', null, null, null, null, null, null, null, '', '', '0', '0.0000', '0.00', '0.00', null, null, null, 'Mr. Y. Tobusawa', '_', '', '', '7');
 
@@ -1694,7 +1699,7 @@ CREATE TABLE `log` (
   `nama_user` varchar(20) DEFAULT NULL,
   `ket` text,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB AUTO_INCREMENT=1810 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1821 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of log
@@ -2988,6 +2993,17 @@ INSERT INTO `log` VALUES ('1806', '2013-01-07 23:28:59', 'admin', 'Edit initial 
 INSERT INTO `log` VALUES ('1807', '2013-01-08 00:01:30', 'admin', 'Edit stock opname 2');
 INSERT INTO `log` VALUES ('1808', '2013-01-07 18:36:48', 'admin', 'logout');
 INSERT INTO `log` VALUES ('1809', '2013-01-10 15:38:15', 'admin', 'login');
+INSERT INTO `log` VALUES ('1810', '2013-01-14 15:09:24', 'admin', 'login');
+INSERT INTO `log` VALUES ('1811', '2013-01-14 15:10:38', 'admin', 'Add delivery order 88');
+INSERT INTO `log` VALUES ('1812', '2013-01-14 09:11:08', 'admin', 'logout');
+INSERT INTO `log` VALUES ('1813', '2013-01-17 05:52:22', 'budi', 'logout');
+INSERT INTO `log` VALUES ('1814', '2013-01-17 11:52:29', 'admin', 'login');
+INSERT INTO `log` VALUES ('1815', '2013-01-21 16:34:29', 'admin', 'login');
+INSERT INTO `log` VALUES ('1816', '2013-01-30 19:48:46', 'admin', 'login');
+INSERT INTO `log` VALUES ('1817', '2013-01-30 20:00:15', 'admin', 'Delete initial balance material 1 2013-01-30');
+INSERT INTO `log` VALUES ('1818', '2013-01-30 20:19:56', 'admin', 'Add stock adjustment 14');
+INSERT INTO `log` VALUES ('1819', '2013-01-30 20:27:10', 'admin', 'Add matin 156');
+INSERT INTO `log` VALUES ('1820', '2013-01-30 20:28:45', 'admin', 'tambah data bc40 8 000004');
 
 -- ----------------------------
 -- Table structure for `mat_group`
@@ -3291,6 +3307,7 @@ INSERT INTO `mat_incdet` VALUES ('155', '1', 'SPB4-70', null, '10.00', '0.0000')
 INSERT INTO `mat_incdet` VALUES ('155', '2', 'SPB5-60', null, '10.00', '0.0000');
 INSERT INTO `mat_incdet` VALUES ('155', '3', 'SPB5-70', null, '10.00', '0.0000');
 INSERT INTO `mat_incdet` VALUES ('155', '4', 'SPB6-60', null, '10.00', '0.0000');
+INSERT INTO `mat_incdet` VALUES ('156', '1', 'RAC-0001', '100.00', '200.00', '900.0000');
 
 -- ----------------------------
 -- Table structure for `mat_inchdr`
@@ -3315,7 +3332,7 @@ CREATE TABLE `mat_inchdr` (
   `tot_amount` decimal(15,4) DEFAULT NULL,
   `notes` varchar(80) NOT NULL DEFAULT '' COMMENT 'Catatan dari Kedatangan Barang',
   PRIMARY KEY (`matin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=latin1 COMMENT='Header Incoming Material';
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=latin1 COMMENT='Header Incoming Material';
 
 -- ----------------------------
 -- Records of mat_inchdr
@@ -3474,6 +3491,7 @@ INSERT INTO `mat_inchdr` VALUES ('152', '0', '', '2012-12-29', '12', null, '0', 
 INSERT INTO `mat_inchdr` VALUES ('153', '0', '000001', '2012-12-27', null, '', '0', '000018', '0', 'PT. HEISEI STAILESS STEEL INDUSTRY', '121821', '', '8', null, '0', null, '');
 INSERT INTO `mat_inchdr` VALUES ('154', '0', '000002', '2012-12-27', null, '', '0', '000410', '0', 'PT. PUTRA ALAM TEKNOLOGI', 'PAT624A-RAM(1448E)', '', '8', null, '0', null, '');
 INSERT INTO `mat_inchdr` VALUES ('155', '0', '000002', '2012-12-27', null, '', '0', '000410', '0', 'PT. PUTRA ALAM TEKNOLOGI', 'PAT624A-RAM (1448E)', '', '8', null, '0', null, '');
+INSERT INTO `mat_inchdr` VALUES ('156', '0', 'INC001', '2013-01-30', null, 'Rp', '0', '0002', '0', 'BUANA BARU JAYA', '0001', '001', '8', null, '0', null, '');
 
 -- ----------------------------
 -- Table structure for `mat_opnamedet`
@@ -3497,7 +3515,7 @@ CREATE TABLE `mat_opnamedet` (
 -- ----------------------------
 -- Records of mat_opnamedet
 -- ----------------------------
-INSERT INTO `mat_opnamedet` VALUES ('2', '1', 'REI-0086', '80.00', '90.00', null, null, '0.00', '0.00', null);
+INSERT INTO `mat_opnamedet` VALUES ('2', '1', 'REI-0086', '80.00', '90.00', '100.00', '10.00', '0.00', '10.00', null);
 INSERT INTO `mat_opnamedet` VALUES ('4', '1', 'FJI-0010', null, '20.00', null, null, '0.00', '0.00', null);
 INSERT INTO `mat_opnamedet` VALUES ('4', '2', 'FJI-0011', null, '3.00', null, null, '0.00', '0.00', null);
 INSERT INTO `mat_opnamedet` VALUES ('4', '3', 'FJI-0017', null, '130.00', null, null, '0.00', '0.00', null);
@@ -3672,7 +3690,7 @@ CREATE TABLE `mat_opnamehdr` (
 -- ----------------------------
 -- Records of mat_opnamehdr
 -- ----------------------------
-INSERT INTO `mat_opnamehdr` VALUES ('2', '2012-12-12', '1', '1', '90.00', '0', '999');
+INSERT INTO `mat_opnamehdr` VALUES ('2', '2012-12-12', '1', '1', '90.00', '1', '999');
 INSERT INTO `mat_opnamehdr` VALUES ('4', '2012-12-26', '3', '0', '5799.00', '0', '');
 INSERT INTO `mat_opnamehdr` VALUES ('5', '2012-12-26', '3', '0', '1398.00', '0', '');
 INSERT INTO `mat_opnamehdr` VALUES ('6', '2012-12-26', '3', '0', '1631.00', '0', '');
@@ -4619,6 +4637,7 @@ INSERT INTO `mat_outdet` VALUES ('87', '6', 'FJI-0032', '0.00', '400.00', '0.071
 INSERT INTO `mat_outdet` VALUES ('87', '7', 'FJI-0047', '0.00', '1176.00', '0.4609');
 INSERT INTO `mat_outdet` VALUES ('87', '8', 'FJI-0052', '0.00', '1166.00', '0.2100');
 INSERT INTO `mat_outdet` VALUES ('87', '9', 'FJI-0056', '0.00', '1336.00', '0.0713');
+INSERT INTO `mat_outdet` VALUES ('88', '1', 'FGE-0001', '1.00', '9000.23', '0.1234');
 
 -- ----------------------------
 -- Table structure for `mat_outhdr`
@@ -4641,7 +4660,7 @@ CREATE TABLE `mat_outhdr` (
   `KdJnsDok` tinyint(1) DEFAULT NULL,
   `CAR` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`matout_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=latin1 COMMENT='Header Transaksi Outgoing Material';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1 COMMENT='Header Transaksi Outgoing Material';
 
 -- ----------------------------
 -- Records of mat_outhdr
@@ -4732,6 +4751,7 @@ INSERT INTO `mat_outhdr` VALUES ('84', '0', '2033', '2012-12-26', '0', '0', 'KLF
 INSERT INTO `mat_outhdr` VALUES ('85', '0', '496', '2012-12-26', '0', '0', '', 'PT. JVC Electronics Indonesia', '', '', '240.00', '125.4480', '', '0', null);
 INSERT INTO `mat_outhdr` VALUES ('86', '0', '496', '2012-12-26', '0', '0', '2290774', 'PT. JVC Electronics Indonesia', '', '', '24473.00', '4892.4353', '', '0', null);
 INSERT INTO `mat_outhdr` VALUES ('87', '0', '495', '2012-12-26', '0', '0', '2290773', 'PT. JVC Electronics Indonesia', '', '', '8910.00', '1760.0443', '', '0', null);
+INSERT INTO `mat_outhdr` VALUES ('88', '0', '1', '2013-01-14', '0', '0', '1', 'CV. Jaya Mulya Mandiri', '1', '1', '9000.23', '1110.6284', '', '3', null);
 
 -- ----------------------------
 -- Table structure for `mat_stockcard`

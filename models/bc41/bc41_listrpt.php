@@ -1,5 +1,6 @@
 <?php
 require_once "../../models/abspath.php";
+require_once "sessions.php";
 require_once "pdocon.php";
 require_once "function.php";
 

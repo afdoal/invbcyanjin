@@ -52,7 +52,7 @@ if(isset($_REQUEST['fUserName'])){
 			  //$_SESSION["status"] = $rsc[0]['StatusUsaha']." (".$rsc[0]['KdbidUsaha'].")";
 			  $_SESSION["NoTpb"] = $rsc[0]['NoTpb'];
 			  $_SESSION["TgTpb"] = $rsc[0]['TgTpb'];
-			  //$_SESSION["JnsTpb"] = $rsc[0]['JnsTpb'];
+			  $_SESSION["JnsTpb"] = $rsc[0]['JnsTpb'];
 			  //$_SESSION["apit"] = $rsc[0]['ApiNo'];
 			  $_SESSION["KpbcPengawas"] = $rsc[0]['KpbcPengawas'];
 			  $_SESSION["KdPengguna"] = $rsc[0]['KdPengguna'];

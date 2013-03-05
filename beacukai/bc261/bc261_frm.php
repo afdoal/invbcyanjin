@@ -139,7 +139,7 @@ require_once "bc261.cjs.php";
                 <td><select id="KdTp" name="KdTp" tabindex="6">
                   <option value=""></option>
                   <?php 
-					$q="SELECT * FROM tujuan_pengiriman ORDER BY KdTp";
+					$q="SELECT * FROM tujuan_pengiriman WHERE KdTp IN ('3','4','5') ORDER BY KdTp";
 					$run = $pdo->query($q);
 		  		    $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 					foreach ($rs as $r){
@@ -147,7 +147,7 @@ require_once "bc261.cjs.php";
 						if ($r['KdTp']=="2"){
 							$str .= "selected";
 						}
-						$str .= ">".$r['KdTp']." - ".$r['UrTp']."</option>";
+						$str .= ">".$r['UrTp']."</option>";
 						echo $str;
 					}
 					?>
@@ -203,7 +203,7 @@ require_once "bc261.cjs.php";
               <select id="NmTuj" name="NmTuj" style="width:200px;">
               <option value=""></option>
               <?php 
-					$q="SELECT * FROM mst_perusahaan WHERE TpPrshn IN ('c') ORDER BY NmPrshn";
+					$q="SELECT * FROM mst_perusahaan WHERE TpPrshn IN ('s') ORDER BY NmPrshn";
 					$run = $pdo->query($q);
 		  		    $rs = $run->fetchAll(PDO::FETCH_ASSOC);
 					foreach ($rs as $r){
