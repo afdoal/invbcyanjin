@@ -12,9 +12,10 @@ function setdg(){
 		columns:[[  		
 			{field:'KdBarang2',title:'Part Code',width:80},
 			{field:'NmBarang2',title:'Part No',width:150},
-			{field:'Sat2',title:'Unit',width:60},
-			{field:'weight',title:'Weight',width:100,align:'right'},
+			{field:'Sat2',title:'Unit',width:60},			
 			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight0',title:'Weight0',width:100,align:'right',hidden:true},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right',formatter:function(value){
 				amount=parseFloat(value);
@@ -106,6 +107,7 @@ function insert_det(row){
 	$('#Sat2').val(row.Sat2);
 	$('#qty').numberbox('setValue',row.qty);
 	$('#price').numberbox('setValue',row.price);
+	$('#weight0').numberbox('setValue',row.weight0);
 }
 
 function simpan(){
@@ -132,9 +134,9 @@ function simpan(){
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
-			weight_val += rows[i].weight.replace(",","") + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
-			price_val += rows[i].price.replace(",","") + "`";
+			weight_val += rows[i].weight.replace(/,/gi,"") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
+			price_val += rows[i].price.replace(/,/gi,"") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				

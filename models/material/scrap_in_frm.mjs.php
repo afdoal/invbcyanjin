@@ -13,9 +13,10 @@ function setdg(){
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'Sat2',title:'Unit',width:80},
-			{field:'qty',title:'Qty.',width:100,align:'right'}
+			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight',title:'Weight',width:100,align:'right'}
 		]],
-		url: '<?php echo $basedir; ?>models/material/scrap_in_grid.php?req=list&matin_id='+matin_id
+		url: '<?php echo $basedir; ?>models/material/scrap_in_grid.php?req=list2&matin_id='+matin_id
 	});
 }
 
@@ -126,11 +127,13 @@ function simpan(){
 		nolist_val="";	
 		KdBarang2_val="";
 		qty_val="";
+		weight_val="";
 		j=1;
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
+			weight_val += rows[i].weight.replace(/,/gi,"") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				
@@ -142,7 +145,7 @@ function simpan(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val
+		qty:qty_val,weight:weight_val
 		},
 		function(result){
 			var result = eval('('+result+')');

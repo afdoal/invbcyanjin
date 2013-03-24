@@ -8,19 +8,21 @@ function login_validate(){
 
 function login_check(){
     $exp_time = $_SESSION["expires_by"];
-	$exp_date = "10/10/2013";
+	$exp_date = "10/10/2015";
 	$this_date = date("d/m/Y");
     if ($exp_date == $this_date){
 		unset($_SESSION["expires_by"]);
 		return false;
 	} else {
-		if (time() < $exp_time){
+		/*if (time() < $exp_time){
 			login_validate();
 			return true; 
 		} else {
 			unset($_SESSION["expires_by"]);
 			return false; 
-		}
+		}*/
+		login_validate();
+		return true; 	
 	}	
 }
 

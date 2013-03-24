@@ -2,6 +2,7 @@
 require_once('../models/tcpdf/config/lang/eng.php');
 require_once('../models/tcpdf/tcpdf.php');
 require_once "../models/abspath.php";
+require_once "sessions.php";
 require_once "pdocon.php";
 require_once "function.php";
 
@@ -115,6 +116,15 @@ $mat_type = $_REQUEST["mat_type"];
 $date1 = dmys2ymd($_REQUEST["date1"]);
 $date2 = dmys2ymd($_REQUEST["date2"]);
 
+$mat_type = $_REQUEST["mat_type"];	
+$date1 = dmys2ymd($_REQUEST["date1"]);
+$date2 = dmys2ymd($_REQUEST["date2"]);
+
+$page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+$rows = isset($_REQUEST['rows']) ? intval($_REQUEST['rows']) : 200;
+$offset = ($page-1)*$rows;
+$result = array();
+
 $q = "SELECT KdBarang, NmBarang,HsNo,Sat,
 	  (
 	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_stockcard s WHERE date < '".$date1."' AND s.mat_id = a.KdBarang AND type = 'B')
@@ -128,13 +138,32 @@ $q = "SELECT KdBarang, NmBarang,HsNo,Sat,
 	  (SELECT IF(SUM(qty_out)>0,SUM(qty_out),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE opname_date < '".$date1."' AND oa.mat_id = a.KdBarang)
 	  ) AS qty_beg, 
 	  
+	  ((SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_stockcard s WHERE date < '".$date1."' AND s.mat_id = a.KdBarang AND type = 'B')
+	  +
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE matin_type <> '3' AND matin_date < '".$date1."' AND ia.mat_id = a.KdBarang)
+	  -
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE matout_type <> '3' AND matout_date < '".$date1."' AND oa.mat_id = a.KdBarang)
+	  +
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE opname_date < '".$date1."' AND oa.mat_id = a.KdBarang)
+	  -
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE opname_date < '".$date1."' AND oa.mat_id = a.KdBarang)
+	  ) AS qty_beg2, 
+	  
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE ia.mat_id = a.KdBarang AND matin_date BETWEEN '".$date1."' AND '".$date2."')
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE matin_type <> '3' AND ia.mat_id = a.KdBarang AND matin_date BETWEEN '".$date1."' AND '".$date2."')
 	  ) AS qty_in,
 	  
 	  (
-	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE oa.mat_id = a.KdBarang AND matout_date BETWEEN '".$date1."' AND '".$date2."')
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_incdet ia LEFT JOIN mat_inchdr ib ON ib.matin_id=ia.matin_id WHERE matin_type <> '3' AND ia.mat_id = a.KdBarang AND matin_date BETWEEN '".$date1."' AND '".$date2."')
+	  ) AS qty_in2,
+	  
+	  (
+	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE matout_type <> '3' AND oa.mat_id = a.KdBarang AND matout_date BETWEEN '".$date1."' AND '".$date2."')
 	  ) AS qty_out,
+	  
+	  (
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_outdet oa LEFT JOIN mat_outhdr ob ON ob.matout_id=oa.matout_id WHERE matout_type <> '3' AND oa.mat_id = a.KdBarang AND matout_date BETWEEN '".$date1."' AND '".$date2."')
+	  ) AS qty_out2,
 	  
 	  (
 	  (SELECT IF(SUM(qty_in)>0,SUM(qty_in),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE oa.mat_id = a.KdBarang AND opname_date BETWEEN '".$date1."' AND '".$date2."')
@@ -143,54 +172,90 @@ $q = "SELECT KdBarang, NmBarang,HsNo,Sat,
 	  ) AS qty_bal,
 	  
 	  (
+	  (SELECT IF(SUM(qty_in)>0,SUM(qty_in),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE oa.mat_id = a.KdBarang AND opname_date BETWEEN '".$date1."' AND '".$date2."')
+	  +
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE oa.mat_id = a.KdBarang AND opname_date BETWEEN '".$date1."' AND '".$date2."')
+	  ) AS qty_bal2,
+	  
+	  (
 	  (SELECT IF(SUM(qty)>0,SUM(qty),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE oa.mat_id = a.KdBarang AND opname_date BETWEEN '".$date1."' AND '".$date2."')
-	  ) AS qty, 0 AS qty_end, FORMAT(0,2) AS qty_diff
+	  ) AS qty, 0 AS qty_end, FORMAT(0,2) AS qty_diff,
+	  
+	  (
+	  (SELECT IF(SUM(weight)>0,SUM(weight),0) FROM mat_opnamedet oa LEFT JOIN mat_opnamehdr ob ON ob.opname_id=oa.opname_id WHERE oa.mat_id = a.KdBarang AND opname_date BETWEEN '".$date1."' AND '".$date2."')
+	  ) AS qty, 0 AS qty_end, FORMAT(0,2) AS qty_diff2
 	   ";
 $q .= "FROM mst_barang a 
 	  WHERE a.TpBarang='$mat_type' 
-	  ORDER BY KdBarang ASC";
+	  ORDER BY a.TpBarang, KdBarang ASC";
+
+$q .= " LIMIT $offset,$rows";
 
 $run=$pdo->query($q);	
 $rs=$run->fetchAll(PDO::FETCH_ASSOC);
 
 // create some HTML content
 $html = '<h2>'.$NmMenu.'</h2>'.	
-		'<b>Period : '.$_REQUEST['date1'] .' - '.$_REQUEST['date2'].'</b><br>'.				
+		'<b>Nama PDKB : '.$_SESSION['c_name'].'</b><br>'.
+		'<b>Alamat : EJIP Industrial Park, Plot 8H, Cikarang Selatan, Bekasi 17550</b><br>'.
+		'<b>Period : '.$_REQUEST['date1'] .' s/d '.$_REQUEST['date2'].'</b><br><br>'.				
 		'<table cellspacing="0" cellpadding="2" border="1">
 		<thead>
 		<tr>
-		  <th align="center" width="25"><b>No.</b></th>
-		  <th width="80"><b>Kode Barang</b></th>
-		  <th width="100"><b>Nama Barang</b></th>
-		  <th align="center" width="30"><b>Sat.</b></th>
-		  <th align="right"><b>Saldo Awal</b></th>
-		  <th align="center"><b>Pemasukan</b></th>
-		  <th align="center"><b>Pengeluaran</b></th>
-		  <th align="right"><b>Penyesuaian (Adjustment)</b></th>
-		  <th align="right"><b>Saldo Akhir</b></th>
-		  <th align="right"><b>Stock Opname</b></th>
-		  <th align="right"><b>Selisih</b></th>
-		  <th width="100"><b>Keterangan</b></th>
+		  <th align="center" rowspan="2" width="25"><b>No</b></th>
+		  <th align="center" rowspan="2"><b>Kode Barang</b></th>
+		  <th align="center" rowspan="2"><b>Nama Barang</b></th>
+		  <th align="center" colspan="2"><b>Persediaan Awal</b></th>
+		  <th align="center" colspan="2"><b>Pemasukan</b></th>
+		  <th align="center" colspan="2"><b>Pengeluaran</b></th>
+		  <th align="center" colspan="2"><b>Penyesuaian</b></th>
+		  <th align="center" colspan="2"><b>Saldo Akhir</b></th>
+		  <th align="center" colspan="2"><b>Stock Opname</b></th>
+		  <th align="center" colspan="2"><b>Selisih</b></th>
+		  <th width="65" rowspan="2"><b>Keterangan</b></th>
+		</tr>
+		<tr>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
+		  <th align="center"><b>Roll/Bar/Sheet</b></th>
+		  <th align="center"><b>Kg</b></th>
 		</tr>
 		</thead>
 		<tbody>';
-$no=1;
+$no=$offset+1;
 foreach ($rs as $r){
 $qty_end=$r['qty_beg']+$r['qty_in']-$r['qty_out'];
+$qty_end2=$r['qty_beg2']+$r['qty_in2']-$r['qty_out2'];
 
 $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
-		 '<td width="80">'.$r['KdBarang'].'</td>'.
-		 '<td width="100">'.$r['NmBarang'].'</td>'.
-		 '<td align="center" width="30">'.$r['Sat'].'</td>'.
+		 '<td>'.$r['KdBarang'].'</td>'.
+		 '<td>'.$r['NmBarang'].'</td>'.
 		 '<td align="right">'.$r['qty_beg'].'</td>'.
+		 '<td align="right">'.$r['qty_beg2'].'</td>'.
 		 '<td align="right">'.$r['qty_in'].'</td>'.
+		 '<td align="right">'.$r['qty_in2'].'</td>'.
 		 '<td align="right">'.$r['qty_out'].'</td>'.
+		 '<td align="right">'.$r['qty_out2'].'</td>'.
 		 '<td align="right">'.$r['qty_bal'].'</td>'.
+		 '<td align="right">'.$r['qty_bal2'].'</td>'.
 		 '<td align="right">'.number_format($qty_end,2).'</td>'.
+		 '<td align="right">'.number_format($qty_end2,2).'</td>'.
 		 '<td align="right">'.$r['qty'].'</td>'.
+		 '<td align="right">'.$r['qty2'].'</td>'.
 		 '<td align="right">'.$r['qty_diff'].'</td>'.	 
-		 '<td width="100">'.$r['ket'].'</td>'.
+		 '<td align="right">'.$r['qty_diff2'].'</td>'.	 
+		 '<td width="65">'.$r['ket'].'</td>'.
 		 '</tr>';
 $no+=1;	
 }

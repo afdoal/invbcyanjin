@@ -41,10 +41,10 @@ try {
 		
 		//TAMBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,ref_id,ref_no,
+				  matout_id,matout_type,matout_no,matout_date,mat_type,ref_id,ref_no,
 				  tot_qty,notes,cust,KdJnsDok
 				  ) VALUES (
-				  '$matout_id','$matout_type','$matout_no','$matout_date','$wo_id','$wo_no',
+				  '$matout_id','$matout_type','$matout_no','$matout_date','1','$wo_id','$wo_no',
 				  '$tot_qty','$notes','$cust','$KdJnsDok'
 				  )";	
 		//AKHIR TAMBAH HEADER
@@ -69,10 +69,10 @@ try {
 		//$sql[]="DELETE FROM mat_outdet WHERE matout_id='$matout_id'";
 		//UBAH HEADER
 		$sql[] = "INSERT INTO mat_outhdr (
-				  matout_id,matout_type,matout_no,matout_date,ref_id,ref_no,
+				  matout_id,matout_type,matout_no,matout_date,mat_type,ref_id,ref_no,
 				  tot_qty,notes,cust,KdJnsDok
 				  ) VALUES (
-				  '$matout_id','$matout_type','$matout_no','$matout_date','$wo_id','$wo_no',
+				  '$matout_id','$matout_type','$matout_no','$matout_date','1','$wo_id','$wo_no',
 				  '$tot_qty','$notes','$cust','$KdJnsDok'
 				  )";	
 		//AKHIR UBAH HEADER		

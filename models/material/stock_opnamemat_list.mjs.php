@@ -39,9 +39,9 @@ function setdg(){
 					{field:'NmBarang2',title:'Desc.',width:100},   
 					{field:'twhmp',title:'Section',width:100},   
 					{field:'LBar',title:'L/Bar',width:80},   
-					{field:'Sat2',title:'Unit',width:80}, 
-					{field:'weight',title:'Weight',width:100,align:'right'},
-					{field:'qty',title:'Quantity',width:100,align:'right'}
+					{field:'Sat2',title:'Unit',width:80},
+					{field:'qty',title:'Quantity',width:100,align:'right'}, 
+					{field:'weight',title:'Weight',width:100,align:'right'}
 				]],  
 				onResize:function(){  
 					$('#dg').datagrid('fixDetailRowHeight',index);  

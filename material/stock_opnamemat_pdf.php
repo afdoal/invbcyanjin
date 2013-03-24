@@ -133,7 +133,7 @@ $q .= "ORDER BY opname_date ASC";
 $runh=$pdo->query($q);	
 $rsh=$runh->fetchAll(PDO::FETCH_ASSOC);
 
-$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty
+$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,IF(weight>0,FORMAT(weight, 2),0) AS weight,FORMAT(qty, 2) AS qty
 	  FROM mat_opnamedet a 
 	  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 	  WHERE opname_id='$opname_id' 

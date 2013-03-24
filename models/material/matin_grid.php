@@ -17,7 +17,7 @@ if ($req=='menu'){
 	$q = "SELECT *,DATE_FORMAT(matin_date,'%d/%m/%Y') AS matin_date
 		  FROM mat_inchdr a 
 		  LEFT JOIN mst_in_type c ON c.matin_type=a.matin_type
-		  WHERE a.matin_type NOT IN('3') ";
+		  WHERE a.matin_type NOT IN('3') AND (a.mat_type IN ('1','2','3','4','5') OR a.mat_type IS NULL) ";
 	
 	if ($txtcari != ""){		  
 		if ($pilcari == "matin_date"){		  
@@ -44,7 +44,7 @@ if ($req=='menu'){
 } else if ($req=='list') {	
 	$matin_id = $_REQUEST["matin_id"];
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,Finish,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 		  FROM mat_incdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matin_id='$matin_id' 
@@ -56,7 +56,7 @@ if ($req=='menu'){
 	
 } else if ($req=='dgDet') {
 	$po_id = $_REQUEST["po_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,LBar,Finish,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty,FORMAT(price, 2) AS price,FORMAT(qty*price, 2) AS amount
 		  FROM pur_podet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE po_id='$po_id' 
@@ -73,7 +73,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Finish,Sat AS Sat2
 		  FROM mst_barang  
 		  WHERE TpBarang NOT IN ('0','11') ";		  
 	

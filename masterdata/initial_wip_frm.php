@@ -117,6 +117,13 @@ require_once "initial_wip_frm.cjs.php";
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:50px"></td>
     </tr>
+    <tr>
+      <td>Weight</td>
+      <td>
+        <input name="weight0" type="hidden" id="weight0" style="width:80px">
+        <input name="weight" type="text" id="weight" style="width:80px" readonly>
+      </td>
+    </tr>
     </table>
     <input type="submit" id="btnSubmit2" name="btnSubmit2" style="display:none">
     </form>

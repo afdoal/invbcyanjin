@@ -15,6 +15,10 @@ if ($req=='menu'){
 			$q .= "AND mat_type LIKE '%$txtcari%' ";	  
 	}  
 	$q .= "ORDER BY mat_type, date ASC";
+	
+	$run=$pdo->query($q);	
+	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
+	echo json_encode($rs);
 } else if ($req=='dgDet') {
 	$mat_type = $_REQUEST["mat_type"];
 	$key = $_REQUEST["q"];
@@ -24,7 +28,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,Sat AS Sat2
 		  FROM mst_barang a 
 		  LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang 
 		  WHERE TpBarang='$mat_type' ";
@@ -48,9 +52,35 @@ if ($req=='menu'){
 	echo json_encode($result);	  
 		  
 } else if ($req=='list') {	
+	$wh_id = $_REQUEST["wh_id"];
+	$date = dmys2ymd($_REQUEST["date"]);
+	
+	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 200;
+	$offset = ($page-1)*$rows;
+	$result = array();
+	
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(weight, 2) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
+		  FROM mst_barang a 
+		  LEFT JOIN mat_stockcard b ON mat_id = KdBarang 
+		  WHERE TpBarang='$mat_type' AND date='$date'
+		  ORDER BY mat_id ASC";
+	
+	$runtot=$pdo->query($q);
+	$rstot=$runtot->fetchAll(PDO::FETCH_ASSOC);
+
+	$q .= " LIMIT $offset,$rows";
+	$run=$pdo->query($q);
+	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
+
+	$result["total"] = count($rstot);
+	$result["rows"] = $rs;
+
+	echo json_encode($result);	
+} else if ($req=='list2') {	
 	$mat_type = $_REQUEST["mat_type"];
 	$date = dmys2ymd($_REQUEST["date"]);
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mst_barang a 
 		  LEFT JOIN mat_stockcard b ON mat_id = KdBarang 
 		  WHERE TpBarang='$mat_type' AND date='$date'

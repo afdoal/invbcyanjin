@@ -59,6 +59,10 @@ require_once "mat_frm.cjs.php";
       <td><input name="NmBarang" type="text" id="NmBarang" class="easyui-validatebox" value="" size="30" maxlength="30" required></td>
     </tr>
     <tr>
+      <td>Berat</td>
+      <td><input name="WPcs" type="text" id="WPcs" class="easyui-numberbox" groupSeparator="," decimalSeparator="." precision="2" value="" size="20"></td>
+    </tr>
+    <tr>
       <td>HS No.</td>
       <td><input name="HsNo" type="text" id="HsNo" class="easyui-validatebox" value="" size="20" maxlength="20" required></td>
     </tr>

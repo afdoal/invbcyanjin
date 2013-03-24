@@ -28,6 +28,13 @@ $('#tot_amount').numberbox({
 	decimalSeparator:'.',
 });*/
 
+$('#weight0').numberbox({  
+    min:0, 
+	precision:2, 
+	groupSeparator:',',
+	decimalSeparator:'.',
+});
+
 $('#weight').numberbox({  
     min:0, 
 	precision:2, 
@@ -44,6 +51,10 @@ $('#qty').numberbox({
 		price=$('#price').numberbox('getValue');
 		amount = newValue*price;
 		$('#amount').numberbox('setValue',amount);
+		
+		weight0=$('#weight0').numberbox('getValue');
+		weight = newValue*weight0;
+		$('#weight').numberbox('setValue',weight);
 	}
 });
 
@@ -211,6 +222,7 @@ $('#tl2Ubh2').click(function(){
 				PartNo: $('#PartNo').val(),	
 				NmBarang2: $('#NmBarang2').val(),	
 				Sat2: $('#Sat2').val(),
+				weight0: nformat2($('#weight0').numberbox('getValue'),2),
 				weight: nformat2($('#weight').numberbox('getValue'),2),
 				qty: nformat2($('#qty').numberbox('getValue'),2),
 				price: formatNumber($('#price').numberbox('getValue'),4),
@@ -227,6 +239,7 @@ $('#tl2Sim').click(function(){
 		PartNo: $('#PartNo').val(),	
 		NmBarang2: $('#NmBarang2').val(),	
 		Sat2: $('#Sat2').val(),
+		weight0: nformat2($('#weight0').numberbox('getValue'),2),
 		weight: nformat2($('#weight').numberbox('getValue'),2),
 		qty: nformat2($('#qty').numberbox('getValue'),2),
 		price: formatNumber($('#price').numberbox('getValue'),4),

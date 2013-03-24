@@ -39,6 +39,7 @@ function setdg(){
 					{field:'NmBarang2',title:'Part No',width:100},   
 					{field:'Sat2',title:'Unit',width:80}, 
 					{field:'qty',title:'Quantity',width:100,align:'right'},
+					{field:'weight',title:'Weight',width:100,align:'right'},
 					{field:'remark',title:'Remark',width:100}  
 				]],  
 				onResize:function(){  

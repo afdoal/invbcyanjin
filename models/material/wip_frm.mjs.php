@@ -15,9 +15,11 @@ function setdg(){
 			{field:'NmBarang2',title:'Part No',width:150},			
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight0',title:'Weight0',width:100,align:'right',hidden:true},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'remark',title:'Remark',width:100}
 		]],
-		url: '<?php echo $basedir; ?>models/material/wip_grid.php?req=list&type='+$("#type").val()+'&wh_id='+wh_id+'&date='+date, 
+		url: '<?php echo $basedir; ?>models/material/wip_grid.php?req=list2&type='+$("#type").val()+'&wh_id='+wh_id+'&date='+date, 
 		onAdd:function(index,row){rowIndex=index;},
 		onDblClickRow:function(index,row){rowIndex=index;}
 		
@@ -62,13 +64,14 @@ function insert_menu(row){
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#Sat2').val(row.Sat2);
+	$('#weight0').numberbox('setValue',row.weight0);
 }
 
 function topdf(){
 	var wh_id = $('#wh_id0').val();	
 	var date = $('#date').datebox('getValue');
 	
-	openurl('<?=$basedir?>material/wip_pdf.php?NmMenu=<?=$NmMenu?>&type='+$("#type").val()+'&wh_id='+wh_id+'&date='+date);
+	openurl('<?=$basedir?>material/wip_inout_list_pdf.php?NmMenu=<?=$NmMenu?>&type='+$("#type").val()+'&wh_id='+wh_id+'&date='+date);
 }
 
 </script>	

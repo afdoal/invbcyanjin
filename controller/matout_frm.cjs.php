@@ -75,7 +75,7 @@ $('#btnPrint').hide();
 $('#dlg').dialog({ 
 	title:"<?php echo strtoupper($NmMenu) ?>", 
     width:400,
-	height:300,
+	height:350,
 	closed:true,
 	buttons:"#dlg-buttons"
 }); 

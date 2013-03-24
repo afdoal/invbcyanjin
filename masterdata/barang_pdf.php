@@ -111,7 +111,7 @@ $pdf->SetFont('helvetica', '', 8);
 $pdf->AddPage();
 
 //Data loading
-$q = "SELECT *,KdBarang AS KdBarang0,FORMAT(Harga, 2) AS Harga FROM mst_barang a LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang ORDER BY TpBarang, KdBarang ASC";
+$q = "SELECT *,KdBarang AS KdBarang0,FORMAT(Harga, 2) AS Harga FROM mst_barang a LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang  WHERE TpBarang NOT IN ('0','1','11') ORDER BY TpBarang, KdBarang ASC";
 $run=$pdo->query($q);	
 $rs=$run->fetchAll(PDO::FETCH_ASSOC);
 

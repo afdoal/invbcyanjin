@@ -9,10 +9,11 @@ function setdg(){
 		pagination:true,
 		pageList:[200,300,400,500],
 		frozenColumns:[[  
-			{field:'matin_no',title:'Incoming No.',width:80},
-			{field:'matin_date',title:'Incoming Date',width:80},
+			
 		]],
 		columns:[[  			
+			{field:'matin_no',title:'Incoming No.',width:80},
+			{field:'matin_date',title:'Incoming Date',width:80},
 			{field:'matin_name',title:'Incoming Type',width:80},
 			{field:'po_no',title:'PO No.',width:80},
 			{field:'supplier',title:'Seller',width:80},
@@ -45,9 +46,10 @@ function setdg(){
 					{field:'NmBarang2',title:'Desc.',width:100},   
 					{field:'twhmp',title:'Section',width:100},   
 					{field:'LBar',title:'L/Bar',width:100},   
+					{field:'Finish',title:'Finish',width:100},   
 					{field:'Sat2',title:'Unit',width:80}, 
-					{field:'weight',title:'Weight',width:100,align:'right'},
 					{field:'qty',title:'Quantity',width:100,align:'right'},
+					{field:'weight',title:'Weight',width:100,align:'right'},
 					{field:'price',title:'Price',width:100,align:'right'},
 					{field:'amount',title:'Amount',width:100,align:'right'}  
 				]],  

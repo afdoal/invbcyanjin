@@ -12,8 +12,8 @@ $date=dmys2ymd($_REQUEST['date']);
 //FORM LIST DATA MATERIAL
 $nolist=explode("`", $_REQUEST['nolist']);
 $KdBarang2=explode("`", $_REQUEST['KdBarang2']);
-$weight=explode("`", $_REQUEST['weight']);
 $qty=explode("`", $_REQUEST['qty']);
+$weight=explode("`", $_REQUEST['weight']);
 $remark=explode("`", $_REQUEST['remark']);
 
 $aksi=$_REQUEST['aksi'];

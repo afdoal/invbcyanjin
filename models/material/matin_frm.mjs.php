@@ -8,14 +8,16 @@ function setdg(){
 		height:200,	
 		toolbar:"#toolbar2",
 		rownumbers:"true",
+		fitColumns:"true",
 		columns:[[  
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'twhmp',title:'Section',width:150},
 			{field:'Lbar',title:'L/Bar',width:150},
-			{field:'Sat2',title:'Unit',width:80},
-			{field:'weight',title:'Weight',width:100,align:'right'},
+			{field:'Finish',title:'Finish',width:150},
+			{field:'Sat2',title:'Unit',width:80},			
 			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'price',title:'Price',width:100,align:'right'},
 			{field:'amount',title:'Amount',width:100,align:'right'}
 		]],
@@ -77,6 +79,7 @@ function setComboGrid(){
 			{field:'NmBarang2',title:'Desc.',width:50},
 			{field:'twhmp',title:'Section',width:50},
 			{field:'LBar',title:'L/Bar',width:50},
+			{field:'Finish',title:'Finish',width:50},
 			{field:'Sat2',title:'Unit',width:50}
 		]],
 		onClickRow:function(index,row){insert_det(row)}  
@@ -123,11 +126,10 @@ function insert_refUbh(row){
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#twhmp').val(row.twhmp);
+	$('#LBar').val(row.LBar);	
+	$('#Finish').val(row.Finish);
 	$('#Sat2').val(row.Sat2);
-	$('#weight').numberbox('setValue',row.weight);
-	$('#qty').numberbox('setValue',row.qty);
-	$('#price').numberbox('setValue',row.price);
-	$('#amount').numberbox('setValue',row.amount);
+	
 }
 
 function simpan(){
@@ -157,9 +159,9 @@ function simpan(){
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
-			weight_val += rows[i].weight.replace(",","") + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
-			price_val += rows[i].price.replace(",","") + "`";
+			weight_val += rows[i].weight.replace(/,/gi,"") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
+			price_val += rows[i].price.replace(/,/gi,"") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				

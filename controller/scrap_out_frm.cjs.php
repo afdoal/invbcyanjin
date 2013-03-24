@@ -32,7 +32,14 @@ $('#qty').numberbox({
     min:0, 
 	precision:2, 
 	groupSeparator:',',
-	decimalSeparator:'.',
+	decimalSeparator:'.'
+});
+
+$('#weight').numberbox({  
+    min:0, 
+	precision:2, 
+	groupSeparator:',',
+	decimalSeparator:'.'
 });
 
 	
@@ -119,13 +126,15 @@ $('#tl1Sim').click(function(){
 		nolist_val="";	
 		KdBarang2_val="";
 		qty_val="";
+		weight_val="";
 		price_val="";
 		j=1;
 		
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
+			weight_val += rows[i].weight.replace(/,/gi,"") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				
@@ -142,7 +151,7 @@ $('#tl1Sim').click(function(){
 		
 		//FORM LIST DATA BARANG	
 		nolist:nolist_val,KdBarang2:KdBarang2_val,
-		qty:qty_val
+		qty:qty_val,weight:weight_val
 		},
 		function(result){
 			var result = eval('('+result+')');
@@ -241,7 +250,8 @@ $('#tl2Ubh2').click(function(){
 				KdBarang2: $('#KdBarang2').combogrid('getValue'),
 				NmBarang2: $('#NmBarang2').val(),	
 				Sat2: $('#Sat2').val(),
-				qty: nformat2($('#qty').numberbox('getValue'),2)
+				qty: nformat2($('#qty').numberbox('getValue'),2),
+				weight: nformat2($('#weight').numberbox('getValue'),2)
 				}
 		});
 	}
@@ -253,7 +263,8 @@ $('#tl2Sim').click(function(){
 		KdBarang2: $('#KdBarang2').combogrid('getValue'),
 		NmBarang2: $('#NmBarang2').val(),
 		Sat2: $('#Sat2').val(),
-		qty: nformat2($('#qty').numberbox('getValue'),2)
+		qty: nformat2($('#qty').numberbox('getValue'),2),
+		weight: nformat2($('#weight').numberbox('getValue'),2)
 	});
 });
 

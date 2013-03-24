@@ -38,7 +38,7 @@ if ($req=='menu'){
 	echo json_encode($result);
 } else if ($req=='list') {	
 	$matout_id = $_REQUEST["matout_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mat_outdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matout_id='$matout_id' 
@@ -46,7 +46,18 @@ if ($req=='menu'){
 		  
 	$run=$pdo->query($q);	
 	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
-	echo json_encode($rs);	  	  
+	echo json_encode($rs);
+} else if ($req=='list2') {	
+	$matout_id = $_REQUEST["matout_id"];
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
+		  FROM mat_outdet a 
+		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
+		  WHERE matout_id='$matout_id' 
+		  ORDER BY child_no ASC";
+		  
+	$run=$pdo->query($q);	
+	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
+	echo json_encode($rs);		  	  
 } else if ($req=='ref') {
 	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes
 		  FROM mat_outhdr a 

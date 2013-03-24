@@ -19,8 +19,8 @@ function setdg(){
 			{field:'HsNo',title:'HS No.',width:100},
 			/*{field:'DieNo',title:'Die No.',width:80},
 			{field:'UWm',title:'UW/m',width:80},
-			{field:'LPc',title:'L/Pc',width:80},
-			{field:'WPcs',title:'W/Pcs',width:80},*/
+			{field:'LPc',title:'L/Pc',width:80},*/
+			{field:'WPcs',title:'W/Pcs',width:80,align:'right'},
 			{field:'LBar',title:'L/Bar',width:80},
 			/*{field:'PcBar',title:'Pc/Bar',width:80},
 			{field:'WBar',title:'WBar',width:80},*/

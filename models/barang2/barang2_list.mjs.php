@@ -13,6 +13,7 @@ function setdg(){
 			{field:'KdBarang0',title:'Kode Barang0',width:80,hidden:true},
 			{field:'KdBarang',title:'Part Code',width:80},
 			{field:'NmBarang',title:'Part No',width:80},
+			{field:'WPcs',title:'Weight',width:80,align:'right'},
 			{field:'Sat',title:'Unit',width:80},
 			{field:'Treatment',title:'Support<br>Treatment',width:100},
 			{field:'Ket',title:'Remarks',width:100},

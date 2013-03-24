@@ -67,7 +67,7 @@ require_once "initial_mac_frm.cjs.php";
       <span class="kolom1">Warehouse </span><span class="kolom2"><input type="hidden" id="wh_id0" name="wh_id0">
       <select name="wh_id" id="wh_id" style="width:150px">
           <?php
-            $run = $pdo->query("SELECT wh_id, wh_name FROM mat_warehouse WHERE wh_id='1' ORDER BY wh_id ASC");
+            $run = $pdo->query("SELECT wh_id, wh_name FROM mat_warehouse WHERE wh_id='5' ORDER BY wh_id ASC");
             $rs = $run->fetchAll(PDO::FETCH_ASSOC);
             foreach($rs as $r)
                 echo "<option value=\"".$r['wh_id']."\">".$r['wh_name']."</option>";
@@ -138,7 +138,14 @@ require_once "initial_mac_frm.cjs.php";
     </tr>
     <tr>
       <td>Quantity</td>
-      <td><input name="qty" type="text" id="qty" value="" style="width:50px"></td>
+      <td><input name="qty" type="text" id="qty" value="" style="width:80px"></td>
+    </tr>
+    <tr>
+      <td>Weight</td>
+      <td>
+        <input name="weight0" type="hidden" id="weight0" style="width:80px">
+        <input name="weight" type="text" id="weight" style="width:80px">
+      </td>
     </tr>
     </table>
     <input type="submit" id="btnSubmit2" name="btnSubmit2" style="display:none">
@@ -151,8 +158,9 @@ require_once "initial_mac_frm.cjs.php";
 </div>
 
 <div id="wCari"><table id="dgCari" singleSelect="true"></table></div>
+    <?php /*
 <div id="toolCari">  
-    Search
+Search
     <select id="txtcari" name="txtcari">
     	<option value=""></option>
           <?php
@@ -164,7 +172,7 @@ require_once "initial_mac_frm.cjs.php";
     </select>
     <a href="#" id="dtlCri" class="easyui-linkbutton" iconCls="icon-search"></a>
 </div>
-
+*/ ?>
            
 </div> <!-- akhir div w -->
 </body> 

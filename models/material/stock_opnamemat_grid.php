@@ -47,7 +47,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mat_opnamedet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE opname_id='$opname_id' 

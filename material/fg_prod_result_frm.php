@@ -112,14 +112,17 @@ require_once "fg_prod_result_frm.cjs.php";
         ?>
           </select>
       </td>
-    </tr>
-	<tr>
-      <td>Weight (Kg)</td>
-      <td><input name="weight" type="text" id="weight" value="" style="width:50px"></td>
-    </tr>
+    </tr>	
     <tr>
       <td>Quantity</td>
-      <td><input name="qty" type="text" id="qty" value="" style="width:50px"></td>
+      <td><input name="qty" type="text" id="qty" value="" style="width:80px"></td>
+    </tr>
+    <tr>
+      <td>Weight (Kg)</td>
+      <td>
+        <input name="weight0" type="hidden" id="weight0" style="width:80px">
+        <input name="weight" type="text" id="weight" style="width:80px" readonly>
+      </td>
     </tr>
 	<tr>
       <td>Remark</td>
@@ -128,6 +131,7 @@ require_once "fg_prod_result_frm.cjs.php";
 	    <option value=""></option>
 		<option value="OK">OK</option>
 		<option value="NG">NG</option>
+        <option value="Rework">Rework</option>
 	  </select></td>
     </tr>
     </table>

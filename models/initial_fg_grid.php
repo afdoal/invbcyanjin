@@ -31,7 +31,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,Sat AS Sat2
 		  FROM mst_barang a 
 		  LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang 
 		  WHERE TpBarang='0' ";
@@ -62,7 +62,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mst_barang a 
 		  LEFT JOIN mat_stockcard b ON mat_id = KdBarang 
 		  WHERE TpBarang='0' AND wh_id='$wh_id' AND date='$date'
@@ -83,7 +83,7 @@ if ($req=='menu'){
 	$wh_id = $_REQUEST["wh_id"];
 	$date = dmys2ymd($_REQUEST["date"]);
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mst_barang a 
 		  LEFT JOIN mat_stockcard b ON mat_id = KdBarang 
 		  WHERE TpBarang='0' AND wh_id='$wh_id' AND date='$date'

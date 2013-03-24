@@ -158,6 +158,7 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		  <th width="150"><b>Part No</b></th>
 		  <th width="30"><b>Unit</b></th>
 		  <th align="right"><b>Qty.</b></th>
+		  <th align="right"><b>Weight</b></th>		  
 		</tr>
 		</thead>
 		<tbody>';

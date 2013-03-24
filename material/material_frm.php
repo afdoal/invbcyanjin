@@ -81,8 +81,8 @@ require_once "mst_frm.cjs.php";
       <td>L/Pc</td>
       <td><input name="LPc" type="text" id="LPc" class="easyui-numberbox" groupSeparator="," decimalSeparator="." precision="4" value="" size="20"></td>
     </tr>
-    <tr style="display:none">
-      <td>W/Pcs</td>
+    <tr>
+      <td>Weight</td>
       <td><input name="WPcs" type="text" id="WPcs" class="easyui-numberbox" groupSeparator="," decimalSeparator="." precision="4" value="" size="20"></td>
     </tr>
     <tr>

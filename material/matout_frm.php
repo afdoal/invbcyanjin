@@ -175,6 +175,10 @@ require_once "matout_frm.cjs.php";
       <td>L/Bar</td>
       <td><input name="LBar" type="text" id="LBar" style="width:150px" readonly></td>
     </tr>
+    <tr>
+      <td>Finish</td>
+      <td><input name="Finish" type="text" id="Finish" style="width:80px" readonly></td>
+    </tr>
 	<tr>
       <td>Unit</td>
       <td>

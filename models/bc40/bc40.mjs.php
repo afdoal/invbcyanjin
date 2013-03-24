@@ -203,10 +203,7 @@ function setdg(){
 			{field:'DokNo',title:'Nomor',width:50,editor:{type:'validatebox',options:{required:true}}},  
 			{field:'DokTgDmy',title:'Tanggal',width:50,align:'center',editor:{type:'datebox'}}
 		]],
-		url: '<?php echo $basedir ?>models/bc40/bc40_grid.php?req=dg&CAR='+CAR,  
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: '',
+		url: '<?php echo $basedir ?>models/bc40/bc40_grid.php?req=dg&CAR='+CAR,
 		onAdd:function(index,row){rowIndex=index;},
 		onDblClickRow:function(index,row){rowIndex=index;}
 		

@@ -16,12 +16,13 @@ if ($req=='menu'){
 	
 	$q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes, a.ref_no
 		  FROM mat_outhdr a 
-		  INNER JOIN mst_out_type c ON c.matout_type=a.matout_type ";
-	if ($pilcari != ""){		  
+		  INNER JOIN mst_out_type c ON c.matout_type=a.matout_type 
+		  WHERE a.mat_type IN ('1','2','3','4','5') OR a.mat_type IS NULL ";
+	if ($txtcari != ""){		  
 		if ($pilcari == "matout_date"){		  
-			$q .= "WHERE $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
+			$q .= "AND $pilcari LIKE '%".dmys2ymd($txtcari)."%' ";	  
 		} else {
-			$q .= "WHERE $pilcari LIKE '%$txtcari%' ";	  
+			$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
 		}
 	}
 	  
@@ -41,7 +42,7 @@ if ($req=='menu'){
 	
 } else if ($req=='list') {	
 	$matout_id = $_REQUEST["matout_id"];
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Finish,Sat AS Sat2,FORMAT(weight, 2) AS weight,FORMAT(qty, 2) AS qty
 		  FROM mat_outdet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE matout_id='$matout_id' 
@@ -68,7 +69,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,twhmp,LBar,Finish,Sat AS Sat2
 		  FROM mst_barang a 
 		  LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang 
 		  WHERE TpBarang NOT IN ('0','11') ";

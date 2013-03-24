@@ -124,7 +124,7 @@ $pdf->AddPage();
 //Data loading
 	$mat_type = $_REQUEST["mat_type"];
 	$date = dmys2ymd($_REQUEST["date"]);
-	$q = "SELECT JnsBarang,DATE_FORMAT(date,'%d/%m/%Y') AS date,KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+	$q = "SELECT JnsBarang,DATE_FORMAT(date,'%d/%m/%Y') AS date,KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 		  FROM mst_barang a 
 		  LEFT JOIN mat_stockcard b ON mat_id = KdBarang 
 		  LEFT JOIN mst_jenisbarang c ON c.KdJnsBarang = b.mat_type
@@ -153,9 +153,10 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		<tr>
 		  <th align="center" width="25"><b>No.</b></th>
 		  <th width="80"><b>Mat. Code</b></th>
-		  <th width="150"><b>Desc.</b></th>
+		  <th width="200"><b>Desc.</b></th>
 		  <th width="30"><b>Unit</b></th>
 		  <th align="right"><b>Qty.</b></th>
+		  <th align="right"><b>Weight</b></th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -164,9 +165,10 @@ foreach ($rs as $r){
 $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
 		 '<td width="80">'.$r['KdBarang2'].'</td>'.
-		 '<td width="150">'.$r['NmBarang2'].'</td>'.
+		 '<td width="200">'.$r['NmBarang2'].'</td>'.
 		 '<td width="30">'.$r['Sat2'].'</td>'.
 		 '<td align="right">'.$r['qty'].'</td>'.
+		 '<td align="right">'.$r['weight'].'</td>'.
 		 '</tr>';
 $no+=1;	
 }

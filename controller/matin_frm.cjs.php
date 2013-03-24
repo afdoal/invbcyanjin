@@ -104,7 +104,7 @@ $('#btnPrint').hide();
 $('#dlg').dialog({ 
 	title:"<?php echo strtoupper($NmMenu) ?>", 
     width:400,
-	height:300,
+	height:350,
 	closed:true,
 	buttons:"#dlg-buttons"
 }); 
@@ -232,7 +232,8 @@ $('#tl2Ubh2').click(function(){
 				KdBarang2: $('#KdBarang2').combogrid('getValue'),
 				NmBarang2: $('#NmBarang2').val(),	
 				twhmp: $('#twhmp').val(),
-				Lbar: $('#Lbar').val(),
+				LBar: $('#LBar').val(),
+				Finish: $('#Finish').val(),
 				Sat2: $('#Sat2').val(),
 				weight: nformat2($('#weight').numberbox('getValue'),2),
 				qty: nformat2($('#qty').numberbox('getValue'),2),
@@ -249,7 +250,8 @@ $('#tl2Sim').click(function(){
 		KdBarang2: $('#KdBarang2').combogrid('getValue'),
 		NmBarang2: $('#NmBarang2').val(),
 		twhmp: $('#twhmp').val(),
-		Lbar: $('#Lbar').val(),
+		LBar: $('#LBar').val(),
+		Finish: $('#Finish').val(),
 		Sat2: $('#Sat2').val(),
 		weight: nformat2($('#weight').numberbox('getValue'),2),
 		qty: nformat2($('#qty').numberbox('getValue'),2),

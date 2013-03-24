@@ -14,9 +14,11 @@ function setdg(){
 			{field:'KdBarang2',title:'Mat. Code',width:80},
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'Sat2',title:'Unit',width:80},
-			{field:'qty',title:'Qty.',width:100,align:'right'}
+			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight0',title:'Weight0',width:100,align:'right',hidden:true},
+			{field:'weight',title:'Weight',width:100,align:'right'}
 		]],
-		url: '<?php echo $basedir; ?>models/initial_mac_grid.php?req=list&mat_type='+mat_type+'&date='+date		
+		url: '<?php echo $basedir; ?>models/initial_mac_grid.php?req=list2&mat_type='+mat_type+'&date='+date		
 	});
 }
 
@@ -32,7 +34,7 @@ function setdgCari(){
 			{field:'JnsBarang',title:'Mat. Type',width:50},
 			{field:'date',title:'Date',width:50}
 		]],
-		url: '<?php echo $basedir ?>models/initial_mac_grid.php?req=menu&pilcari='+$("#pilcari").val(), 
+		url: '<?php echo $basedir ?>models/initial_mac_grid.php?req=menu', 
 		onClickRow:function(index,row){insert_menu(row)}
 		
 	});
@@ -78,6 +80,7 @@ function insert_menu(row){
 function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#Sat2').val(row.Sat2);
+	$('#weight0').numberbox('setValue',row.weight0);
 }
 
 function topdf(){

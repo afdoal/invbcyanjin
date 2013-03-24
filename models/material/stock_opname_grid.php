@@ -47,16 +47,16 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty,remark
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty,remark
 		  FROM mat_opnamedet a 
 		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 		  WHERE opname_id='$opname_id' 
-		  ORDER BY child_no ASC";
+		  ORDER BY child_no ASC ";
 	
 	$runtot=$pdo->query($q);
 	$rstot=$runtot->fetchAll(PDO::FETCH_ASSOC);
 
-	$q .= " LIMIT $offset,$rows";
+	$q .= "LIMIT $offset,$rows";
 	$run=$pdo->query($q);
 	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
 
@@ -64,6 +64,19 @@ if ($req=='menu'){
 	$result["rows"] = $rs;
 
 	echo json_encode($result);
+} else if ($req=='list2') {	
+	$opname_id = $_REQUEST["opname_id"];
+	
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty,remark
+		  FROM mat_opnamedet a 
+		  LEFT JOIN mst_barang b ON KdBarang = mat_id 
+		  WHERE opname_id='$opname_id' 
+		  ORDER BY child_no ASC ";
+
+	$run=$pdo->query($q);
+	$rs=$run->fetchAll(PDO::FETCH_ASSOC);
+
+	echo json_encode($rs);		  
 		  
 } else if ($req=='dgDet') {
 	$key = $_REQUEST["q"];
@@ -73,7 +86,7 @@ if ($req=='menu'){
 	$offset = ($page-1)*$rows;
 	$result = array();
 	
-	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2
+	$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,FORMAT(WPcs, 2) AS weight0,Sat AS Sat2
 		  FROM mst_barang a 
 		  LEFT JOIN mst_jenisbarang b ON KdJnsBarang=TpBarang 
 		  WHERE TpBarang='0' ";

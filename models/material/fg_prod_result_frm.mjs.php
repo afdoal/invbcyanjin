@@ -14,14 +14,12 @@ function setdg(){
 			{field:'KdBarang2',title:'Part Code',width:80},
 			{field:'NmBarang2',title:'Part No',width:150},
 			{field:'Sat2',title:'Unit',width:80},
-			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'qty',title:'Qty.',width:100,align:'right'},
+			{field:'weight0',title:'Weight0',width:100,align:'right'},
+			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'remark',title:'Remark',width:100}
 		]],
-		url: '<?php echo $basedir; ?>models/material/fg_prod_result_grid.php?req=list&wh_id='+wh_id+'&date='+date,  
-		saveUrl: '',  
-		updateUrl: '',  
-		destroyUrl: '',
+		url: '<?php echo $basedir; ?>models/material/fg_prod_result_grid.php?req=list2&wh_id='+wh_id+'&date='+date,
 		onAdd:function(index,row){rowIndex=index;},
 		onDblClickRow:function(index,row){rowIndex=index;}
 		
@@ -67,6 +65,7 @@ function insert_det(row){
 	$('#PartNo').val(row.PartNo);
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#Sat2').val(row.Sat2);
+	$('#weight0').numberbox('setValue',row.weight0);
 }
 
 function topdf(){

@@ -41,7 +41,7 @@ $('#tot_amount').numberbox({
 	precision:2, 
 	groupSeparator:',',
 	decimalSeparator:'.',
-});*/
+});
 
 $('#ppn').numberbox({  
     min:0, 
@@ -49,8 +49,15 @@ $('#ppn').numberbox({
 	groupSeparator:',',
 	decimalSeparator:'.',
 });
-
+*/
 $('#qty').numberbox({  
+    min:0, 
+	precision:2, 
+	groupSeparator:',',
+	decimalSeparator:'.'
+});
+
+$('#weight').numberbox({  
     min:0, 
 	precision:2, 
 	groupSeparator:',',
@@ -203,7 +210,8 @@ $('#tl2Ubh2').click(function(){
 				KdBarang2: $('#KdBarang2').combogrid('getValue'),
 				NmBarang2: $('#NmBarang2').val(),	
 				Sat2: $('#Sat2').val(),
-				qty: nformat2($('#qty').numberbox('getValue'),2)
+				qty: nformat2($('#qty').numberbox('getValue'),2),
+				weight: nformat2($('#weight').numberbox('getValue'),2)
 				}
 		});
 	}
@@ -215,7 +223,8 @@ $('#tl2Sim').click(function(){
 		KdBarang2: $('#KdBarang2').combogrid('getValue'),
 		NmBarang2: $('#NmBarang2').val(),
 		Sat2: $('#Sat2').val(),
-		qty: nformat2($('#qty').numberbox('getValue'),2)
+		qty: nformat2($('#qty').numberbox('getValue'),2),
+		weight: nformat2($('#weight').numberbox('getValue'),2)
 	});
 });
 

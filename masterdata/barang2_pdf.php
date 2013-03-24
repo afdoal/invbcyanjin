@@ -115,7 +115,7 @@ $TpBarang = $_REQUEST["TpBarang"];
 $pilcari = $_REQUEST["pilcari"];
 $txtcari = $_REQUEST["txtcari"];
 
-$q = "SELECT *,KdBarang AS KdBarang0 FROM mst_barang a WHERE TpBarang='$TpBarang' ";
+$q = "SELECT *,KdBarang AS KdBarang0, FORMAT(WPcs,2) AS weight FROM mst_barang a WHERE TpBarang='$TpBarang' ";
 	  
 if ($txtcari != ""){		  
 		$q .= "AND $pilcari LIKE '%$txtcari%' ";	  
@@ -133,6 +133,7 @@ $html = '<h2>'.$NmMenu.'</h2>
 		  <th align="center" width="25"><b>No.</b></th>
 		  <th width="80"><b>Part Code</b></th>
 		  <th width="125"><b>Part No.</b></th>
+		  <th width="80"><b>Weight</b></th>
 		  <th width="50"><b>Unit</b></th>
 		  <th><b>Support Treatment</b></th>
 		  <th><b>Remarks</b></th>
@@ -146,6 +147,7 @@ $html .= '<tr>'.
 	  	 '<td align="center" width="25">'.$no.'</td>'.
 		 '<td width="80">'.$r['KdBarang'].'</td>'.
 		 '<td width="125">'.$r['NmBarang'].'</td>'.
+		 '<td width="80">'.$r['weight'].'</td>'.
 		 '<td width="50">'.$r['Sat'].'</td>'.
 		 '<td>'.$r['Treatment'].'</td>'.
 		 '<td>'.$r['Ket'].'</td>'.

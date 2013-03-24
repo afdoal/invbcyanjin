@@ -14,6 +14,7 @@ function setdg(){
 			{field:'NmBarang2',title:'Desc.',width:150},
 			{field:'twhmp',title:'Section',width:100},
 			{field:'LBar',title:'L/Bar',width:100},
+			{field:'Finish',title:'Finish',width:100},
 			{field:'Sat2',title:'Unit',width:80},
 			{field:'weight',title:'Weight',width:100,align:'right'},
 			{field:'qty',title:'Qty.',width:100,align:'right'}
@@ -78,6 +79,7 @@ function setComboGrid(){
 			{field:'NmBarang2',title:'Desc.',width:50},
 			{field:'twhmp',title:'Section',width:50},
 			{field:'LBar',title:'L/Bar',width:50},
+			{field:'Finish',title:'Finish',width:50},
 			{field:'Sat2',title:'Unit',width:50},
 			{field:'qty',title:'Qty',width:50}
 		]],
@@ -94,9 +96,8 @@ function insert_det(row){
 	$('#NmBarang2').val(row.NmBarang2);
 	$('#twhmp').val(row.twhmp);
 	$('#LBar').val(row.LBar);
+	$('#Finish').val(row.Finish);
 	$('#Sat2').val(row.Sat2);
-	$('#weight').numberbox('setValue',row.weight);
-	$('#qty').numberbox('setValue',row.qty);
 }
 
 function simpan(){
@@ -123,8 +124,8 @@ function simpan(){
 		for(var i=0; i<rows.length; i++){
 			nolist_val += j+i + "`";		
 			KdBarang2_val += rows[i].KdBarang2 + "`";
-			weight_val += rows[i].weight.replace(",","") + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
+			weight_val += rows[i].weight.replace(/,/gi,"") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG
 				

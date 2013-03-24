@@ -10,6 +10,7 @@ $KdBarang0=$_REQUEST['KdBarang0'];
 //$PartNo=$_REQUEST['PartNo'];
 $KdBarang=$_REQUEST['KdBarang'];
 $NmBarang=$_REQUEST['NmBarang'];
+$WPcs=$_REQUEST['WPcs'];
 $TpBarang=$_REQUEST['TpBarang'];
 $HsNo=$_REQUEST['HsNo'];
 $Sat=$_REQUEST['Sat'];
@@ -36,10 +37,10 @@ try {
 		$rstuj = $rec->fetchAll(PDO::FETCH_ASSOC);
 		if (count($rstuj) == 0){
 			$sql[]="INSERT INTO mst_barang (	
-					  KdBarang,NmBarang,TpBarang,
+					  KdBarang,NmBarang,WPcs,TpBarang,
 					  HsNo,Sat,Treatment,Ket,cust
 					) VALUES (
-					  '$KdBarang','$NmBarang','$TpBarang',
+					  '$KdBarang','$NmBarang','$WPcs','$TpBarang',
 					  '$HsNo','$Sat',
 					  '$Treatment','$Ket','$cust'
 					)";					
@@ -55,7 +56,9 @@ try {
 		//UBAH
 		$sql[]="UPDATE mst_barang SET 
 				KdBarang='$KdBarang',
-				NmBarang='$NmBarang',TpBarang='$TpBarang',
+				NmBarang='$NmBarang',
+				WPcs='$WPcs',
+				TpBarang='$TpBarang',
 				HsNo='$HsNo',Sat='$Sat',
 				Treatment='$Treatment',Ket='$Ket',
 				cust='$cust'									

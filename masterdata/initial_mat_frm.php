@@ -76,7 +76,7 @@ require_once "initial_mat_frm.cjs.php";
     <a href="javascript:void(0)" id="tl1Btl" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" title="Cancel">Cancel</a>  
     <a href="javascript:void(0)" id="tl1Sim" class="easyui-linkbutton" iconCls="icon-save" plain="true" title="Save">Save</a> 
     <a href="javascript:void(0)" id="tl1Cri" class="easyui-linkbutton" iconCls="icon-search" plain="true" title="Search">Search</a>  
-	<a href="javascript:void(0)" id="btnPrint" class="easyui-linkbutton" iconCls="icon-pdf" plain="true" title="Hapus">Printable</a>              
+	<a href="javascript:void(0)" id="btnPrint" class="easyui-linkbutton" iconCls="icon-pdf" plain="true" title="Hapus">Printable</a>
 </div>
 
 <table id="dg" singleSelect="true"></table> 
@@ -121,13 +121,13 @@ require_once "initial_mat_frm.cjs.php";
           </select>
       </td>
     </tr>
-    <tr>
-      <td>Weight</td>
-      <td><input name="weight" type="text" id="weight" value="" style="width:50px"></td>
-    </tr>
 	<tr>
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:50px"></td>
+    </tr>
+    <tr>
+      <td>Weight</td>
+      <td><input name="weight" type="text" id="weight" value="" style="width:50px"></td>
     </tr>
     </table>
     <input type="submit" id="btnSubmit2" name="btnSubmit2" style="display:none">

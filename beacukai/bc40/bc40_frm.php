@@ -260,7 +260,7 @@ require_once "bc40.cjs.php";
             <tr>
               <td width="20%">Harga Penyerahan</td>     
               <td width="29%">
-              	<select id="KdVal" name="KdVal" style="width:80px; display:none" tabindex="28">
+              	<select id="KdVal" name="KdVal" style="width:80px;" tabindex="28">
                     	<option value=""></option>
                     <?php 
 					$q="SELECT * FROM valuta ORDER BY KdVal";

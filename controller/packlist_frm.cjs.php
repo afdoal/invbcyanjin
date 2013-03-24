@@ -165,8 +165,8 @@ $('#tl1Sim').click(function(){
 			KdBarang2_val += rows[i].KdBarang2 + "`";
 			fromct_val += rows[i].fromct + "`";
 			toct_val += rows[i].toct + "`";
-			qty_val += rows[i].qty.replace(",","") + "`";
-			amount_val += rows[i].amount.replace(",","") + "`";
+			qty_val += rows[i].qty.replace(/,/gi,"") + "`";
+			amount_val += rows[i].amount.replace(/,/gi,"") + "`";
 			remark_val += rows[i].remark + "`";
 		}	 	
 		//AKHIR FORM LIST BARANG

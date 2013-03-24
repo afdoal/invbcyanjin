@@ -5,15 +5,34 @@ function setdg(){
 		width:736,
 		height:515,	
 		toolbar:"#toolCari",
-		fitColumns:true,
-		rownumbers:true,
+		fitColumns:false,
+		rownumbers:"true",
 		pagination:true,
 		pageList:[200,300,400,500],
-		columns:[[  
-			{field:'KdBarang',title:'Kode Barang',width:80},  
-			{field:'NmBarang',title:'Nama Barang',width:120},   
-			{field:'Sat',title:'Sat.',width:50}, 
-			{field:'qty_end',title:'Jumlah',width:90,align:'right',formatter: function(value,row,index){				
+		frozenColumns:[[  
+			{field:'KdBarang',title:'Kode Barang',rowspan:2,width:80},
+			{field:'NmBarang',title:'Nama Barang',rowspan:2,width:100},   
+			//{field:'Sat',title:'Sat.',width:50}, 
+		]],
+		columns:[[  					
+			{title:'Persediaan Awal',width:150,align:'center',colspan:2},
+			{title:'Pemasukan',width:150,align:'center',colspan:2},
+			{title:'Pengeluaran',width:150,align:'center',colspan:2},
+			{title:'Penyesuaian',width:150,align:'center',colspan:2},
+			{title:'Saldo Akhir',width:150,align:'center',colspan:2},
+			{title:'Stock Opname',width:150,align:'center',colspan:2},
+			{title:'Selisih',width:150,align:'center',colspan:2},
+			{field:'Ket',title:'Keterangan',width:150,align:'center',rowspan:2},
+		],[  					
+			{field:'qty_beg',title:'Pcs',width:75,align:'right'},
+			{field:'qty_beg2',title:'Kg',width:75,align:'right'},
+			{field:'qty_in',title:'Pcs',width:75,align:'right'},
+			{field:'qty_in2',title:'Kg',width:75,align:'right'},
+			{field:'qty_out',title:'Pcs',width:75,align:'right'},
+			{field:'qty_out2',title:'Kg',width:75,align:'right'},
+			{field:'qty_bal',title:'Pcs',width:75,align:'right'},
+			{field:'qty_bal2',title:'Kg',width:75,align:'right'},			
+			{field:'qty_end',title:'Saldo Akhir',width:75,align:'right',formatter: function(value,row,index){				
 				qty_beg=parseFloat(row.qty_beg);
 				qty_in=parseFloat(row.qty_in);
 				qty_out=parseFloat(row.qty_out);
@@ -27,14 +46,32 @@ function setdg(){
 				}
 				return qty_end.toFixed(2);
 			}},
-			{field:'ket',title:'Keterangan',width:150}
+			{field:'qty_end2',title:'Saldo Akhir',width:75,align:'right',formatter: function(value,row,index){				
+				qty_beg=parseFloat(row.qty_beg);
+				qty_in=parseFloat(row.qty_in);
+				qty_out=parseFloat(row.qty_out);
+				qty_akhir=qty_beg+qty_in-qty_out;
+				qty_bal=parseFloat(row.qty_bal);
+				qty=parseFloat(row.qty);
+				if (qty_akhir>qty){
+					qty_end=qty_akhir-qty_bal;
+				} else {
+					qty_end=qty_akhir+qty_bal;
+				}
+				return qty_end.toFixed(2);
+			}},
+			{field:'qty',title:'Pcs',width:75,align:'right'},
+			{field:'qty2',title:'Kg',width:75,align:'right'},
+			{field:'qty_diff',title:'Pcs',width:75,align:'right'},
+			{field:'qty_diff2',title:'Kg',width:75,align:'right'}
 		]],
 		url: '<?php echo $basedir; ?>models/material/mutasi_fg_grid.php?mat_type=11&date1='+$("#date1").datebox('getValue')+'&date2='+$("#date2").datebox('getValue'),
 	});
 }
 
 function showPrint(){
-	openurl('mutasi_wip_list_pdf.php?NmMenu=Laporan Posisi Barang Dalam Proses (WIP)&mat_type=0&date1='+$("#date1").datebox('getValue')+'&date2='+$("#date2").datebox('getValue'));
+	var opts = $('#dg').datagrid('options');
+	openurl('mutasi_wip_list_pdf.php?NmMenu=Laporan Posisi Barang Dalam Proses (WIP)&mat_type=0&date1='+$("#date1").datebox('getValue')+'&date2='+$("#date2").datebox('getValue')+'&page='+opts.pageNumber+'&rows='+opts.pageSize);
 }
 
 </script>	

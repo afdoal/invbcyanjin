@@ -15,6 +15,7 @@ $notes=$_REQUEST['notes'];
 $nolist=explode("`", $_REQUEST['nolist']);
 $KdBarang2=explode("`", $_REQUEST['KdBarang2']);
 $qty=explode("`", $_REQUEST['qty']);
+$weight=explode("`", $_REQUEST['weight']);
 $remark=explode("`", $_REQUEST['remark']);
 $tot_qty=0;
 $jmlnodet=sizeof($nolist)-1;
@@ -46,9 +47,9 @@ try {
 		//TAMBAH DETAIL		
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mat_opnamedet (
-				  opname_id,child_no,mat_id,qty,remark
+				  opname_id,child_no,mat_id,qty,weight,remark
 				  ) VALUES (
-				  '$opname_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$remark[$i]'
+				  '$opname_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$weight[$i]','$remark[$i]'
 				  )";	
 		}//AKHIR TAMBAH DETAIL
 		
@@ -74,9 +75,9 @@ try {
 		$jmlnodet=sizeof($nolist)-1;		
 		for ($i=0; $i<$jmlnodet; $i++){			
 		$sql[] = "INSERT INTO mat_opnamedet (
-				  opname_id,child_no,mat_id,qty,remark
+				  opname_id,child_no,mat_id,qty,weight,remark
 				  ) VALUES (
-				  '$opname_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$remark[$i]'
+				  '$opname_id','$nolist[$i]','$KdBarang2[$i]','$qty[$i]','$weight[$i]','$remark[$i]'
 				  )";	
 		}//AKHIR UBAH DETAIL
 		

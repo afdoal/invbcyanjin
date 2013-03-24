@@ -35,9 +35,9 @@ function setdg(){
 				columns:[[  
 					{field:'KdBarang2',title:'Mat Code',width:80},  					
 					{field:'NmBarang2',title:'Desc.',width:100},   
-					{field:'Sat2',title:'Unit',width:80}, 
-					{field:'weight',title:'Weight',width:100,align:'right'},
-					{field:'qty',title:'Qty.',width:100,align:'right'} 
+					{field:'Sat2',title:'Unit',width:80},
+					{field:'qty',title:'Qty.',width:100,align:'right'}, 
+					{field:'weight',title:'Weight',width:100,align:'right'} 
 				]],  
 				onResize:function(){  
 					$('#dg').datagrid('fixDetailRowHeight',index);  

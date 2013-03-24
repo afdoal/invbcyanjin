@@ -125,14 +125,14 @@ $pdf->AddPage();
 $matout_id = $_REQUEST["matout_id"];
 
 $q = "SELECT *,DATE_FORMAT(matout_date,'%d/%m/%Y') AS matout_date, a.notes AS notes
-		  FROM mat_outhdr a WHERE matout_type='3' ";
-$q .= "AND matout_id LIKE '$matout_id' ";	  
+		  FROM mat_outhdr a ";
+$q .= "WHERE matout_id LIKE '$matout_id' ";	  
 $q .= "ORDER BY matout_no, matout_date ASC";
 $runh=$pdo->query($q);	
 $rsh=$runh->fetchAll(PDO::FETCH_ASSOC);
 
 
-$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,HsNo AS HsNo2,Sat AS Sat2,FORMAT(qty, 2) AS qty
+$q = "SELECT KdBarang AS KdBarang3,KdBarang AS KdBarang2, NmBarang AS NmBarang2,IF(weight>0,FORMAT(weight, 2),0) AS weight,Sat AS Sat2,FORMAT(qty, 2) AS qty
 	  FROM mat_outdet a 
 	  LEFT JOIN mst_barang b ON KdBarang = mat_id 
 	  WHERE matout_id='$matout_id' 
@@ -150,9 +150,9 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		  <td width="80"><b>Scrap Out Date</b></td>
 		  <td width="10"><b>:</b></td>
 		  <td width="150"><b>'.$rsh[0]['matout_date'].'</b></td>
-		  <td width="80"><b>Ref No</b></td>
-		  <td width="10"><b>:</b></td>
-		  <td width="100"><b>'.$rsh[0]['ref_no'].'</b></td>
+		  <td width="80"><b></b></td>
+		  <td width="10"><b></b></td>
+		  <td width="100"><b></b></td>
 		</tr>
 		<tr><td colspan="3"></td></tr>
 		</table>'.
@@ -164,6 +164,7 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		  <th width="150"><b>Desc.</b></th>
 		  <th width="30"><b>Unit</b></th>
 		  <th align="right"><b>Qty.</b></th>
+		  <th align="right"><b>Weight</b></th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -175,6 +176,7 @@ $html .= '<tr>'.
 		 '<td width="150">'.$r['NmBarang2'].'</td>'.
 		 '<td width="30">'.$r['Sat2'].'</td>'.
 		 '<td align="right">'.$r['qty'].'</td>'.
+		 '<td align="right">'.$r['weight'].'</td>'.
 		 '</tr>';
 $no+=1;	
 }

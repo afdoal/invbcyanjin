@@ -14,6 +14,7 @@ function setdg(){
 			{field:'JnsBarang',title:'Jenis Barang',width:80},
 			{field:'KdBarang',title:'Kode Barang',width:80},
 			{field:'NmBarang',title:'Nama Barang',width:100},
+			{field:'WPcs',title:'Berat',width:100},
 			{field:'HsNo',title:'HS No.',width:100},
 			{field:'Sat',title:'Satuan',width:80},
 			{field:'Harga',title:'Harga',width:50,align:'right'},

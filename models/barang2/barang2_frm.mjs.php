@@ -11,11 +11,11 @@ function setdg(){
 		pageList:[200,300,400,500],
 		columns:[[  
 			{field:'KdBarang0',title:'Kode Barang0',width:80,hidden:true},
-			{field:'KdBarang',title:'Part Code',width:80},
-			//{field:'PartNo',title:'Part No.',width:80},
+			{field:'KdBarang',title:'Part Code',width:80},			
 			{field:'NmBarang',title:'Part No',width:80},
-			//{field:'HsNo',title:'HS No.',width:100},
-			{field:'Sat',title:'Unit',width:80},
+			{field:'WPcs',title:'Weight',width:80,align:'right'},
+			{field:'HsNo',title:'HS No.',width:100},
+			{field:'Sat',title:'Unit',width:40},
 			{field:'Treatment',title:'Support<br>Treatment',width:100},
 			{field:'Ket',title:'Remarks',width:100},
 			{field:'cust',title:'Customer',width:100}

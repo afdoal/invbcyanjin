@@ -129,6 +129,10 @@ require_once "stock_opname_frm.cjs.php";
     </tr>
     <tr>
       <td>Part No</td>
+      <td><input name="PartNo" type="text" id="PartNo" style="width:150px" readonly></td>
+    </tr>
+    <tr>
+      <td>Part Name</td>
       <td><input name="NmBarang2" type="text" id="NmBarang2" style="width:150px" readonly></td>
     </tr>
     <tr>
@@ -148,6 +152,13 @@ require_once "stock_opname_frm.cjs.php";
     <tr>
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:100px"></td>
+    </tr>
+    <tr>
+      <td>Weight</td>
+      <td>
+        <input name="weight0" type="hidden" id="weight0" style="width:80px">
+        <input name="weight" type="text" id="weight" style="width:80px" readonly>
+      </td>
     </tr>  
 	<tr>
       <td>Remark</td>
@@ -156,6 +167,7 @@ require_once "stock_opname_frm.cjs.php";
 	    <option value=""></option>
 		<option value="OK">OK</option>
 		<option value="NG">NG</option>
+		<option value="Rework">Rework</option>
 	  </select></td>
     </tr>  
     </table>

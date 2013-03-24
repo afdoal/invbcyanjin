@@ -115,7 +115,7 @@ $TpBarang=$_REQUEST["TpBarang"];
 $pilcari = $_REQUEST["pilcari"];
 $txtcari = $_REQUEST["txtcari"];
 
-$q = "SELECT *,KdBarang AS KdBarang0 FROM mst_barang a 
+$q = "SELECT *,KdBarang AS KdBarang0, FORMAT(WPcs,2) AS weight FROM mst_barang a 
 	  LEFT JOIN mat_group b ON b.matgroup_code=a.MatGroup
 	  WHERE TpBarang='$TpBarang' ";
 	  
@@ -138,6 +138,7 @@ $html = '<h2>'.$NmMenu.'</h2>
 		  <th width="125"><b>Desc.</b></th>
 		  <th><b>Section</b></th>
 		  <th width="70"><b>HS No.</b></th>		 
+		  <th align="right"><b>Weight</b></th>
 		  <th><b>LBar</b></th>
 		  <th><b>Finish</b></th>
 		  <th><b>Unit</b></th>
@@ -154,6 +155,7 @@ $html .= '<tr>'.
 		 '<td width="125">'.$r['NmBarang'].'</td>'.
 		 '<td>'.htmlentities($r['twhmp']).'</td>'.
 		 '<td width="70">'.$r['HsNo'].'</td>'.
+		 '<td align="right">'.$r['weight'].'</td>'.
 		 '<td>'.$r['LBar'].'</td>'.
 		 '<td>'.$r['Finish'].'</td>'.
 		 '<td>'.$r['Sat'].'</td>'.

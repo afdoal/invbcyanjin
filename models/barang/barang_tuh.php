@@ -10,6 +10,7 @@ $KdBarang0=$_REQUEST['KdBarang0'];
 $KdBarang=$_REQUEST['KdBarang'];
 $TpBarang=$_REQUEST['TpBarang'];
 $NmBarang=$_REQUEST['NmBarang'];
+$WPcs=$_REQUEST['WPcs'];
 $HsNo=$_REQUEST['HsNo'];
 $Sat=$_REQUEST['Sat'];
 $Harga=$_REQUEST['Harga'];
@@ -29,9 +30,9 @@ try {
 		$rstuj = $rec->fetchAll(PDO::FETCH_ASSOC);
 		if (count($rstuj) == 0){
 			$sql[]="INSERT INTO mst_barang (	
-					  KdBarang,TpBarang,NmBarang,HsNo,Sat,Harga,Ket
+					  KdBarang,TpBarang,NmBarang,WPcs,HsNo,Sat,Harga,Ket
 					) VALUES (
-					  '$KdBarang','$TpBarang','$NmBarang','$HsNo','$Sat','$Harga','$Ket'
+					  '$KdBarang','$TpBarang','$NmBarang','$WPcs','$HsNo','$Sat','$Harga','$Ket'
 					)";
 			
 			$ketlog="tambah data $NmMenu $KdBarang";
@@ -45,7 +46,8 @@ try {
 		//UBAH
 		$sql[]="UPDATE mst_barang SET 
 				KdBarang='$KdBarang',TpBarang='$TpBarang',
-				NmBarang='$NmBarang',HsNo='$HsNo',
+				NmBarang='$NmBarang',WPcs='$WPcs',
+				HsNo='$HsNo',
 				Sat='$Sat',Harga='$Harga',Ket='$Ket'									
 				WHERE KdBarang='$KdBarang0'";
 		

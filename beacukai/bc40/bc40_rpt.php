@@ -423,7 +423,7 @@ $HrgSerah=($rsBarang[$i]['HrgSerah']<1)?"-":number_format($rsBarang[$i]['HrgSera
 ?>
 <tr>
   <td align="center" class="noborderbtm"><?php echo $rsBarang[$i]['no'] ?></td>
-  <td class="noborderbtm" colspan="8"><?php echo $UrBarang."<br>".$KdBarang ?></td>
+  <td class="noborderbtm" colspan="7"><?php echo $UrBarang."<br>".$KdBarang ?></td>
   <td align="right" class="noborderbtm" colspan="4"><?php echo $qty ?> &nbsp; &nbsp; &nbsp; </td>
   <td class="noborderrb">&nbsp;</td>
   <td class="noborderrb"><?php echo $rs[0]['KdVal'] ?></td>

@@ -157,8 +157,8 @@ $html = '<h2 align="center">'.$NmMenu.'</h2>'.
 		  <th width="100"><b>Section</b></th>
 		  <th width="80"><b>L/Bar</b></th>
 		  <th width="30"><b>Unit</b></th>
-		  <th align="right"><b>Weight</b></th>
 		  <th align="right"><b>qty</b></th>
+		  <th align="right"><b>Weight</b></th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -171,8 +171,8 @@ $html .= '<tr>'.
 		 '<td width="100">'.htmlentities($r['twhmp']).'</td>'.
 		 '<td width="80">'.$r['LBar'].'</td>'.
 		 '<td width="30">'.$r['Sat2'].'</td>'.
-		 '<td align="right">'.$r['weight'].'</td>'.
 		 '<td align="right">'.$r['qty'].'</td>'.
+		 '<td align="right">'.$r['weight'].'</td>'.
 		 '</tr>';
 $no+=1;	
 }

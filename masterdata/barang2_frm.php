@@ -55,6 +55,11 @@ require_once "mst_frm.cjs.php";
       <td width="254">
       <input name="NmBarang" type="text" id="NmBarang" class="easyui-validatebox" value="" size="20" required></td>
     </tr>
+    <tr>
+      <td width="114">Weight</td>
+      <td width="254">
+      <input name="WPcs" type="text" id="WPcs" class="easyui-numberbox" groupSeparator="," decimalSeparator="." precision="4" value="" size="20"></td>
+    </tr>
     <tr style="display:none">
       <td>HS No.</td>
       <td><input name="HsNo" type="text" id="HsNo" class="easyui-validatebox" value="" size="20" maxlength="20"></td>

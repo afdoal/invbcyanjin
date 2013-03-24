@@ -213,7 +213,11 @@ require_once "matin_frm.cjs.php";
     </tr>
 	<tr>
       <td>L/Bar</td>
-      <td><input name="Lbar" type="text" id="Lbar" style="width:150px" readonly></td>
+      <td><input name="LBar" type="text" id="LBar" style="width:150px" readonly></td>
+    </tr>
+    <tr>
+      <td>Finish</td>
+      <td><input name="Finish" type="text" id="Finish" style="width:80px" readonly></td>
     </tr>
     <tr>
       <td>Unit</td>
@@ -229,14 +233,14 @@ require_once "matin_frm.cjs.php";
           </select>
       </td>
     </tr>
-    <tr>
-      <td>Weight</td>
-      <td><input name="weight" type="text" id="weight" value="" style="width:100px"></td>
-    </tr>
 	<tr>
       <td>Quantity</td>
       <td><input name="qty" type="text" id="qty" value="" style="width:100px"></td>
     </tr>
+    <tr>
+      <td>Weight</td>
+      <td><input name="weight" type="text" id="weight" value="" style="width:100px"></td>
+    </tr>    
     <tr>
       <td>Price</td>
       <td><input name="price" type="text" id="price" value="" style="width:100px"></td>
